@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@index');
+Route::get('/about', 'PagesController@about');
+Route::get('/services', 'PagesController@services');
+Route::get('/cadastro_empresas', 'PagesController@cadastro_empresas');
+
+Route::resource('posts', 'PostController');
