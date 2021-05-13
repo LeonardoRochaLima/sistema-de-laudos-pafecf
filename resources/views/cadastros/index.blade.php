@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>{{ $title }}</h1>
+    <h1>Teste</h1>
     <h3>Empresa Desenvolvedora Requerente: </h3>
     <div class="title-body">
         <form class="row">

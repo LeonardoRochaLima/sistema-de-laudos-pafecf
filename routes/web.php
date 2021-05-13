@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controller\CadastroEmpresasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
-Route::get('/cadastro_empresas', 'PagesController@cadastro_empresas');
+//Route::get('/cadastro_empresas', 'PagesController@cadastro_empresas');
 
+Route::resource('cadastros', 'CadastroEmpresasController');
 Route::resource('posts', 'PostsController');
