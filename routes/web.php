@@ -19,5 +19,7 @@ Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
 //Route::get('/cadastro_empresas', 'PagesController@cadastro_empresas');
 
-Route::resource('cadastros', 'CadastroEmpresasController');
+Route::post('/cadastros', [EmpresaController::class, 'store']);
+
+Route::resource('cadastros', 'EmpresaController');
 Route::resource('posts', 'PostsController');
