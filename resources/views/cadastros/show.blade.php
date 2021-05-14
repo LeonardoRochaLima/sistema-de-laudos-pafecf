@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="/empresas" class="btn btn-default">Voltar</a>
-    <h1>{{$empresas->razao_social}}</h1>
+    <a href="/cadastros" class="btn btn-default">Voltar</a>
+    <h1>{{$empresa->razao_social}}</h1>
     <div>
-        <h3>Serasdasd</h3>
+        <h3>{{$empresa->nome_fantasia}}</h3>
     </div>
     <hr>
 @endsection

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<a href="/cadastros" class="btn btn-default">Voltar</a>
     <h1>Cadastrar Empresa</h1>
     <div id="cadastrar-empresa-create-container">
         <form action="/cadastros" method="POST">

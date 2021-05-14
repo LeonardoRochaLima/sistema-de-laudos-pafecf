@@ -16,6 +16,11 @@ class EmpresaController extends Controller
         return view('cadastros.create');
     }
 
+    public function show($id){
+        $empresa = Empresa::find($id);
+        return view('cadastros.show')->with('empresa', $empresa);
+    }
+
     public function store(Request $request){
 
         $cadastro = new Empresa;
@@ -39,6 +44,6 @@ class EmpresaController extends Controller
 
         $cadastro->save();
 
-        return redirect('/');
+        return redirect('/')->with('msg', 'Empresa Cadastrada com Sucesso');
     }
 }
