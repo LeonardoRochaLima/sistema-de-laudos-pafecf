@@ -8,8 +8,8 @@ use App\Empresa;
 class EmpresaController extends Controller
 {
     public function index(){
-        $title = 'Cadastro de Empresas';
-        return view('cadastros.create')->with('title', $title);
+        $empresas = Empresa::orderBy('razao_social', 'asc')->paginate(10);
+        return view('cadastros.index')->with('empresas', $empresas);;
     }
 
     public function create(){
