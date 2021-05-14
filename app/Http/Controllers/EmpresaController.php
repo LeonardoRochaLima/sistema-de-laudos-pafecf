@@ -9,7 +9,7 @@ class EmpresaController extends Controller
 {
     public function index(){
         $empresas = Empresa::orderBy('razao_social', 'asc')->paginate(10);
-        return view('cadastros.index')->with('empresas', $empresas);;
+        return view('cadastros.index')->with('empresas', $empresas);
     }
 
     public function create(){

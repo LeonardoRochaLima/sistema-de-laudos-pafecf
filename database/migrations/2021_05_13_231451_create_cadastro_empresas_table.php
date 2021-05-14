@@ -14,6 +14,7 @@ class CreateCadastroEmpresasTable extends Migration
     public function up()
     {
         Schema::create('empresas', function (Blueprint $table) {
+            $table->id();
             $table->string('cnpj', 18);
             $table->string('razao_social');
             $table->string('nome_fantasia');
