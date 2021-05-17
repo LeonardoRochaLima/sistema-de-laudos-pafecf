@@ -44,6 +44,6 @@ class EmpresaController extends Controller
 
         $cadastro->save();
 
-        return redirect('/')->with('msg', 'Empresa Cadastrada com Sucesso');
+        return redirect('/')->with('msg', 'Empresa Cadastrada com Sucesso!!');
     }
 }
