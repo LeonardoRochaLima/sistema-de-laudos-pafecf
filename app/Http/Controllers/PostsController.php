@@ -21,7 +21,7 @@ class PostsController extends Controller
         //$posts = Post::orderBy('title', 'asc')->take(1)->get();
         //$posts = Post::orderBy('title', 'desc')->get();
 
-        $posts = Post::orderBy('title', 'asc')->paginate(10);
+        $posts = Post::orderBy('id', 'asc')->paginate(10);
         return view('posts.index') -> with ('posts', $posts);
     }
 
