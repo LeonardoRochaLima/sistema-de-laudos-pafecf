@@ -76,7 +76,7 @@
                         <input type="text" class="form-control" id="email_representante" name="email_representante" placeholder="Email">
                     </div>
                     <div class="form-group col-md-2">
-                        <input type="submit" class="btn btn-primary" value="Finalizar Cadastro">
+                        <input type="submit" class="btn btn-success" value="Finalizar Cadastro">
                     </div>
                     <br>
                     
