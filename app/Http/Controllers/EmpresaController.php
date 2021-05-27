@@ -7,6 +7,12 @@ use App\Empresa;
 
 class EmpresaController extends Controller
 {
+    private $objEmpresa;
+    
+    public function __contruct(){
+        $this->objEmpresa = new Empresa();
+    }
+
     public function index(){
         $empresas = Empresa::orderBy('razao_social', 'asc')->paginate(10);
         return view('cadastros.index')->with('empresas', $empresas);
@@ -19,6 +25,10 @@ class EmpresaController extends Controller
     public function show($id){
         $empresa = Empresa::find($id);
         return view('cadastros.show')->with('empresa', $empresa);
+    }
+
+    public function search(){
+        return view('cadastros.search');
     }
 
     public function store(Request $request){
@@ -45,5 +55,17 @@ class EmpresaController extends Controller
         $cadastro->save();
 
         return redirect('/')->with('msg', 'Empresa Cadastrada com Sucesso!!');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Teste  $teste
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Teste $teste)
+    {
+        //
     }
 }

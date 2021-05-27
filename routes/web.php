@@ -21,5 +21,7 @@ Route::get('/services', 'PagesController@services');
 
 Route::post('/cadastros', [EmpresaController::class, 'store']);
 
+Route::get('/cadastros/search', 'EmpresaController@search');
+
 Route::resource('cadastros', 'EmpresaController');
 Route::resource('posts', 'PostsController');

@@ -79,7 +79,6 @@
                         <input type="submit" class="btn btn-success" value="Finalizar Cadastro">
                     </div>
                     <br>
-                    
                 </form>
             </div>
         </form>

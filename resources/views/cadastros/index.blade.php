@@ -3,6 +3,7 @@
 @section('content')
     <h1>Empresas Cadastradas</h1>
     <a href="/cadastros/create" class="btn btn-default">Cadastrar Nova Empresa</a>
+    <br>
     @if(count($empresas) > 0)
         @foreach ($empresas as $empresa)
             <div class="well">
