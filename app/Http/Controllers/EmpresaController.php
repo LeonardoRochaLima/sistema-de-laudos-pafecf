@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreEmpresaRequest;
 use App\Empresa;
 
 class EmpresaController extends Controller
@@ -31,7 +32,7 @@ class EmpresaController extends Controller
         return view('cadastros.search');
     }
 
-    public function store(Request $request){
+    public function store(StoreEmpresaRequest $request){
 
         $cadastro = new Empresa;
 
