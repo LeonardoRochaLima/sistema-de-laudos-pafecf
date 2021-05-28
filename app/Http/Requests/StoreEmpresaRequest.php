@@ -57,6 +57,6 @@ class StoreEmpresaRequest extends FormRequest
             'cpf_representante.required' => 'O campo CPF é obrigatório',
             'rg_representante.required' => 'O campo RG é obrigatório',
             'email_representante.required' => 'O campo Email é obrigatório',
-        ]
+        ];
     }
 }
