@@ -89,7 +89,6 @@ class EmpresaController extends Controller
         $empresa->email_representante = $request->input('email_representante');
 
         $empresa->save();
-
-        return redirect('/cadastros/index')->with('msg', 'Cadastro Editado com Sucesso!!');
+        return redirect()->back()->with('msg', 'Cadastro Editado com Sucesso!!');
     }
 }
