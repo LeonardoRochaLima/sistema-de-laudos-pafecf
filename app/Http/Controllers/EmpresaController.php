@@ -70,25 +70,45 @@ class EmpresaController extends Controller
         //Edit Empresa
         $empresa = Empresa::find($id);
 
+        if(
+            $empresa->razao_social == $request->input('razao_social') &&
+            $empresa->nome_fantasia == $request->input('nome_fantasia') &&
+            $empresa->endereco == $request->input('endereco') &&
+            $empresa->bairro == $request->input('bairro') &&
+            $empresa->cidade == $request->input('cidade') &&
+            $empresa->uf == $request->input('uf') &&
+            $empresa->cep == $request->input('cep') &&
+            $empresa->telefone == $request->input('telefone') &&
+            $empresa->celular == $request->input('celular') &&
+            $empresa->cnpj == $request->input('cnpj') &&
+            $empresa->inscricao_estadual == $request->input('inscricao_estadual') &&
+            $empresa->inscricao_municipal == $request->input('inscricao_municipal') &&
+            $empresa->representante == $request->input('representante') &&
+            $empresa->cpf_representante == $request->input('cpf_representante') &&
+            $empresa->rg_representante == $request->input('rg_representante') &&
+            $empresa->email_representante == $request->input('email_representante')
+        ){
+            return redirect()->back()->with('msg', 'Nenhum campo alterado!!');
+        }else{
+            $empresa->razao_social = $request->input('razao_social');
+            $empresa->nome_fantasia = $request->input('nome_fantasia');
+            $empresa->endereco = $request->input('endereco');
+            $empresa->bairro = $request->input('bairro');
+            $empresa->cidade = $request->input('cidade');
+            $empresa->uf = $request->input('uf');
+            $empresa->cep = $request->input('cep');
+            $empresa->telefone = $request->input('telefone');
+            $empresa->celular = $request->input('celular');
+            $empresa->cnpj = $request->input('cnpj');
+            $empresa->inscricao_estadual = $request->input('inscricao_estadual');
+            $empresa->inscricao_municipal = $request->input('inscricao_municipal');
+            $empresa->representante = $request->input('representante');
+            $empresa->cpf_representante = $request->input('cpf_representante');
+            $empresa->rg_representante = $request->input('rg_representante');
+            $empresa->email_representante = $request->input('email_representante');
 
-        $empresa->razao_social = $request->input('razao_social');
-        $empresa->nome_fantasia = $request->input('nome_fantasia');
-        $empresa->endereco = $request->input('endereco');
-        $empresa->bairro = $request->input('bairro');
-        $empresa->cidade = $request->input('cidade');
-        $empresa->uf = $request->input('uf');
-        $empresa->cep = $request->input('cep');
-        $empresa->telefone = $request->input('telefone');
-        $empresa->celular = $request->input('celular');
-        $empresa->cnpj = $request->input('cnpj');
-        $empresa->inscricao_estadual = $request->input('inscricao_estadual');
-        $empresa->inscricao_municipal = $request->input('inscricao_municipal');
-        $empresa->representante = $request->input('representante');
-        $empresa->cpf_representante = $request->input('cpf_representante');
-        $empresa->rg_representante = $request->input('rg_representante');
-        $empresa->email_representante = $request->input('email_representante');
-
-        $empresa->save();
-        return redirect()->back()->with('msg', 'Cadastro Editado com Sucesso!!');
+            $empresa->save();
+            return redirect()->back()->with('msg', 'Cadastro Editado com Sucesso!!');
+        }
     }
 }

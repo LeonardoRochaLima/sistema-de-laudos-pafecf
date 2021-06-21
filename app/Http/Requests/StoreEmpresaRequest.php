@@ -33,7 +33,7 @@ class StoreEmpresaRequest extends FormRequest
             'cep' => 'required',
             'telefone' => 'required',
             'celular' => 'required',
-            'cnpj' => 'required',
+            'cnpj' => 'required|max:18',
             'representante' => 'required',
             'cpf_representante' => 'required',
             'rg_representante' => 'required',
@@ -57,6 +57,8 @@ class StoreEmpresaRequest extends FormRequest
             'cpf_representante.required' => 'O campo CPF é obrigatório',
             'rg_representante.required' => 'O campo RG é obrigatório',
             'email_representante.required' => 'O campo Email é obrigatório',
+
+            'cnpj.max' => 'O cnpj não pode ter mais de 18 caracteres.'
         ];
     }
 }
