@@ -14,9 +14,11 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">Sobre</a></li>
                 <li><a href="/services">Serviços</a></li>
-                <li><a href="/posts">Posts</a></li>
-                <li><a href="/cadastros">Cadastro de Empresas</a></li>
+                <li><a href="/cadastros">Empresas</a></li>
+                {{--
                 <li><a href="/cadastros/search">Busca Empresa</a></li>
+                <li><a href="/posts">Posts</a></li>
+                --}}
             </ul>
         </div>
     </div>

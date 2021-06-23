@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="/cadastros" class="btn btn-default">Voltar</a>
+    <a href="/cadastros" class="btn btn-default">Empresas Cadastradas</a>
+
     <h1>Cadastrar Empresa</h1>
 
     @if ($errors->any())
