@@ -13,15 +13,18 @@
         }
 
     </style>
-    <button type="button" class="btn btn-outline-danger" onclick="{{ route('cadastroEmpresa.excluirCadastro', $empresa) }}">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash-fill"
-            viewBox="0 0 16 16" style="color: red">
-            <path
-                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z">
-            </path>
-        </svg>
-        Excluir Cadastro
-    </button>
+    <form action="{{ route('cadastroEmpresa.excluirCadastro', $empresa) }}" method="post">
+        <button type="submit" class="btn btn-outline-danger">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash-fill"
+                viewBox="0 0 16 16" style="color: red">
+                <path
+                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z">
+                </path>
+            </svg>
+            Excluir Cadastro
+        </button>
+    </form>
+    <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -37,7 +40,7 @@
     </div>
     <form action="{{ route('cadastroEmpresa.update', $empresa) }}" method="post" name="formulario">
         @csrf
-        <div class="form-group col-md-7">
+        <div class="form-group control-label col-md-7">
             <label for="razao_social">Razão Social</label>
             <input type="text" class="form-control" id="razao_social" name="razao_social" placeholder="Razão Social"
                 value="{{ $empresa->razao_social }}">
@@ -48,7 +51,7 @@
                 </div>
             @enderror
         </div>
-        <div class="form-group col-md-5">
+        <div class="form-group control-label col-md-5">
             <label for="nome_fantasia">Nome Fantasia</label>
             <input type="text" class="form-control" id="nome_fantasia" name="nome_fantasia" placeholder="Nome Fantasia"
                 value="{{ $empresa->nome_fantasia }}">
@@ -58,7 +61,7 @@
                 </div>
             @enderror
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group control-label col-md-6">
             <label for="endereco">Endereço</label>
             <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço"
                 value="{{ $empresa->endereco }}">
@@ -68,7 +71,7 @@
                 </div>
             @enderror
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group control-label col-md-6">
             <label for="bairro">Bairro</label>
             <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Bairro"
                 value="{{ $empresa->bairro }}">
@@ -78,7 +81,7 @@
                 </div>
             @enderror
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group control-label col-md-6">
             <label for="cidade">Cidade</label>
             <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Cidade"
                 value="{{ $empresa->cidade }}">
@@ -88,7 +91,7 @@
                 </div>
             @enderror
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group control-label col-md-2">
             <label for="uf">UF</label>
             <input type="text" class="form-control" id="uf" name="uf" placeholder="UF" value="{{ $empresa->uf }}">
             @error('uf')
@@ -97,7 +100,7 @@
                 </div>
             @enderror
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group control-label col-md-4">
             <label for="cep">CEP</label>
             <input type="text" class="form-control" id="cep" name="cep" placeholder="CEP" value="{{ $empresa->cep }}">
             @error('cep')
@@ -106,7 +109,7 @@
                 </div>
             @enderror
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group control-label col-md-6">
             <label for="telefone">Telefone</label>
             <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone"
                 value="{{ $empresa->telefone }}">
@@ -116,7 +119,7 @@
                 </div>
             @enderror
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group control-label col-md-6">
             <label for="celular">Celular</label>
             <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular"
                 value="{{ $empresa->celular }}">
@@ -126,7 +129,7 @@
                 </div>
             @enderror
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group control-label col-md-4">
             <label for="cnpj">CNPJ</label>
             <input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="CNPJ"
                 value="{{ $empresa->cnpj }}">
@@ -146,7 +149,7 @@
             <input type="text" class="form-control" id="inscricao_municipal" name="inscricao_municipal"
                 placeholder="Inscriação Municipal" value="{{ $empresa->inscricao_municipal }}">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group control-label col-md-4">
             <label for="representante">Representante Legal da Empresa</label>
             <input type="text" class="form-control" id="representante" name="representante"
                 placeholder="Representante Legal da Empresa" value="{{ $empresa->representante }}">
@@ -156,7 +159,7 @@
                 </div>
             @enderror
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group control-label col-md-4">
             <label for="cpf_representante">CPF do Responsável</label>
             <input type="text" class="form-control" id="cpf_representante" name="cpf_representante"
                 placeholder="CPF do Representante" value="{{ $empresa->cpf_representante }}">
@@ -166,7 +169,7 @@
                 </div>
             @enderror
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group control-label col-md-4">
             <label for="rg_representante">RG do Representante</label>
             <input type="text" class="form-control" id="rg_representante" name="rg_representante"
                 placeholder="RG do Representante" value="{{ $empresa->rg_representante }}">
@@ -176,7 +179,7 @@
                 </div>
             @enderror
         </div>
-        <div class="form-group col-md-12">
+        <div class="form-group control-label col-md-12">
             <label for="email_representante">Email de Contato - Representante</label>
             <input type="text" class="form-control" id="email_representante" name="email_representante" placeholder="Email"
                 value="{{ $empresa->email_representante }}">

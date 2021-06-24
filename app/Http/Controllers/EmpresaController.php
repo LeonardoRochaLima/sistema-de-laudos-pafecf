@@ -71,7 +71,7 @@ class EmpresaController extends Controller
         return redirect('/')->with('msg', 'Empresa Cadastrada com Sucesso!!');
     }
 
-    public function excluirCadastro(StoreEmpresaRequest $request, $id){
+    public function excluirCadastro($id){
         $empresa = Empresa::find($id);
         $empresa->validacao = true;
         return redirect('/cadastros')->with('msg', 'Cadastro da Empresa Excluído com Sucesso!!');
