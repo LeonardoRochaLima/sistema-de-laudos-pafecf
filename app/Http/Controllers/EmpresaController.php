@@ -15,8 +15,17 @@ class EmpresaController extends Controller
     }
 
     public function index(){
-        $empresas = Empresa::orderBy('razao_social', 'asc')->paginate(10);
-        return view('cadastros.index')->with('empresas', $empresas);
+        $buscar = request('buscar');
+
+        if ($buscar) {
+            echo("Entrou no if");
+            $empresa = Empresa::where([
+                ['razao_social', 'like', '%'.$buscar.'%'],
+                ['nome_fantasia', 'like', '%'.$buscar.'%']
+            ])->get();
+        }
+        $empresa = Empresa::orderBy('id', 'desc')->paginate(10);
+        return view('cadastros.index',['empresas' => $empresa, 'buscar' => $buscar]);
     }
 
     public function create(){
