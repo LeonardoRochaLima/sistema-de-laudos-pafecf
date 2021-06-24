@@ -15,17 +15,16 @@ class EmpresaController extends Controller
     }
 
     public function index(){
+        
         $buscar = request('buscar');
 
         if ($buscar) {
-            echo("Entrou no if");
-            $empresa = Empresa::where([
-                ['razao_social', 'like', '%'.$buscar.'%'],
-                ['nome_fantasia', 'like', '%'.$buscar.'%']
+            $empresas = Empresa::where([
+                ['razao_social', 'LIKE', "%{$buscar}%"]
             ])->get();
         }
-        $empresa = Empresa::orderBy('id', 'desc')->paginate(10);
-        return view('cadastros.index',['empresas' => $empresa, 'buscar' => $buscar]);
+        $empresas = Empresa::orderBy('id', 'desc')->paginate(10);
+        return view('cadastros.index',['empresas' => $empresas, 'buscar' => $buscar]);
     }
 
     public function create(){
@@ -37,7 +36,8 @@ class EmpresaController extends Controller
         return view('cadastros.show')->with('empresa', $empresa);
     }
 
-    public function search(){
+    public function search($buscar)
+    {
         return view('cadastros.search');
     }
 

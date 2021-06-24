@@ -8255,6 +8255,13 @@ button.close {
   }
 }
 
+.form-group.control-label:before{
+  color: red;
+  content: "*";
+  position: absolute;
+  margin-left: -10px;
+}
+
 @media print {
   .hidden-print {
     display: none !important;

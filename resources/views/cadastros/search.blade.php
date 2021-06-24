@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Buscar Empresa</h1>
-    <a href="/cadastros" class="btn btn-default">Cadastrar Nova Empresa</a>
+    <a href="/cadastros" class="btn btn-default cold-md-10">Voltar</a>
+    <h2>Buscando por: {{ $buscar }}</h2>
 @endsection
