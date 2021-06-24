@@ -31,6 +31,7 @@ class CreateCadastroEmpresasTable extends Migration
             $table->string('cpf_representante', 14);
             $table->string('rg_representante', 12);
             $table->string('email_representante');
+            $table->boolean('validacao');
             $table->timestamps();
         });
     }

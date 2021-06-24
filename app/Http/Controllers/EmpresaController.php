@@ -9,29 +9,31 @@ use App\Empresa;
 class EmpresaController extends Controller
 {
     private $objEmpresa;
-    
-    public function __contruct(){
+
+    public function __contruct()
+    {
         $this->objEmpresa = new Empresa();
     }
 
-    public function index(){
-        
+    public function index()
+    {
         $buscar = request('buscar');
-
         if ($buscar) {
             $empresas = Empresa::where([
                 ['razao_social', 'LIKE', "%{$buscar}%"]
             ])->get();
         }
-        $empresas = Empresa::orderBy('id', 'desc')->paginate(10);
-        return view('cadastros.index',['empresas' => $empresas, 'buscar' => $buscar]);
+        $empresas = Empresa::where('validacao', true)->orderBy('id', 'desc')->paginate(10);
+        return view('cadastros.index', ['empresas' => $empresas, 'buscar' => $buscar]);
     }
 
-    public function create(){
+    public function create()
+    {
         return view('cadastros.create');
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $empresa = Empresa::find($id);
         return view('cadastros.show')->with('empresa', $empresa);
     }
@@ -41,7 +43,8 @@ class EmpresaController extends Controller
         return view('cadastros.search');
     }
 
-    public function store(StoreEmpresaRequest $request){
+    public function store(StoreEmpresaRequest $request)
+    {
 
         $empresa = new Empresa;
 
@@ -61,10 +64,17 @@ class EmpresaController extends Controller
         $empresa->cpf_representante = $request->cpf_representante;
         $empresa->rg_representante = $request->rg_representante;
         $empresa->email_representante = $request->email_representante;
+        $empresa->validacao = true;
 
         $empresa->save();
 
         return redirect('/')->with('msg', 'Empresa Cadastrada com Sucesso!!');
+    }
+
+    public function excluirCadastro(StoreEmpresaRequest $request, $id){
+        $empresa = Empresa::find($id);
+        $empresa->validacao = true;
+        return redirect('/cadastros')->with('msg', 'Cadastro da Empresa Excluído com Sucesso!!');
     }
 
     /**
@@ -79,7 +89,7 @@ class EmpresaController extends Controller
         //Edit Empresa
         $empresa = Empresa::find($id);
 
-        if(
+        if (
             $empresa->razao_social == $request->input('razao_social') &&
             $empresa->nome_fantasia == $request->input('nome_fantasia') &&
             $empresa->endereco == $request->input('endereco') &&
@@ -96,9 +106,9 @@ class EmpresaController extends Controller
             $empresa->cpf_representante == $request->input('cpf_representante') &&
             $empresa->rg_representante == $request->input('rg_representante') &&
             $empresa->email_representante == $request->input('email_representante')
-        ){
+        ) {
             return redirect()->back()->with('msg', 'Nenhum campo alterado!!');
-        }else{
+        } else {
             $empresa->razao_social = $request->input('razao_social');
             $empresa->nome_fantasia = $request->input('nome_fantasia');
             $empresa->endereco = $request->input('endereco');
