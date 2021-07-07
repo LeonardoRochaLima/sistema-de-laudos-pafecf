@@ -13,7 +13,19 @@
         }
 
     </style>
-    <form action="{{ route('cadastroEmpresa.excluirCadastro', $empresa) }}" method="post">
+    <script>
+        function validarExclusao(frm) {
+            var validador = confirm("Tem certeza que deseja excluir o cadastro desta em");
+            if (validador == false) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+    <form action="{{ route('cadastroEmpresa.excluirCadastro', $empresa) }}" method="post"
+        onsubmit="return validarExclusao(this);">
+        @csrf
         <button type="submit" class="btn btn-outline-danger">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash-fill"
                 viewBox="0 0 16 16" style="color: red">
