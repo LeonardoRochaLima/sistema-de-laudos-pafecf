@@ -22,6 +22,7 @@ class EmpresaController extends Controller
             $empresas = Empresa::where([
                 ['razao_social', 'LIKE', "%{$buscar}%"]
             ])->get();
+            return view('cadastros.index', ['empresas' => $empresas, 'buscar' => $buscar]);
         }
         $empresas = Empresa::where('validacao', true)->orderBy('id', 'desc')->paginate(10);
         return view('cadastros.index', ['empresas' => $empresas, 'buscar' => $buscar]);
