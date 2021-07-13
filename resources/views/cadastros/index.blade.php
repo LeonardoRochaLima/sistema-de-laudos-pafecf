@@ -38,9 +38,8 @@
                 </div>
             @endforeach
         @else
-            <p>Nenhuma empresa cadastrada</p>
+            <p>Nenhuma empresa encontrada.</p>
         @endif
-
     @else
         <a href="/cadastros/create" class="btn btn-default">Cadastrar Nova Empresa</a>
         <br>
