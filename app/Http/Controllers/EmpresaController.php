@@ -21,7 +21,7 @@ class EmpresaController extends Controller
         if ($buscar) {
             $empresas = Empresa::where([
                 ['razao_social', 'LIKE', "%{$buscar}%"],
-                ['validacao', 'LIKE', "1"]
+                ['validacao', true]
             ])->get();
             return view('cadastros.index', ['empresas' => $empresas, 'buscar' => $buscar]);
         }
