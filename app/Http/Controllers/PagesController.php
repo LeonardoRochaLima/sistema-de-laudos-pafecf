@@ -17,6 +17,10 @@ class PagesController extends Controller
         return view('pages.about')->with('title', $title);
     }
 
+    public function teste(){
+        return view('pages.teste');
+    }
+
     public function services(){
         $data = array(
             'title' => 'Serviços',
@@ -29,4 +33,6 @@ class PagesController extends Controller
         $title = 'Cadastro de Empresas';
         return view('pages.cadastro_empresas')->with('title', $title);
     }
+
+
 }

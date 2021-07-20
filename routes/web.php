@@ -16,6 +16,7 @@ use App\Http\Controller\CadastroEmpresasController;
 
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
+Route::get('/teste', 'PagesController@teste');
 Route::get('/services', 'PagesController@services');
 //Route::get('/cadastro_empresas', 'PagesController@cadastro_empresas');
 
