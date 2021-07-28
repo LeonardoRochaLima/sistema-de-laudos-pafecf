@@ -70,7 +70,7 @@ class EmpresaController extends Controller
 
         $empresa->save();
 
-        return redirect('/')->with('msg', 'Empresa Cadastrada com Sucesso!!');
+        return redirect('/cadastros')->with('msg', 'Empresa Cadastrada com Sucesso!!');
     }
 
     public function excluirCadastro($id){

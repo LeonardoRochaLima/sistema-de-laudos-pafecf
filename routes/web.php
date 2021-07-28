@@ -26,7 +26,5 @@ Route::post('cadastros/{empresa}/update', 'EmpresaController@update')->name('cad
 
 Route::post('/cadastros/{empresa}/excluirCadastro', 'EmpresaController@excluirCadastro')->name('cadastroEmpresa.excluirCadastro');
 
-Route::get('/cadastros/search', 'EmpresaController@search');
-
 Route::resource('cadastros', 'EmpresaController');
 Route::resource('posts', 'PostsController');
