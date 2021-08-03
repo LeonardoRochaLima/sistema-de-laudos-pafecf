@@ -24,3 +24,5 @@ Route::post('/cadastros', [EmpresaController::class, 'store']);
 Route::post('cadastros/{empresa}/update', 'EmpresaController@update')->name('cadastroEmpresa.update');
 Route::post('/cadastros/{empresa}/excluirCadastro', 'EmpresaController@excluirCadastro')->name('cadastroEmpresa.excluirCadastro');
 Route::resource('cadastros', 'EmpresaController');
+
+Route::get('/login', 'PagesController@login');

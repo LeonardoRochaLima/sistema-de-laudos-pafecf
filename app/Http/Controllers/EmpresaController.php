@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreEmpresaRequest;
-use App\Empresa;
+use App\Models\Empresa;
 
 class EmpresaController extends Controller
 {
