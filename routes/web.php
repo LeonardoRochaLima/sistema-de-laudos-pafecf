@@ -25,6 +25,6 @@ Route::post('cadastros/{empresa}/update', 'EmpresaController@update')->name('cad
 Route::post('/cadastros/{empresa}/excluirCadastro', 'EmpresaController@excluirCadastro')->name('cadastroEmpresa.excluirCadastro');
 Route::resource('cadastros', 'EmpresaController');
 
-Route::get('/login', 'PagesController@login');
-Route::get('/register', 'PagesController@register');
-Route::get('/verify', 'PagesController@verify');
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');

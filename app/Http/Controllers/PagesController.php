@@ -34,17 +34,4 @@ class PagesController extends Controller
         return view('pages.cadastro_empresas')->with('title', $title);
     }
 
-    public function login(){
-        return view('auth.login');
-    }
-
-    public function register(){
-        return view('auth.register');
-    }
-
-    public function verify(){
-        return view('auth.verify');
-    }
-
-
 }
