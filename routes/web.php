@@ -26,3 +26,5 @@ Route::post('/cadastros/{empresa}/excluirCadastro', 'EmpresaController@excluirCa
 Route::resource('cadastros', 'EmpresaController');
 
 Route::get('/login', 'PagesController@login');
+Route::get('/register', 'PagesController@register');
+Route::get('/verify', 'PagesController@verify');
