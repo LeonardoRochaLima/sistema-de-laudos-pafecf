@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -13,7 +12,6 @@
                             {{ __('Um link de verificação foi enviado para o seu endereço de e-mail.') }}
                         </div>
                     @endif
-
                     {{ __('Antes de continuar, verifique no seu e-mail se recebeu um link de verificação.') }}
                     {{ __('Se você não recebeu o email') }},
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">

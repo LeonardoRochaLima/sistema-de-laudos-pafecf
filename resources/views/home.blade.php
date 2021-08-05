@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="jumbotron text-center">
         <h1>Bem-vindo ao Sistema de Laudos!</h1>
@@ -16,7 +15,6 @@
                     {{ session('status') }}
                 </div>
             @endif
-
             {{ __('Você está logado!') }}
     </div>
 @endsection
