@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
 
 <head>
@@ -25,5 +25,12 @@
             </div>
         </main>
 </body>
-
+<br>
+<br>
+<footer>
+    <div class="text-center">
+      ©2021 Copyright: NPI - Núcleo de Práticas em Informática - UNIFIL
+    </div>
+</footer>
 </html>
+

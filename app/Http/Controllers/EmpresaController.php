@@ -10,6 +10,11 @@ class EmpresaController extends Controller
 {
     private $objEmpresa;
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function __contruct()
     {
         $this->objEmpresa = new Empresa();
