@@ -110,13 +110,13 @@ return [
         'string' => 'The :attribute must be :size characters.',
         'array' => 'The :attribute must contain :size items.',
     ],
-    'starts_with' => 'The :attribute must start with one of the following: :values.',
-    'string' => 'The :attribute must be a string.',
-    'timezone' => 'The :attribute must be a valid zone.',
-    'unique' => 'The :attribute has already been taken.',
-    'uploaded' => 'The :attribute failed to upload.',
-    'url' => 'The :attribute format is invalid.',
-    'uuid' => 'The :attribute must be a valid UUID.',
+    'starts_with' => 'O :attribute deve estar entre following: :values.',
+    'string' => 'O :attribute deveria ser do tipo String.',
+    'timezone' => 'A :attribute deve estar uma zona válida.',
+    'unique' => 'O :attribute já existe no cadastro de usuários.',
+    'uploaded' => 'Falha na atualização do :attribute.',
+    'url' => ':attribute inválida.',
+    'uuid' => 'O :attribute deveria ser um UUID válido.',
 
     /*
     |--------------------------------------------------------------------------

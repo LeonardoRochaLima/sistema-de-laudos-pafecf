@@ -29,7 +29,9 @@
 <br>
 <footer>
     <div class="text-center">
-      ©2021 Copyright: NPI - Núcleo de Práticas em Informática - UNIFIL
+      ©2021 Copyright By Leonardo Lima <br>
+      From NPI - Núcleo de Práticas em Informática <br>
+      Centro Universitário Filadélfia - UNIFIL
     </div>
 </footer>
 </html>
