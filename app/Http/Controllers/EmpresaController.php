@@ -15,11 +15,6 @@ class EmpresaController extends Controller
         $this->middleware('auth');
     }
 
-    public function __contruct()
-    {
-        $this->objEmpresa = new Empresa();
-    }
-
     public function index()
     {
         $buscar = request('buscar');
