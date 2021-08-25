@@ -14,17 +14,24 @@ use App\Http\Controller\CadastroEmpresasController;
 |
 */
 
+//Rotas de Páginas comuns
 Route::get('/', 'PagesController@welcome');
 Route::get('/about', 'PagesController@about');
 Route::get('/teste', 'PagesController@teste');
 Route::get('/services', 'PagesController@services');
-//Route::get('/cadastro_empresas', 'PagesController@cadastro_empresas');
 
+//Rotas da Empresa
+Route::resource('cadastros', 'EmpresaController');
 Route::post('/cadastros', [EmpresaController::class, 'store']);
 Route::post('cadastros/{empresa}/update', 'EmpresaController@update')->name('cadastroEmpresa.update');
 Route::post('/cadastros/{empresa}/excluirCadastro', 'EmpresaController@excluirCadastro')->name('cadastroEmpresa.excluirCadastro');
-Route::resource('cadastros', 'EmpresaController');
 
+//Rotas de Autenticação de usuário
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//Rotas do Usuário
+Route::resource('profile', 'Auth\UserController');
+Route::get('profile.show', 'Auth\UserController@show');
+Route::post('/profie/show/update', 'Auth\UserController@update')->name('user.update');

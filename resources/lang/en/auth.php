@@ -14,6 +14,6 @@ return [
     */
 
     'failed' => 'Usuário ou senha incorretos.',
-    'throttle' => 'Muitas tentativas. Por favor tente novamente: 10 segundos.',
+    'throttle' => 'Muitas tentativas. Por favor tente novamente em: 10 segundos.',
 
 ];

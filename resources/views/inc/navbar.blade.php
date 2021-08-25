@@ -18,23 +18,27 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             @guest
+                <ul class="nav navbar-nav">
+                    <li><a href="/about">Sobre</a></li>
+                    <li><a href="/services">Serviços</a></li>
+                </ul>
                 <ul class="nav navbar-nav top-right">
-                    <li><a href="/login">Logar</a></li>
-                    <li><a href="/register">Registrar</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Registro</a></li>
                 </ul>
             @else
                 <ul class="nav navbar-nav">
                     <li><a href="/home">Home</a></li>
+                    <li><a href="/cadastros">Empresas</a></li>
                     <li><a href="/about">Sobre</a></li>
                     <li><a href="/services">Serviços</a></li>
-                    <li><a href="/cadastros">Empresas</a></li>
                 </ul>
                 <ul class="nav navbar-nav top-right">
+                    <li><a href="/profile/show">User</a></li>
                     <li>
                         <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
-                        <form id="logout-form" action="{{ route('logout') }}"
-                        method="POST" class="hidden">
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                             {{ csrf_field() }}
                         </form>
                     </li>
