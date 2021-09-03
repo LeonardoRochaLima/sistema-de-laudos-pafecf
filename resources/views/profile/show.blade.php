@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-       <a href="/home" class="btn btn-default">Voltar</a> 
-       <h1>Perfil</h1>
-       @if ($errors->any())
+    <a href="/home" class="btn btn-default">Voltar</a>
+    @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -12,32 +11,82 @@
             </ul>
         </div>
     @endif
-    <h3>Usuario</h3>
-    <form action="{{route('user.update', $user)}}" method="POST" name="perfil_update">
-        @csrf
-        <div class="form-group control-label col-md-4">
-            <label for="name">Nome</label>
-            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" 
-            value="{{$user->name}}">
-            @error('nome')
-                <div class="invalid-feedback" style="color: red">
-                    {{ $message }}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <h2 class="card-header">Perfil de Usuário</h2>
+                    <br>
+                    <div class="card-body">
+                        <form action="{{ route('user.update', $user) }}" method="POST" name="perfil_update">
+                            @csrf
+                            <div class="form-group row">
+                                <label for="nome" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome"
+                                        value="{{ $user->name }}">
+                                    @error('nome')
+                                        <div class="invalid-feedback" style="color: red">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Endereço de Email') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="Email"
+                                        value="{{ $user->email }}">
+                                    @error('email')
+                                        <div class="invalid-feedback" style="color: red">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <br>
+                            <h3>Alterar Senha</h3>
+                            <br>
+                            <div class="form-group row">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Senha Atual') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="password" name="password" placeholder="Senha Atual">
+                                    @error('password')
+                                        <div class="invalid-feedback" style="color: red">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="new-password" class="col-md-4 col-form-label text-md-right">{{ __('Nova Senha') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="new-password" name="new-password" placeholder="Nova Senha">
+                                    @error('new-password')
+                                        <div class="invalid-feedback" style="color: red">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar Senha') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="password-confirm" name="password-confirm" placeholder="Confirmar Senha">
+                                    @error('new-password')
+                                        <div class="invalid-feedback" style="color: red">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row col-md-4">
+                                <input type="submit" class="btn btn-success" value="Salvar Alterações">
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            @enderror
+            </div>
         </div>
-        <div class="form-group control-label col-md-4">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" id="email" name="email" placeholder="Email" 
-            value="{{$user->email}}">
-            @error('email')
-                <div class="invalid-feedback" style="color: red">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-        <br>
-        <div class="form-group col-md-10">
-            <input type="submit" class="btn btn-success" value="Salvar Alterações">
-        </div>
-    </form>
+    </div>
 @endsection
