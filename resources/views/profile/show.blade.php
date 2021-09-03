@@ -18,7 +18,7 @@
                     <h2 class="card-header">Perfil de Usuário</h2>
                     <br>
                     <div class="card-body">
-                        <form action="{{ route('user.update', $user) }}" method="POST" name="perfil_update">
+                        <form action="{{ route('user.update', $user)}}" method="POST" name="perfil_update">
                             @csrf
                             <div class="form-group row">
                                 <label for="nome" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
@@ -44,14 +44,13 @@
                                     @enderror
                                 </div>
                             </div>
-                            <br>
                             <h3>Alterar Senha</h3>
                             <br>
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Senha Atual') }}</label>
+                                <label for="current_password" class="col-md-4 col-form-label text-md-right">{{ __('Senha Atual') }}</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="password" name="password" placeholder="Senha Atual">
-                                    @error('password')
+                                    <input type="text" class="form-control" id="current_password" name="current_password" placeholder="Senha Atual">
+                                    @error('current_password')
                                         <div class="invalid-feedback" style="color: red">
                                             {{ $message }}
                                         </div>
@@ -59,10 +58,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="new-password" class="col-md-4 col-form-label text-md-right">{{ __('Nova Senha') }}</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Nova Senha') }}</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="new-password" name="new-password" placeholder="Nova Senha">
-                                    @error('new-password')
+                                    <input type="text" class="form-control" id="password" name="password" placeholder="Nova Senha">
+                                    @error('password')
                                         <div class="invalid-feedback" style="color: red">
                                             {{ $message }}
                                         </div>
@@ -82,7 +81,7 @@
                             </div>
                             <div class="form-group row col-md-4">
                                 <input type="submit" class="btn btn-success" value="Salvar Alterações">
-                            </div>
+                            </div>                            
                         </form>
                     </div>
                 </div>
