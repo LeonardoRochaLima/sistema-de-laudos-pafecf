@@ -48,7 +48,7 @@ class UserController extends Controller
                     session()->flash('msg','Informações alteradas com sucesso!');
                     return redirect()->back();
                 }else{
-                    session()->flash('msg','Informações alteradas com sucesso!');
+                    session()->flash('msg','As senhas não conferem!');
                     return redirect()->back();
                 }
             }else{
