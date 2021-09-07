@@ -24,11 +24,22 @@ class UserController extends Controller
         return view('profile.show')->with('user', $user);
     }
 
+    public function updatePerfil(StoreUserRequest $request, $id){
+        $user = User::find($id);
+        if (
+            $user->name == $request->input('nome') &&
+            $user->email == $request->input('email')){
+                return redirect()->back()->with('msg', 'Nenhum campo alterado!!');
+            }
+        $user->name = $request->input('nome');
+        $user->email = $request->input('email'); 
+        $user->save();
+        return redirect()->back()->with('msg', 'Informações Alteradas com Sucesso!!');
+    }
+
     public function update(StoreUserRequest $request, $id)
     {
         $user = Auth::user();
-        $user->name = $request->input('nome');
-        $user->email = $request->input('email');
  
         $this->validate($request, [
  

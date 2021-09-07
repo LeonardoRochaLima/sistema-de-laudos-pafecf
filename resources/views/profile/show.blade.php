@@ -18,7 +18,7 @@
                     <h2 class="card-header">Perfil de Usuário</h2>
                     <br>
                     <div class="card-body">
-                        <form action="{{ route('user.update', $user)}}" method="POST" name="perfil_update">
+                        <form action="{{ route('user.updatePerfil', $user)}}" method="POST">
                             @csrf
                             <div class="form-group row">
                                 <label for="nome" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
@@ -44,8 +44,17 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="form-group row col-md-4">
+                                <input type="submit" class="btn btn-success" value="Salvar Alterações">
+                            </div>
+                        </form>
+                        <br>
+                        <br>
+                        <br>
                             <h3>Alterar Senha</h3>
                             <br>
+                        <form action="{{ route('user.update', $user)}}" method="POST" name="password_update">
+                                @csrf
                             <div class="form-group row">
                                 <label for="current_password" class="col-md-4 col-form-label text-md-right">{{ __('Senha Atual') }}</label>
                                 <div class="col-md-6">
@@ -80,7 +89,7 @@
                                 </div>
                             </div>
                             <div class="form-group row col-md-4">
-                                <input type="submit" class="btn btn-success" value="Salvar Alterações">
+                                <input type="submit" class="btn btn-success" value="Alterar Senha">
                             </div>                            
                         </form>
                     </div>
