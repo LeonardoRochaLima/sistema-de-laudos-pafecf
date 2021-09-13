@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\StoreUserPasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -24,7 +25,8 @@ class UserController extends Controller
         return view('profile.show')->with('user', $user);
     }
 
-    public function updatePerfil(StoreUserRequest $request, $id){
+    public function perfil(StoreUserRequest $request, $id){
+        print("entrou aqui;;");
         $user = User::find($id);
         if (
             $user->name == $request->input('nome') &&
@@ -37,16 +39,9 @@ class UserController extends Controller
         return redirect()->back()->with('msg', 'Informações Alteradas com Sucesso!!');
     }
 
-    public function update(StoreUserRequest $request, $id)
+    public function update(StoreUserPasswordRequest $request, $id)
     {
         $user = Auth::user();
- 
-        $this->validate($request, [
- 
-        'current_password' => 'required',
-        'password' => 'required',
-        ]);
- 
  
        $hashedPassword = $user->password;
  
@@ -56,7 +51,7 @@ class UserController extends Controller
                     $user = User::find($user->id);
                     $user->password = bcrypt($request->password);
                     User::where( 'id' , $user->id)->update( array( 'password' =>  $user->password));
-                    session()->flash('msg','Informações alteradas com sucesso!');
+                    session()->flash('msg','Senha alterada com sucesso!');
                     return redirect()->back();
                 }else{
                     session()->flash('msg','As senhas não conferem!');

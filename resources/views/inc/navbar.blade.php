@@ -34,7 +34,7 @@
                     <li><a href="/services">Serviços</a></li>
                 </ul>
                 <ul class="nav navbar-nav top-right">
-                    <li><a href="/profile/show">User</a></li>
+                    <li><a href="/profile/show">Editar Perfil</a></li>
                     <li>
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
