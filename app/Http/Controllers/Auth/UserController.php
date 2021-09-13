@@ -58,7 +58,7 @@ class UserController extends Controller
                     return redirect()->back();
                 }
             }else{
-                session()->flash('msg','A nova senha não pode ser igual a sua atual!');
+                session()->flash('msg','A nova senha não pode ser igual a senha atual!');
                 return redirect()->back();
             }
         }else{

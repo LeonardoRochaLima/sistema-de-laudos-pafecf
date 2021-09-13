@@ -58,7 +58,7 @@
                             <div class="form-group row">
                                 <label for="current_password" class="col-md-4 col-form-label text-md-right">{{ __('Senha Atual') }}</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="current_password" name="current_password" placeholder="Senha Atual">
+                                    <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Senha Atual">
                                     @error('current_password')
                                         <div class="invalid-feedback" style="color: red">
                                             {{ $message }}
@@ -69,7 +69,7 @@
                             <div class="form-group row">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Nova Senha') }}</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="password" name="password" placeholder="Nova Senha">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Nova Senha">
                                     @error('password')
                                         <div class="invalid-feedback" style="color: red">
                                             {{ $message }}
@@ -80,7 +80,7 @@
                             <div class="form-group row">
                                 <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar Senha') }}</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="password-confirm" name="password-confirm" placeholder="Confirmar Senha">
+                                    <input type="password" class="form-control" id="password-confirm" name="password-confirm" placeholder="Confirmar Senha">
                                     @error('password-confirm')
                                         <div class="invalid-feedback" style="color: red">
                                             {{ $message }}
