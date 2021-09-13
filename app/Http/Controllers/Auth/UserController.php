@@ -43,10 +43,10 @@ class UserController extends Controller
     {
         $user = Auth::user();
  
-       $hashedPassword = $user->password;
+       $senhaHash = $user->password;
  
-       if (Hash::check($request->current_password , $hashedPassword )) {
-           if (!Hash::check($request->password , $hashedPassword)) {
+       if (Hash::check($request->current_password , $senhaHash )) {
+           if (!Hash::check($request->password , $senhaHash)) {
                if($request->input('password') == $request->input('password-confirm')){
                     $user = User::find($user->id);
                     $user->password = bcrypt($request->password);
