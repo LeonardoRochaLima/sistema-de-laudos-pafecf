@@ -36,3 +36,6 @@ Route::resource('profile', 'Auth\UserController');
 Route::get('profile.show', 'Auth\UserController@show');
 Route::post('/profie/{user}/update', 'Auth\UserController@update')->name('user.update');
 Route::post('/profie/{user}/perfil', 'Auth\UserController@perfil')->name('user.perfil');
+
+//Rotas Laudo
+Route::resource('laudo', 'LaudoController');
