@@ -39,7 +39,7 @@
     <br>
     <a href="/cadastros/{{ $empresa->id }}/PDV">
         <button type="submit">
-            Cadastrar PDV
+            Cadastro de PDV
         </button>
     </a>
     <br>
