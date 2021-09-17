@@ -8,6 +8,11 @@ use App\Models\PDV;
 
 class PDVController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index($id)
     {
         $empresa = Empresa::find($id);
@@ -15,8 +20,8 @@ class PDVController extends Controller
     }
 
     public function show($id){
-        $empresa = Empresa::find($id);
-        return view('cadastros.PDV.create')->with('empresa', $empresa);
+        $empresa = PDV::find($id);
+        return view('cadastros.PDV.show')->with('empresa', $empresa);
     }
 
     public function store($request){

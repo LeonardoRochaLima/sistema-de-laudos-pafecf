@@ -10,13 +10,13 @@
         <div class="form-group col-md-7">
             <h3>Informações do Ponto de Venda: </h3>
             <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
-        </div>        
+        </div>
         <div class="title-body">
             <form class="row">
                 <div class="form-group control-label col-md-7">
                     <label for="nome_comercial">Nome Comercial do Programa</label>
-                    <input type="text" class="form-control @error('nome_comercial') is-invalid @enderror" id="nome_comercial"
-                        name="nome_comercial" placeholder="Nome comercial">
+                    <input type="text" class="form-control @error('nome_comercial') is-invalid @enderror"
+                        id="nome_comercial" name="nome_comercial" placeholder="Nome comercial">
                     @error('nome_comercial')
                         <div class="invalid-feedback" style="color: red">
                             {{ $message }}
@@ -25,7 +25,8 @@
                 </div>
                 <div class="form-group control-label col-md-5">
                     <label for="versao">Versão do Programa</label>
-                    <input type="text" class="form-control" id="versao" name="versao" placeholder="Para qual versão vai o programa?">
+                    <input type="text" class="form-control" id="versao" name="versao"
+                        placeholder="Para qual versão vai o programa?">
                     @error('versao')
                         <div class="invalid-feedback" style="color: red">
                             {{ $message }}
@@ -54,8 +55,8 @@
                 </div>
                 <div class="form-group control-label col-md-4">
                     <label for="sistema_operacional">Sistema Operacional</label>
-                    <input type="text" class="form-control @error('sistema_operacional') is-invalid @enderror" id="sistema_operacional"
-                        name="sistema_operacional" placeholder="Nome comercial">
+                    <input type="text" class="form-control @error('sistema_operacional') is-invalid @enderror"
+                        id="sistema_operacional" name="sistema_operacional" placeholder="Nome comercial">
                     @error('sistema_operacional')
                         <div class="invalid-feedback" style="color: red">
                             {{ $message }}
@@ -132,11 +133,13 @@
                     <label for="aplicacoes_especiais">Aplicações Especiais:</label>
                     <div>
                         <input type="checkbox" id="posto_com_bomba" name="posto_com_bomba">
-                        <label for="posto_com_bomba">Posto revendedor de Combusível COM Sistema de Interligação de Bombas.</label>
+                        <label for="posto_com_bomba">Posto revendedor de Combusível COM Sistema de Interligação de
+                            Bombas.</label>
                     </div>
                     <div>
                         <input type="checkbox" id="posto_sem_bomba" name="posto_sem_bomba">
-                        <label for="posto_sem_bomba">Posto revendedor de Combusível SEM Sistema de Interligação de Bombas.</label>
+                        <label for="posto_sem_bomba">Posto revendedor de Combusível SEM Sistema de Interligação de
+                            Bombas.</label>
                     </div>
                     <div>
                         <input type="checkbox" id="oficina_dav_os" name="oficina_dav_os">
@@ -148,19 +151,23 @@
                     </div>
                     <div>
                         <input type="checkbox" id="bar_ecf_restaurante" name="bar_ecf_restaurante">
-                        <label for="bar_ecf_restaurante">Bar, Restaurante e estabelecimento similiar com utilização de ECF-RESTAURANTE e balança interligada.</label>
+                        <label for="bar_ecf_restaurante">Bar, Restaurante e estabelecimento similiar com utilização de
+                            ECF-RESTAURANTE e balança interligada.</label>
                     </div>
                     <div>
                         <input type="checkbox" id="bar_ecf_normal" name="bar_ecf_normal">
-                        <label for="bar_ecf_normal">Bar, Restaurante e estabelecimento similiar com utilização de ECF-NORMAL e balança interligada.</label>
+                        <label for="bar_ecf_normal">Bar, Restaurante e estabelecimento similiar com utilização de ECF-NORMAL
+                            e balança interligada.</label>
                     </div>
                     <div>
                         <input type="checkbox" id="bar_ecf_restaurante_sem_balanca" name="bar_ecf_restaurante_sem_balanca">
-                        <label for="bar_ecf_restaurante_sem_balanca">Bar, Restaurante e estabelecimento similiar com utilização de ECF-RESTAURANTE SEM balança interligada.</label>
+                        <label for="bar_ecf_restaurante_sem_balanca">Bar, Restaurante e estabelecimento similiar com
+                            utilização de ECF-RESTAURANTE SEM balança interligada.</label>
                     </div>
                     <div>
                         <input type="checkbox" id="bar_ecf_normal_sem_balanca" name="bar_ecf_normal_sem_balanca">
-                        <label for="bar_ecf_normal_sem_balanca">Bar, Restaurante e estabelecimento similiar com utilização de ECF-NORMAL SEM balança interligada.</label>
+                        <label for="bar_ecf_normal_sem_balanca">Bar, Restaurante e estabelecimento similiar com utilização
+                            de ECF-NORMAL SEM balança interligada.</label>
                     </div>
                     <div>
                         <input type="checkbox" id="farmacia" name="farmacia">
@@ -176,7 +183,8 @@
                     </div>
                     <div>
                         <input type="checkbox" id="moteis" name="moteis">
-                        <label for="moteis">Estacionamento, Motéis e Similares, que pratiquem o Controle de Tráfego de Veículos ou Pessoas.</label>
+                        <label for="moteis">Estacionamento, Motéis e Similares, que pratiquem o Controle de Tráfego de
+                            Veículos ou Pessoas.</label>
                     </div>
                     <div>
                         <input type="checkbox" id="cinema" name="cinema">
@@ -188,7 +196,8 @@
                     </div>
                     <div>
                         <input type="checkbox" id="simples_nacional" name="simples_nacional">
-                        <label for="simples_nacional">Estabelecimento Enquadrado no SIMPLES NACIONAL (Art. 5º Ato COPETE da ER-PAF-ECF).</label>
+                        <label for="simples_nacional">Estabelecimento Enquadrado no SIMPLES NACIONAL (Art. 5º Ato COPETE da
+                            ER-PAF-ECF).</label>
                     </div>
                 </div>
                 <div class="form-group control-label col-md-5">
