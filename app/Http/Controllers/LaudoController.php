@@ -7,6 +7,11 @@ use App\Models\Empresa;
 
 class LaudoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $empresas = Empresa::where('validacao', true)->orderBy('id', 'desc')->paginate(10);

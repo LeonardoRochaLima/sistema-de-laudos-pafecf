@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="form-group row col-md-4">
-                                <input type="submit" class="btn btn-success" value="Salvar Alterações">
+                                <input type="submit" class="btn btn-success" value="Alterar Perfil">
                             </div>
                         </form>
                         <br>

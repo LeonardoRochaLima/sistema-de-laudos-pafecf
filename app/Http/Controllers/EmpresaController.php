@@ -25,7 +25,7 @@ class EmpresaController extends Controller
             ])->get();
             return view('cadastros.index', ['empresas' => $empresas, 'buscar' => $buscar]);
         }
-        $empresas = Empresa::where('validacao', true)->orderBy('id', 'desc')->paginate(100);
+        $empresas = Empresa::where('validacao', true)->orderBy('id', 'desc')->paginate(10);
         return view('cadastros.index', ['empresas' => $empresas, 'buscar' => $buscar]);
     }
 
@@ -36,8 +36,8 @@ class EmpresaController extends Controller
 
     public function show($id)
     {
-        $empresas = Empresa::find($id);
-        return view('cadastros.show')->with('empresas', $empresas);
+        $empresa = Empresa::find($id);
+        return view('cadastros.show')->with('empresa', $empresa);
     }
 
     public function search($buscar)

@@ -22,9 +22,14 @@ Route::get('/services', 'PagesController@services');
 
 //Rotas da Empresa
 Route::resource('cadastros', 'EmpresaController');
-Route::post('/cadastros', [EmpresaController::class, 'store']);
+Route::post('/cadastros/create', 'EmpresaController@store');
 Route::post('cadastros/{empresa}/update', 'EmpresaController@update')->name('cadastroEmpresa.update');
 Route::post('/cadastros/{empresa}/excluirCadastro', 'EmpresaController@excluirCadastro')->name('cadastroEmpresa.excluirCadastro');
+
+//Rotas de PDV
+Route::resource('cadastros/PDV', 'PDVController');
+Route::get('/cadastros/{empresa}/PDV', 'PDVController@index');
+Route::post('/cadastros/{empresa}/PDV/create', 'EmpresaController@store');
 
 //Rotas de Autenticação de usuário
 Auth::routes();
