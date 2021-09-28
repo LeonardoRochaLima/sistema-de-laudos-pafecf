@@ -1,37 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"
-        integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <style>
-        section {
-            padding-top: 100px;
-        }
 
-        .form-sectio {
-            padding-left: 15px;
-            display: none;
-        }
-        
-        .form-section.current{
-            display: inherit;
-        }
-
-        .btn-info, .btn-btn-success{
-            margin-top: 10px;
-        }
-
-        .parseley-error-list{
-            margin: 2px 0 2px;
-            padding: 0;
-            list-style-type: none;
-            color: red;
-        }
-    </style>
+    <head>
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
     <h1>{{ $title }}</h1>
     @if (count($services) > 0)
         <ul class="list-group">
@@ -40,76 +18,52 @@
             @endforeach
         </ul>
     @endif
-    <div class="containe">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="card">
-                    <div class="card-hearder text-white bg-ingo">
-                        <h5>Multi Step Form</h5>
-                    </div>
-                    <div class="card-body">
-                        <form action="" class="contact-form">
-                            @csrf
-                            <div class="form-section">
-                                <label for="first-name">First Name</label>
-                                <input type="text" class="form-control" name="first-name" required>
-                                <label for="last-name">Last Name</label>
-                                <input type="text" class="form-control" name="last-name" required>
-                            </div>
-                            <div class="form-section">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" name="email" required>
-                                <label for="phone">Phone</label>
-                                <input type="text" class="form-control" name="phone" required>
-                            </div>
-
-                            <div class="form-section">
-                                <label for="msg">Message</label>
-                                <textarea name="msg" class="form-control" required></textarea>
-                            </div>
-                            <div class="form-navigation">
-                                <button type="button" class=" previous btn btn-info float-left">Voltar</button>
-                                <button type="button" class="next btn btn-info float-right">Avançar</button>
-                                <button type="submit" class="btn btn-success float-right">Enviar</button>
-                            </div>
-                        </form>
-                    </div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">First Panel</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Second Panel</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Third Panel</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+            <div class="form-group control-label col-md-5">
+                <label for="forma_impressao">Forma de Impressão de Item em Cupom Fiscal:</label>
+                <div>
+                    <input type="checkbox" id="concomitante" name="concomitante">
+                    <label for="concomitante">Concomitante</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="nao_concomitante" name="nao_concomitante">
+                    <label for="nao_concomitante">Não Concomitante com Impressão de DAV</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="perfil_t" name="perfil_t">
+                    <label for="perfil_t">Não Concomitante com contrle de Pré-venda</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="perfil_u" name="perfil_u">
+                    <label for="perfil_u">Não Concomitante com controle de Conta de Cliente</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="dav_sem_impressao" name="dav_sem_impressao">
+                    <label for="dav_sem_impressao">DAV - Emitido sem possibilidade de Impressão</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="dav_impresso_nao_fiscal" name="dav_impresso_nao_fiscal">
+                    <label for="dav_impresso_nao_fiscal">DAV - Impresso em Impressora Não Fiscal</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="dav_impresso_ecf" name="dav_impresso_ecf">
+                    <label for="dav_impresso_ecf">DAV - Impresso em ECF</label>
                 </div>
             </div>
         </div>
+        <div class="tab-pane" id="tabs-2" role="tabpanel"><p>Second Panel</p></div>
+        <div class="tab-pane" id="tabs-3" role="tabpanel"><p>Third Panel</p></div>
     </div>
-    <script>
-        $(function()){
-            var $sections = $('.form-section');
-
-            function navigateTo(index){
-                $sections.removeClass('current').eq(index).addClass('current');
-                $('.form-navigation .previous').toggle(index>0);
-                var atTheEnd = index >= $sections.length -1;
-                $('.form-navigation .next').toggle(!alTheEnd);
-                $('.form-navigation [type=submit]').toggle(atTheEnd);
-            }
-
-            function curIndex(){
-                return $sections.index($sections.filter('current'));
-            }
-
-            $('.form-navigaion .previos').click(function(){
-                navigateTo(curIndex()-1);
-            });
-
-            $('.form-navigation .next').click(function(){
-                $('.contact-form').parsley().whenValidate(){
-                    group: 'block-' + curIndex()
-                }).done(function(){
-                    navigateTo(curIndex()+1);
-                });
-            });
-
-            $sections.each(function(index, section){
-                $(section).find(':input').attr('data-parsley-group', 'block'+index);
-            });
-            navigateTo(0);
-        });
-    </script>
 @endsection

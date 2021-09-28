@@ -5,14 +5,29 @@
     <h3>{{ $empresa->razao_social }}</h3>
     <p>Lista de PDV's Cadastrados desta Empresa: </p>
     <p>Não há nenhum PDV cadastrado com essa empresa</p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <form action="" method="" name="formulario">
         @csrf
-        <div class="form-group col-md-7">
+        <div class="form-group col-md-12">
             <h3>Informações do Ponto de Venda: </h3>
             <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
         </div>
-        <div class="title-body">
-            <form class="row">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#base" role="tab">Informações Base</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#aplicacoes" role="tab">Aplicações Especiais</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#impressao" role="tab">Forma de Impressão</a>
+            </li>
+        </ul>
+        <br>
+        <div class="tab-content">
+            <div class="tab-pane active" id="base" role="tabpanel">
                 <div class="form-group control-label col-md-7">
                     <label for="nome_comercial">Nome Comercial do Programa</label>
                     <input type="text" class="form-control @error('nome_comercial') is-invalid @enderror"
@@ -113,7 +128,8 @@
                     </select>
                 </div>
                 <div class="form-group control-label col-md-6">
-                    <label for="tratamento_interrupcao">Tratamento de Interrupção Durante a Emissão do Cupom Fiscal:</label>
+                    <label for="tratamento_interrupcao">Tratamento de Interrupção Durante a Emissão do Cupom
+                        Fiscal:</label>
                     <select name="tratamento_interrupcao" id="tratamento_interrupcao">
                         <option value="recupera">Recuperação dos Dados</option>
                         <option value="cancela">Cancelamento Automático</option>
@@ -129,6 +145,8 @@
                         <option value="nao_integrado">Não Integrado</option>
                     </select>
                 </div>
+            </div>
+            <div class="tab-pane" id="aplicacoes" role="tabpanel">
                 <div class="form-group control-label col-md-9">
                     <label for="aplicacoes_especiais">Aplicações Especiais:</label>
                     <div>
@@ -156,7 +174,8 @@
                     </div>
                     <div>
                         <input type="checkbox" id="bar_ecf_normal" name="bar_ecf_normal">
-                        <label for="bar_ecf_normal">Bar, Restaurante e estabelecimento similiar com utilização de ECF-NORMAL
+                        <label for="bar_ecf_normal">Bar, Restaurante e estabelecimento similiar com utilização de
+                            ECF-NORMAL
                             e balança interligada.</label>
                     </div>
                     <div>
@@ -166,7 +185,8 @@
                     </div>
                     <div>
                         <input type="checkbox" id="bar_ecf_normal_sem_balanca" name="bar_ecf_normal_sem_balanca">
-                        <label for="bar_ecf_normal_sem_balanca">Bar, Restaurante e estabelecimento similiar com utilização
+                        <label for="bar_ecf_normal_sem_balanca">Bar, Restaurante e estabelecimento similiar com
+                            utilização
                             de ECF-NORMAL SEM balança interligada.</label>
                     </div>
                     <div>
@@ -196,10 +216,13 @@
                     </div>
                     <div>
                         <input type="checkbox" id="simples_nacional" name="simples_nacional">
-                        <label for="simples_nacional">Estabelecimento Enquadrado no SIMPLES NACIONAL (Art. 5º Ato COPETE da
+                        <label for="simples_nacional">Estabelecimento Enquadrado no SIMPLES NACIONAL (Art. 5º Ato COPETE
+                            da
                             ER-PAF-ECF).</label>
                     </div>
                 </div>
+            </div>
+            <div class="tab-pane" id="impressao" role="tabpanel">
                 <div class="form-group control-label col-md-5">
                     <label for="forma_impressao">Forma de Impressão de Item em Cupom Fiscal:</label>
                     <div>
@@ -261,7 +284,7 @@
                 <div class="form-group col-md-12">
                     <input type="submit" class="btn btn-success" value="Cadastrar PDV">
                 </div>
-            </form>
+            </div>
         </div>
     </form>
 @endsection
