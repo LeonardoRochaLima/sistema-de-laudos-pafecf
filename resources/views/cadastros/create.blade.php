@@ -44,7 +44,16 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group control-label col-md-7">
+                    <div class="form-group control-label col-md-4">
+                        <label for="cnpj">CNPJ</label>
+                        <input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="CNPJ">
+                        @error('cnpj')
+                            <div class="invalid-feedback" style="color: red">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="form-group control-label col-md-4">
                         <label for="endereco">Endereço</label>
                         <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço">
                         @error('endereco')
@@ -53,7 +62,7 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group control-label col-md-5">
+                    <div class="form-group control-label col-md-4">
                         <label for="bairro">Bairro</label>
                         <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Bairro">
                         @error('bairro')
@@ -107,21 +116,12 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group control-label col-md-4">
-                        <label for="cnpj">CNPJ</label>
-                        <input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="CNPJ">
-                        @error('cnpj')
-                            <div class="invalid-feedback" style="color: red">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="inscricao_estadual">Inscrição Estadual</label>
                         <input type="text" class="form-control" id="inscricao_estadual" name="inscricao_estadual"
                             placeholder="Inscrição Estadual">
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="inscricao_municipal">Inscrição Municipal</label>
                         <input type="text" class="form-control" id="inscricao_municipal" name="inscricao_municipal"
                             placeholder="Inscriação Municipal">
