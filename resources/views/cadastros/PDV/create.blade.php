@@ -8,6 +8,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.proximo').click(function() {
+                $('.nav-tabs .active').parent().next('li').find('a').trigger('click');
+            });
+
+            $('.anterior').click(function() {
+                $('.nav-tabs .active').parent().prev('li').find('a').trigger('click');
+            });
+        });
+    </script>
     <form action="" method="" name="formulario">
         @csrf
         <h3>Informações do Ponto de Venda: </h3>
@@ -26,6 +37,10 @@
         <br>
         <div class="tab-content">
             <div class="tab-pane active" id="base" role="tabpanel">
+                <div class="form-group col-md-12" id="botoes">
+                    <a class="btn btn-default">Voltar</a>
+                    <a class="btn btn-primary proximo pull-right">Próximo</a>
+                </div>
                 <div class="form-group control-label col-md-7">
                     <label for="nome_comercial">Nome Comercial do Programa</label>
                     <input type="text" class="form-control @error('nome_comercial') is-invalid @enderror"
@@ -145,6 +160,10 @@
                 </div>
             </div>
             <div class="tab-pane" id="aplicacoes" role="tabpanel">
+                <div class="form-group col-md-12" id="botoes">
+                    <a class="btn btn-primary anterior">Voltar</a>
+                    <a class="btn btn-primary proximo pull-right">Próximo</a>
+                </div>
                 <div class="form-group control-label col-md-9">
                     <label for="aplicacoes_especiais">Aplicações Especiais:</label>
                     <div>
@@ -221,6 +240,10 @@
                 </div>
             </div>
             <div class="tab-pane" id="impressao" role="tabpanel">
+                <div class="form-group col-md-12" id="botoes">
+                    <a class="btn btn-primary anterior">Voltar</a>
+                    <a class="btn btn-default pull-right">Próximo</a>
+                </div>
                 <div class="form-group control-label col-md-5">
                     <label for="forma_impressao">Forma de Impressão de Item em Cupom Fiscal:</label>
                     <div>

@@ -68,7 +68,7 @@
         </div>
     @endif
     <br>
-    <h3>{{ $empresa->razao_social }}</h3>
+    <h3><b>{{ $empresa->razao_social }}</b></h3>
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#base" role="tab">Informações Básicas</a>
