@@ -4,7 +4,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <h1>Cadastrar Empresa</h1>
+    <a href="/cadastros" class="btn btn-default">Lista de Empresas Cadastradas</a>
+    <h1>Cadastro de Empresas</h1>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -17,10 +18,8 @@
     <div id="cadastrar-empresa-create-container">
         <form action="/cadastros" method="POST" name="formulario">
             @csrf
-            <div class="form-group col-md-12">
-                <h3>Empresa Desenvolvedora Requerente: </h3>
-                <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
-            </div>
+            <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
+            <br>
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#base" role="tab">Informações Básicas</a>
@@ -48,6 +47,7 @@
             <div class="title-body tab-content">
                 <div class="tab-pane active" id="base" role="tabpanel">
                     <div class="form-group col-md-12" id="botoes">
+                        <a class="btn btn-default">Voltar</a>
                         <a class="btn btn-primary proximo pull-right">Próximo</a>
                     </div>
                     <div class="form-group control-label col-md-7">
@@ -162,6 +162,7 @@
                 <div class="tab-pane" id="representante" role="tabpanel">
                     <div class="form-group col-md-12" id="botoes">
                         <a class="btn btn-primary anterior">Voltar</a>
+                        <a class="btn btn-default pull-right">Próximo</a>
                     </div>
                     <div class="form-group control-label col-md-6">
                         <label for="representante">Representante Legal da Empresa</label>

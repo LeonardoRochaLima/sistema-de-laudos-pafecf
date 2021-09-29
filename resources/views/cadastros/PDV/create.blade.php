@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Cadastro de Ponto de Venda - PDV</h1>
-    <h3>{{ $empresa->razao_social }}</h3>
+    <h3>Empresa Requerente: <b>{{ $empresa->razao_social }}</b></h3>
     <p>Lista de PDV's Cadastrados desta Empresa: </p>
     <p>Não há nenhum PDV cadastrado com essa empresa</p>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -10,10 +10,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <form action="" method="" name="formulario">
         @csrf
-        <div class="form-group col-md-12">
-            <h3>Informações do Ponto de Venda: </h3>
-            <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
-        </div>
+        <h3>Informações do Ponto de Venda: </h3>
+        <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#base" role="tab">Informações Base</a>
