@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <a href="/cadastros/{{ $empresa->id }}" class="btn btn-default">Editar Cadastro da Empresa</a>
     <h1>Cadastro de Ponto de Venda - PDV</h1>
     <h3>Empresa Requerente: <b>{{ $empresa->razao_social }}</b></h3>
     <p>Lista de PDV's Cadastrados desta Empresa: </p>

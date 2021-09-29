@@ -4,6 +4,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <a href="/cadastros" class="btn btn-default">Lista de Empresas Cadastradas</a>
     <h1>Editar Cadastro</h1>
     <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
@@ -30,6 +31,35 @@
         });
     </script>
     <script>
+        function validarExclusao2() {
+            swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this imaginary file!",
+                    icon: "warning",
+                    dangerMode: true,
+                    closeOnClickOutside: false,
+                    buttons: {
+                        cancelar: {
+                            texto: "Cancelar",
+                            valor: false,
+                        },
+                        confirm: {
+                            texto: "Ok",
+                            valor: true,
+                        }
+                    }
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("Poof! Your imaginary file has been deleted!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("Your imaginary file is safe!");
+                    }
+                });
+        }
+
         function validarExclusao(frm) {
             var validador = confirm("Tem certeza que deseja excluir o cadastro desta empresa?");
             if (validador == false) {
@@ -40,24 +70,24 @@
         }
     </script>
     <br>
-        <form action="{{ route('cadastroEmpresa.excluirCadastro', $empresa) }}" method="post"
-            onsubmit="return validarExclusao(this);">
-            @csrf
-            <button type="submit" class="btn btn-danger pull-right">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash-fill"
-                    viewBox="0 0 16 13" style="color: red">
-                    <path
-                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z">
-                    </path>
-                </svg>
-                Excluir Cadastro
-            </button>
-        </form>
-        <a href="/cadastros/{{ $empresa->id }}/PDV">
-            <button type="submit">
-                Cadastro de PDV
-            </button>
-        </a>
+    <form action="{{ route('cadastroEmpresa.excluirCadastro', $empresa) }}" method="post" .
+        onsubmit="return validarExclusao2();">
+        @csrf
+        <button type="submit" class="btn btn-danger pull-right">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash-fill"
+                viewBox="0 0 16 13" style="color: red">
+                <path
+                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z">
+                </path>
+            </svg>
+            Excluir Cadastro
+        </button>
+    </form>
+    <a href="/cadastros/{{ $empresa->id }}/PDV">
+        <button type="submit">
+            Cadastro de PDV
+        </button>
+    </a>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

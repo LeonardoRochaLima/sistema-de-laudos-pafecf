@@ -75,7 +75,7 @@ class EmpresaController extends Controller
 
     public function excluirCadastro($id){
         $empresa = Empresa::find($id);
-        $empresa->validacao = false;
+        //$empresa->validacao = false;
         $empresa->save();
         return redirect('/cadastros')->with('msg', 'Cadastro da Empresa Excluído com Sucesso!!');
     }
