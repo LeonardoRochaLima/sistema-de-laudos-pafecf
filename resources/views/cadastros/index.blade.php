@@ -62,6 +62,11 @@
                             </svg>
                         </button>
                     </a>
+                    <a href="/cadastros/{{ $empresa->id }}/PDV">
+                        <button type="submit">
+                            Cadastro de PDV
+                        </button>
+                    </a>
                 </div>
             @endforeach
         @else
