@@ -20,7 +20,7 @@
             });
         });
     </script>
-    <form action="" method="" name="formulario">
+    <form action="{{ route('cadastroPDV.store', $empresa) }}" method="POST" name="formulario">
         @csrf
         <h3>Informações do Ponto de Venda: </h3>
         <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
@@ -168,72 +168,70 @@
                 <div class="form-group control-label col-md-9">
                     <label for="aplicacoes_especiais">Aplicações Especiais:</label>
                     <div>
-                        <input type="checkbox" id="posto_com_bomba" name="posto_com_bomba">
-                        <label for="posto_com_bomba">Posto revendedor de Combusível COM Sistema de Interligação de
-                            Bombas.</label>
+                        <input type="checkbox" id="posto_com_bomba" name="aplicacoes_especiais[]" value="posto_com_bomba">
+                        <label for="posto_com_bomba">Posto revendedor de Combusível COM Sistema de Interligação de Bombas.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="posto_sem_bomba" name="posto_sem_bomba">
-                        <label for="posto_sem_bomba">Posto revendedor de Combusível SEM Sistema de Interligação de
-                            Bombas.</label>
+                        <input type="checkbox" id="posto_sem_bomba" name="aplicacoes_especiais[]" value="posto_sem_bomba">
+                        <label for="posto_sem_bomba">Posto revendedor de Combusível SEM Sistema de Interligação de Bombas.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="oficina_dav_os" name="oficina_dav_os">
+                        <input type="checkbox" id="oficina_dav_os" name="aplicacoes_especiais[]" value="oficina_dav_os">
                         <label for="oficina_dav_os">Oficina de Conserto COM DAV-OS.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="oficina_conta_cliente" name="oficina_conta_cliente">
+                        <input type="checkbox" id="oficina_conta_cliente" name="aplicacoes_especiais[]" value="oficina_conta_cliente">
                         <label for="oficina_conta_cliente">Oficina de Conserto COM CONTA DE CLIENTE.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="bar_ecf_restaurante" name="bar_ecf_restaurante">
+                        <input type="checkbox" id="bar_ecf_restaurante" name="aplicacoes_especiais[]" value="bar_ecf_restaurante">
                         <label for="bar_ecf_restaurante">Bar, Restaurante e estabelecimento similiar com utilização de
                             ECF-RESTAURANTE e balança interligada.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="bar_ecf_normal" name="bar_ecf_normal">
+                        <input type="checkbox" id="bar_ecf_normal" name="aplicacoes_especiais[]" value="bar_ecf_normal">
                         <label for="bar_ecf_normal">Bar, Restaurante e estabelecimento similiar com utilização de
                             ECF-NORMAL
                             e balança interligada.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="bar_ecf_restaurante_sem_balanca" name="bar_ecf_restaurante_sem_balanca">
+                        <input type="checkbox" id="bar_ecf_restaurante_sem_balanca" name="aplicacoes_especiais[]" value="bar_ecf_restaurante_sem_balanca">
                         <label for="bar_ecf_restaurante_sem_balanca">Bar, Restaurante e estabelecimento similiar com
                             utilização de ECF-RESTAURANTE SEM balança interligada.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="bar_ecf_normal_sem_balanca" name="bar_ecf_normal_sem_balanca">
+                        <input type="checkbox" id="bar_ecf_normal_sem_balanca" name="aplicacoes_especiais[]" value="bar_ecf_normal_sem_balanca">
                         <label for="bar_ecf_normal_sem_balanca">Bar, Restaurante e estabelecimento similiar com
                             utilização
                             de ECF-NORMAL SEM balança interligada.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="farmacia" name="farmacia">
+                        <input type="checkbox" id="farmacia" name="aplicacoes_especiais[]" value="farmacia">
                         <label for="farmacia">Farmácia de Manipulação.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="transporte_passageiros" name="transporte_passageiros">
+                        <input type="checkbox" id="transporte_passageiros" name="aplicacoes_especiais[]" value="transporte_passageiros">
                         <label for="transporte_passageiros">Transporte de Passageiros.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="posto_pedagio" name="posto_pedagio">
+                        <input type="checkbox" id="posto_pedagio" name="aplicacoes_especiais[]" value="posto_pedagio">
                         <label for="posto_pedagio">Posto de Pedágio.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="moteis" name="moteis">
+                        <input type="checkbox" id="moteis" name="aplicacoes_especiais[]" value="moteis">
                         <label for="moteis">Estacionamento, Motéis e Similares, que pratiquem o Controle de Tráfego de
                             Veículos ou Pessoas.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="cinema" name="cinema">
+                        <input type="checkbox" id="cinema" name="aplicacoes_especiais[]" value="cinema">
                         <label for="cinema">Prestador de Serviço de Cinema, Espetáculos ou Similares.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="demais" name="demais">
+                        <input type="checkbox" id="demais" name="aplicacoes_especiais[]" value="demais">
                         <label for="demais">Demais Atividades.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="simples_nacional" name="simples_nacional">
+                        <input type="checkbox" id="simples_nacional" name="aplicacoes_especiais[]" value="simples_nacional">
                         <label for="simples_nacional">Estabelecimento Enquadrado no SIMPLES NACIONAL (Art. 5º Ato COPETE
                             da
                             ER-PAF-ECF).</label>
@@ -248,58 +246,58 @@
                 <div class="form-group control-label col-md-5">
                     <label for="forma_impressao">Forma de Impressão de Item em Cupom Fiscal:</label>
                     <div>
-                        <input type="checkbox" id="concomitante" name="concomitante">
+                        <input type="checkbox" id="concomitante" name="forma_impressao[]" value="concomitante">
                         <label for="concomitante">Concomitante</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="nao_concomitante" name="nao_concomitante">
+                        <input type="checkbox" id="nao_concomitante" name="forma_impressao[]" value="nao_concomitante">
                         <label for="nao_concomitante">Não Concomitante com Impressão de DAV</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="perfil_t" name="perfil_t">
-                        <label for="perfil_t">Não Concomitante com contrle de Pré-venda</label>
+                        <input type="checkbox" id="nao_concomitante_pv" name="forma_impressao[]" value="nao_concomitante_pv">
+                        <label for="nao_concomitante_pv">Não Concomitante com contrle de Pré-venda</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="perfil_u" name="perfil_u">
-                        <label for="perfil_u">Não Concomitante com controle de Conta de Cliente</label>
+                        <input type="checkbox" id="nao_concomitante_cc" name="forma_impressao[]" value="nao_concomitante_cc">
+                        <label for="nao_concomitante_cc">Não Concomitante com controle de Conta de Cliente</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="dav_sem_impressao" name="dav_sem_impressao">
+                        <input type="checkbox" id="dav_sem_impressao" name="forma_impressao[]" value="dav_sem_impressao">
                         <label for="dav_sem_impressao">DAV - Emitido sem possibilidade de Impressão</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="dav_impresso_nao_fiscal" name="dav_impresso_nao_fiscal">
+                        <input type="checkbox" id="dav_impresso_nao_fiscal" name="forma_impressao[]" value="dav_impresso_nao_fiscal">
                         <label for="dav_impresso_nao_fiscal">DAV - Impresso em Impressora Não Fiscal</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="dav_impresso_ecf" name="dav_impresso_ecf">
+                        <input type="checkbox" id="dav_impresso_ecf" name="forma_impressao[]" value="dav_impresso_ecf">
                         <label for="dav_impresso_ecf">DAV - Impresso em ECF</label>
                     </div>
                 </div>
                 <div class="form-group control-label col-md-1">
                     <label for="perfis">Perfis:</label>
                     <div>
-                        <input type="checkbox" id="perfil_v" name="perfil_v" checked>
+                        <input type="checkbox" id="perfil_v" name="perfis[]" checked value="perfil_v">
                         <label for="perfil_v">Perfil V</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="perfil_s" name="perfil_s">
+                        <input type="checkbox" id="perfil_s" name="perfis[]" value="perfil_s">
                         <label for="perfil_s">Perfil S</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="perfil_t" name="perfil_t">
+                        <input type="checkbox" id="perfil_t" name="perfis[]" value="perfil_t">
                         <label for="perfil_t">Perfil T</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="perfil_u" name="perfil_u">
+                        <input type="checkbox" id="perfil_u" name="perfis[]" value="perfil_u">
                         <label for="perfil_u">Perfil U</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="perfil_y" name="perfil_y">
+                        <input type="checkbox" id="perfil_y" name="perfis[]" value="perfil_y">
                         <label for="perfil_y">Perfil Y</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="perfil_z" name="perfil_z">
+                        <input type="checkbox" id="perfil_z" name="perfis[]" value="perfil_z">
                         <label for="perfil_z">Perfil Z</label>
                     </div>
                 </div>

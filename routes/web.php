@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controller\CadastroEmpresasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +28,7 @@ Route::post('/cadastros/{empresa}/excluirCadastro', 'EmpresaController@excluirCa
 //Rotas de PDV
 Route::resource('cadastros/PDV', 'PDVController');
 Route::get('/cadastros/{empresa}/PDV', 'PDVController@index');
-Route::post('/cadastros/{empresa}/PDV/create', 'EmpresaController@store');
+Route::post('/cadastros/{empresa}/PDV/create', 'PDVController@store')->name('cadastroPDV.store');
 
 //Rotas de Autenticação de usuário
 Auth::routes();
