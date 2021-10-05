@@ -6,6 +6,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <a href="/cadastros/{{ $empresa->id }}" class="btn btn-default">Editar Cadastro da Empresa</a>
     <h1>Cadastro de Ponto de Venda - PDV</h1>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <h3>Empresa Requerente: <b>{{ $empresa->razao_social }}</b></h3>
     @if (count($pdvs) > 0)
         <p>Lista de PDV's Cadastrados desta Empresa: </p>
@@ -253,6 +262,11 @@
                             da
                             ER-PAF-ECF).</label>
                     </div>
+                    @error('aplicacoes_especiais')
+                        <div class="invalid-feedback" style="color: red">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
             <div class="tab-pane" id="impressao" role="tabpanel">
@@ -293,8 +307,13 @@
                         <input type="checkbox" id="dav_impresso_ecf" name="forma_impressao[]" value="dav_impresso_ecf">
                         <label for="dav_impresso_ecf">DAV - Impresso em ECF</label>
                     </div>
+                    @error('forma_impressao')
+                        <div class="invalid-feedback" style="color: red">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
-                <div class="form-group control-label col-md-1">
+                <div class="form-group control-label col-md-5">
                     <label for="perfis">Perfis:</label>
                     <div>
                         <input type="checkbox" id="perfil_v" name="perfis[]" checked value="perfil_v">
@@ -320,6 +339,11 @@
                         <input type="checkbox" id="perfil_z" name="perfis[]" value="perfil_z">
                         <label for="perfil_z">Perfil Z</label>
                     </div>
+                    @error('perfis')
+                        <div class="invalid-feedback" style="color: red">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
                 <div class="form-group col-md-12">
                     <input type="submit" class="btn btn-success" value="Cadastrar PDV">

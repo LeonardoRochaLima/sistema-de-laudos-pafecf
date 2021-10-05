@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Empresa;
 use App\Models\PDV;
+use App\Http\Requests\StorePDVRequest;
 
 class PDVController extends Controller
 {
@@ -31,7 +32,7 @@ class PDVController extends Controller
         return view('cadastros.PDV.create', ['empresa' => $empresa, 'pdvs'=> $pdvs]);
     }
 
-    public function store(Request $request, $id_empresa){
+    public function store(StorePDVRequest $request, $id_empresa){
         
         $pdv = new PDV;
 
@@ -68,7 +69,7 @@ class PDVController extends Controller
      * @param  \App\Teste  $teste
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StorePDVRequest $request, $id)
     {
         //Edit Empresa
         $pdv = PDV::find($id);
