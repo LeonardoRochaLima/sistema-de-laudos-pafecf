@@ -1,10 +1,16 @@
 /node_modules
 /public/hot
 /public/storage
+/public/js/
+/public/mix-manifest.json
 /storage/*.key
 /vendor
 .env
 .env.backup
+composer.json
+composer.lock
+package-lock.json
+package.json
 .phpunit.result.cache
 docker-compose.override.yml
 Homestead.json
