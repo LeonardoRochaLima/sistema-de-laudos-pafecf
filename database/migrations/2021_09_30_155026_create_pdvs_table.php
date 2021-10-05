@@ -29,9 +29,9 @@ class CreatePdvsTable extends Migration
             $table->string('nfce');
             $table->string('tratamento_interrupcao');
             $table->string('integracao_paf');
-            $table->json('aplicacoes_especiais');
-            $table->json('forma_impressao');
-            $table->json('perfis');
+            $table->longText('aplicacoes_especiais');
+            $table->longText('forma_impressao');
+            $table->longText('perfis');
             $table->timestamps();
         });
     }

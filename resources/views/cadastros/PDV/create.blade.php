@@ -1,14 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="/cadastros/{{ $empresa->id }}" class="btn btn-default">Editar Cadastro da Empresa</a>
-    <h1>Cadastro de Ponto de Venda - PDV</h1>
-    <h3>Empresa Requerente: <b>{{ $empresa->razao_social }}</b></h3>
-    <p>Lista de PDV's Cadastrados desta Empresa: </p>
-    <p>Não há nenhum PDV cadastrado com essa empresa</p>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <a href="/cadastros/{{ $empresa->id }}" class="btn btn-default">Editar Cadastro da Empresa</a>
+    <h1>Cadastro de Ponto de Venda - PDV</h1>
+    <h3>Empresa Requerente: <b>{{ $empresa->razao_social }}</b></h3>
+    @if (count($pdvs) > 0)
+        <p>Lista de PDV's Cadastrados desta Empresa: </p>
+        <div class="well">
+            <ul>
+                @foreach ($pdvs as $pdv)
+                    <li><small><a href="/cadastros/PDV/{{$pdv->id}}">{{ $pdv->nome_comercial }}</a></small></li>
+                @endforeach
+            </ul>
+        </div>
+    @else
+        <p>Não há nenhum PDV cadastrado por essa empresa</p>
+    @endif
     <script type="text/javascript">
         $(document).ready(function() {
             $('.proximo').click(function() {
@@ -169,22 +179,26 @@
                     <label for="aplicacoes_especiais">Aplicações Especiais:</label>
                     <div>
                         <input type="checkbox" id="posto_com_bomba" name="aplicacoes_especiais[]" value="posto_com_bomba">
-                        <label for="posto_com_bomba">Posto revendedor de Combusível COM Sistema de Interligação de Bombas.</label>
+                        <label for="posto_com_bomba">Posto revendedor de Combusível COM Sistema de Interligação de
+                            Bombas.</label>
                     </div>
                     <div>
                         <input type="checkbox" id="posto_sem_bomba" name="aplicacoes_especiais[]" value="posto_sem_bomba">
-                        <label for="posto_sem_bomba">Posto revendedor de Combusível SEM Sistema de Interligação de Bombas.</label>
+                        <label for="posto_sem_bomba">Posto revendedor de Combusível SEM Sistema de Interligação de
+                            Bombas.</label>
                     </div>
                     <div>
                         <input type="checkbox" id="oficina_dav_os" name="aplicacoes_especiais[]" value="oficina_dav_os">
                         <label for="oficina_dav_os">Oficina de Conserto COM DAV-OS.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="oficina_conta_cliente" name="aplicacoes_especiais[]" value="oficina_conta_cliente">
+                        <input type="checkbox" id="oficina_conta_cliente" name="aplicacoes_especiais[]"
+                            value="oficina_conta_cliente">
                         <label for="oficina_conta_cliente">Oficina de Conserto COM CONTA DE CLIENTE.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="bar_ecf_restaurante" name="aplicacoes_especiais[]" value="bar_ecf_restaurante">
+                        <input type="checkbox" id="bar_ecf_restaurante" name="aplicacoes_especiais[]"
+                            value="bar_ecf_restaurante">
                         <label for="bar_ecf_restaurante">Bar, Restaurante e estabelecimento similiar com utilização de
                             ECF-RESTAURANTE e balança interligada.</label>
                     </div>
@@ -195,12 +209,14 @@
                             e balança interligada.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="bar_ecf_restaurante_sem_balanca" name="aplicacoes_especiais[]" value="bar_ecf_restaurante_sem_balanca">
+                        <input type="checkbox" id="bar_ecf_restaurante_sem_balanca" name="aplicacoes_especiais[]"
+                            value="bar_ecf_restaurante_sem_balanca">
                         <label for="bar_ecf_restaurante_sem_balanca">Bar, Restaurante e estabelecimento similiar com
                             utilização de ECF-RESTAURANTE SEM balança interligada.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="bar_ecf_normal_sem_balanca" name="aplicacoes_especiais[]" value="bar_ecf_normal_sem_balanca">
+                        <input type="checkbox" id="bar_ecf_normal_sem_balanca" name="aplicacoes_especiais[]"
+                            value="bar_ecf_normal_sem_balanca">
                         <label for="bar_ecf_normal_sem_balanca">Bar, Restaurante e estabelecimento similiar com
                             utilização
                             de ECF-NORMAL SEM balança interligada.</label>
@@ -210,7 +226,8 @@
                         <label for="farmacia">Farmácia de Manipulação.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="transporte_passageiros" name="aplicacoes_especiais[]" value="transporte_passageiros">
+                        <input type="checkbox" id="transporte_passageiros" name="aplicacoes_especiais[]"
+                            value="transporte_passageiros">
                         <label for="transporte_passageiros">Transporte de Passageiros.</label>
                     </div>
                     <div>
@@ -227,7 +244,7 @@
                         <label for="cinema">Prestador de Serviço de Cinema, Espetáculos ou Similares.</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="demais" name="aplicacoes_especiais[]" value="demais">
+                        <input type="checkbox" id="demais" name="aplicacoes_especiais[]" value="demais" checked>
                         <label for="demais">Demais Atividades.</label>
                     </div>
                     <div>
@@ -254,11 +271,13 @@
                         <label for="nao_concomitante">Não Concomitante com Impressão de DAV</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="nao_concomitante_pv" name="forma_impressao[]" value="nao_concomitante_pv">
+                        <input type="checkbox" id="nao_concomitante_pv" name="forma_impressao[]"
+                            value="nao_concomitante_pv">
                         <label for="nao_concomitante_pv">Não Concomitante com contrle de Pré-venda</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="nao_concomitante_cc" name="forma_impressao[]" value="nao_concomitante_cc">
+                        <input type="checkbox" id="nao_concomitante_cc" name="forma_impressao[]"
+                            value="nao_concomitante_cc">
                         <label for="nao_concomitante_cc">Não Concomitante com controle de Conta de Cliente</label>
                     </div>
                     <div>
@@ -266,7 +285,8 @@
                         <label for="dav_sem_impressao">DAV - Emitido sem possibilidade de Impressão</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="dav_impresso_nao_fiscal" name="forma_impressao[]" value="dav_impresso_nao_fiscal">
+                        <input type="checkbox" id="dav_impresso_nao_fiscal" name="forma_impressao[]"
+                            value="dav_impresso_nao_fiscal">
                         <label for="dav_impresso_nao_fiscal">DAV - Impresso em Impressora Não Fiscal</label>
                     </div>
                     <div>

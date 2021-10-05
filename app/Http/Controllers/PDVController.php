@@ -12,11 +12,23 @@ class PDVController extends Controller
     {
         $this->middleware('auth');
     }
-    
-    public function index($id)
+
+    public function show($id)
     {
+        $pdv = PDV::find($id);
+        $empresa = Empresa::find($pdv->id_empresa);
+        $aplicacoes = explode(", ", $pdv->aplicacoes_especiais);
+        $forma_impressao = explode(", ", $pdv->forma_impressao);
+        $perfis = explode(", ", $pdv->perfis);
+        return view('cadastros.PDV.show', ['empresa' => $empresa, 'pdv'=> $pdv, 'aplicacoes' => $aplicacoes, 'forma_impressao' => $forma_impressao, 'perfis' => $perfis]);
+    }
+
+    public function create($id){
         $empresa = Empresa::find($id);
-        return view('cadastros.PDV.create')->with('empresa', $empresa);
+        $pdvs = PDV::where([
+            ['id_empresa', 'LIKE', "{$id}"]
+        ])->get();
+        return view('cadastros.PDV.create', ['empresa' => $empresa, 'pdvs'=> $pdvs]);
     }
 
     public function store(Request $request){
@@ -39,15 +51,11 @@ class PDVController extends Controller
         $pdv->integracao_paf = $request->integracao_paf;
 
 
-        $pdv->aplicacoes_especiais = implode(" ", $request->aplicacoes_especiais);
-        $pdv->forma_impressao = implode(" ", $request->forma_impressao);
-        $pdv->perfis = implode(" ", $request->perfis);
+        $pdv->aplicacoes_especiais = implode(", ", $request->aplicacoes_especiais);
+        $pdv->forma_impressao = implode(", ", $request->forma_impressao);
+        $pdv->perfis = implode(", ", $request->perfis);
         
         $pdv->save();
         return redirect()->back()->with('msg', 'PDV Cadastrado com Sucesso!!');
-    }
-
-    public function create(){
-
     }
 }

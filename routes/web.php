@@ -27,7 +27,8 @@ Route::post('/cadastros/{empresa}/excluirCadastro', 'EmpresaController@excluirCa
 
 //Rotas de PDV
 Route::resource('cadastros/PDV', 'PDVController');
-Route::get('/cadastros/{empresa}/PDV', 'PDVController@index');
+Route::get('/cadastros/{empresa}/PDV', 'PDVController@create');
+Route::get('/cadastros/{empresa}/PDV/{pdv}', 'PDVController@show');
 Route::post('/cadastros/{empresa}/PDV/create', 'PDVController@store')->name('cadastroPDV.store');
 
 //Rotas de Autenticação de usuário
