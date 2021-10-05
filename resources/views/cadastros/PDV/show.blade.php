@@ -387,6 +387,141 @@
                     </div>
                 </div>
             </div>
+            <div class="tab-pane" id="impressao" role="tabpanel">
+                <div class="form-group col-md-12" id="botoes">
+                    <a class="btn btn-primary anterior">Voltar</a>
+                    <a class="btn btn-default pull-right">Próximo</a>
+                </div>
+                <div class="form-group control-label col-md-5">
+                    <label for="forma_impressao">Forma de Impressão de Item em Cupom Fiscal:</label>
+                    <div>
+                        <input type="checkbox" id="concomitante" name="forma_impressao[]" value="concomitante"
+                        @foreach ($forma_impressao as $valor)
+                        @if ($valor == 'concomitante')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="concomitante">Concomitante</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="nao_concomitante" name="forma_impressao[]" value="nao_concomitante"
+                        @foreach ($forma_impressao as $valor)
+                        @if ($valor == 'nao_concomitante')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="nao_concomitante">Não Concomitante com Impressão de DAV</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="nao_concomitante_pv" name="forma_impressao[]"
+                            value="nao_concomitante_pv"
+                            @foreach ($forma_impressao as $valor)
+                        @if ($valor == 'nao_concomitante_pv')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="nao_concomitante_pv">Não Concomitante com contrle de Pré-venda</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="nao_concomitante_cc" name="forma_impressao[]"
+                            value="nao_concomitante_cc"
+                            @foreach ($forma_impressao as $valor)
+                        @if ($valor == 'nao_concomitante_cc')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="nao_concomitante_cc">Não Concomitante com controle de Conta de Cliente</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="dav_sem_impressao" name="forma_impressao[]" value="dav_sem_impressao"
+                        @foreach ($forma_impressao as $valor)
+                        @if ($valor == 'dav_sem_impressao')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="dav_sem_impressao">DAV - Emitido sem possibilidade de Impressão</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="dav_impresso_nao_fiscal" name="forma_impressao[]"
+                            value="dav_impresso_nao_fiscal"
+                            @foreach ($forma_impressao as $valor)
+                        @if ($valor == 'dav_impresso_nao_fiscal')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="dav_impresso_nao_fiscal">DAV - Impresso em Impressora Não Fiscal</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="dav_impresso_ecf" name="forma_impressao[]" value="dav_impresso_ecf"
+                        @foreach ($forma_impressao as $valor)
+                        @if ($valor == 'dav_impresso_ecf')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="dav_impresso_ecf">DAV - Impresso em ECF</label>
+                    </div>
+                </div>
+                <div class="form-group control-label col-md-1">
+                    <label for="perfis">Perfis:</label>
+                    <div>
+                        <input type="checkbox" id="perfil_v" name="perfis[]" checked value="perfil_v"
+                        @foreach ($perfis as $valor)
+                        @if ($valor == 'perfil_v')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="perfil_v">Perfil V</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="perfil_s" name="perfis[]" value="perfil_s"
+                        @foreach ($perfis as $valor)
+                        @if ($valor == 'perfil_s')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="perfil_s">Perfil S</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="perfil_t" name="perfis[]" value="perfil_t"
+                        @foreach ($perfis as $valor)
+                        @if ($valor == 'perfil_t')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="perfil_t">Perfil T</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="perfil_u" name="perfis[]" value="perfil_u"
+                        @foreach ($perfis as $valor)
+                        @if ($valor == 'perfil_u')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="perfil_u">Perfil U</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="perfil_y" name="perfis[]" value="perfil_y"
+                        @foreach ($perfis as $valor)
+                        @if ($valor == 'perfil_y')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="perfil_y">Perfil Y</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="perfil_z" name="perfis[]" value="perfil_z"
+                        @foreach ($perfis as $valor)
+                        @if ($valor == 'perfil_z')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="perfil_z">Perfil Z</label>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <input type="submit" class="btn btn-success" value="Cadastrar PDV">
+                </div>
+            </div>
         </div>
     </form>
 @endsection
