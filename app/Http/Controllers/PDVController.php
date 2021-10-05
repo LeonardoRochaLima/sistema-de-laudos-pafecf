@@ -31,11 +31,13 @@ class PDVController extends Controller
         return view('cadastros.PDV.create', ['empresa' => $empresa, 'pdvs'=> $pdvs]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request, $id_empresa){
         
         $pdv = new PDV;
-        //$empresa = Empresa::find($id);
-        $pdv->id_empresa = 1;
+
+        $empresa = Empresa::find($id_empresa);
+
+        $pdv->id_empresa = $empresa->id;
         $pdv->nome_comercial = $request->nome_comercial;
         $pdv->versao = $request->versao;
         $pdv->nome_principal_executavel = $request->nome_principal_executavel;
@@ -57,5 +59,63 @@ class PDVController extends Controller
         
         $pdv->save();
         return redirect()->back()->with('msg', 'PDV Cadastrado com Sucesso!!');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Teste  $teste
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //Edit Empresa
+        $pdv = PDV::find($id);
+        $request->aplicacoes_especiais = implode(", ", $request->aplicacoes_especiais);
+        $request->forma_impressao = implode(", ", $request->forma_impressao);
+        $request->perfis = implode(", ", $request->perfis);
+        if (
+            $pdv->nome_comercial == $request->input('nome_comercial') &&
+            $pdv->versao == $request->input('versao') &&
+            $pdv->nome_principal_executavel == $request->input('nome_principal_executavel') &&
+            $pdv->linguagem == $request->input('linguagem') &&
+            $pdv->sistema_operacional == $request->input('sistema_operacional') &&
+            $pdv->data_base == $request->input('data_base') &&
+            $pdv->tipo_desenvolvimento == $request->input('tipo_desenvolvimento') &&
+            $pdv->tipo_funcionamento == $request->input('tipo_funcionamento') &&
+            $pdv->nfe == $request->input('nfe') &&
+            $pdv->sped == $request->input('sped') &&
+            $pdv->nfce == $request->input('nfce') &&
+            $pdv->tratamento_interrupcao == $request->input('tratamento_interrupcao') &&
+            $pdv->integracao_paf == $request->input('integracao_paf') &&
+            
+            $pdv->aplicacoes_especiais == $request->aplicacoes_especiais &&
+            $pdv->forma_impressao == $request->forma_impressao &&
+            $pdv->perfis == $request->perfis
+        ) 
+        {
+            return redirect()->back()->with('msg', 'Nenhum campo alterado!!');
+        } else {
+            $pdv->nome_comercial = $request->input('nome_comercial');
+            $pdv->versao = $request->input('versao');
+            $pdv->nome_principal_executavel = $request->input('nome_principal_executavel');
+            $pdv->linguagem = $request->input('linguagem');
+            $pdv->sistema_operacional = $request->input('sistema_operacional');
+            $pdv->data_base = $request->input('data_base');
+            $pdv->tipo_desenvolvimento = $request->input('tipo_desenvolvimento');
+            $pdv->tipo_funcionamento = $request->input('tipo_funcionamento');
+            $pdv->nfe = $request->input('nfe');
+            $pdv->sped = $request->input('sped');
+            $pdv->nfce = $request->input('nfce');
+            $pdv->tratamento_interrupcao = $request->input('tratamento_interrupcao');
+            $pdv->integracao_paf = $request->input('integracao_paf');
+            $pdv->aplicacoes_especiais = $request->aplicacoes_especiais;
+            $pdv->forma_impressao = $request->forma_impressao;
+            $pdv->perfis = $request->perfis;
+
+            $pdv->save();
+            return redirect()->back()->with('msg', 'Cadastro do PDV Editado com Sucesso!!');
+        }
     }
 }

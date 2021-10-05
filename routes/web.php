@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::post('/cadastros/{empresa}/excluirCadastro', 'EmpresaController@excluirCa
 Route::resource('cadastros/PDV', 'PDVController');
 Route::get('/cadastros/{empresa}/PDV', 'PDVController@create');
 Route::get('/cadastros/{empresa}/PDV/{pdv}', 'PDVController@show');
+Route::post('/cadastros/PDV/{pdv}/update', 'PDVController@update')->name('cadastroPDV.update');
 Route::post('/cadastros/{empresa}/PDV/create', 'PDVController@store')->name('cadastroPDV.store');
 
 //Rotas de Autenticação de usuário

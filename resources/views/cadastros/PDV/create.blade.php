@@ -30,7 +30,7 @@
             });
         });
     </script>
-    <form action="{{ route('cadastroPDV.store', $empresa) }}" method="POST" name="formulario">
+    <form action="{{ route('cadastroPDV.store', $empresa, $empresa->id) }}" method="POST" name="formulario">
         @csrf
         <h3>Informações do Ponto de Venda: </h3>
         <small>Os campos obrigatórios estão representados com um asterisco (*).</small>

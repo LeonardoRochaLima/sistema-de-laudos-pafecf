@@ -18,7 +18,8 @@
             });
         });
     </script>
-    <form action="" method="" name="formulario">
+    <form action="{{ route('cadastroPDV.update', $pdv, $pdv->id) }}" method="post" name="formulario">
+        @csrf
         <h3>Informações do Ponto de Venda: <b>{{ $pdv->nome_comercial }}</b></h3>
         <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
         <ul class="nav nav-tabs" role="tablist">
