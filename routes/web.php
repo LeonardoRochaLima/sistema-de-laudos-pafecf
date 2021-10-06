@@ -28,10 +28,11 @@ Route::post('/cadastros/{empresa}/excluirCadastro', 'EmpresaController@excluirCa
 
 //Rotas de PDV
 Route::resource('cadastros/PDV', 'PDVController');
-Route::get('/cadastros/{empresa}/PDV', 'PDVController@create');
+Route::get('/cadastros/{empresa}/PDV', 'PDVController@create')->name('cadastroPDV.create');
 Route::get('/cadastros/{empresa}/PDV/{pdv}', 'PDVController@show');
 Route::post('/cadastros/PDV/{pdv}/update', 'PDVController@update')->name('cadastroPDV.update');
 Route::post('/cadastros/{empresa}/PDV/create', 'PDVController@store')->name('cadastroPDV.store');
+Route::post('/cadastros/PDV/{pdv}/destroy', 'PDVController@destroy')->name('pdv.destroy');
 
 //Rotas de Autenticação de usuário
 Auth::routes();

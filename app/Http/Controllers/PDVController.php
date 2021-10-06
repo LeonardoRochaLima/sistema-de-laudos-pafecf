@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Empresa;
 use App\Models\PDV;
 use App\Http\Requests\StorePDVRequest;
@@ -118,5 +117,14 @@ class PDVController extends Controller
             $pdv->save();
             return redirect()->back()->with('msg', 'Cadastro do PDV Editado com Sucesso!!');
         }
+    }
+
+    public function destroy($id)
+    {   
+        $pdv = PDV::find($id);
+        $empresa = Empresa::find($pdv->id_empresa);
+        $empresa_id = $empresa->id;
+        $pdv->delete();
+        return redirect()->route('cadastroPDV.create', ['empresa' => $empresa_id])->with('msg', 'PDV Excluído com Sucesso!!');
     }
 }

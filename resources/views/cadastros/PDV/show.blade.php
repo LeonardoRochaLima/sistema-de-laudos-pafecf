@@ -6,6 +6,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <a href="/cadastros/{{ $empresa->id }}" class="btn btn-default">Editar Cadastro da Empresa</a>
     <h1>Editar Cadastro de Ponto de Venda - PDV</h1>
+    <h3>Informações do Ponto de Venda: <b>{{ $pdv->nome_comercial }}</b></h3>
+    <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -27,10 +29,60 @@
             });
         });
     </script>
+     <script>
+        function validarExclusao2() {
+            swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this imaginary file!",
+                    icon: "warning",
+                    dangerMode: true,
+                    closeOnClickOutside: false,
+                    buttons: {
+                        cancelar: {
+                            texto: "Cancelar",
+                            valor: false,
+                        },
+                        confirm: {
+                            texto: "Ok",
+                            valor: true,
+                        }
+                    }
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("Poof! Your imaginary file has been deleted!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("Your imaginary file is safe!");
+                    }
+                });
+        }
+
+        function validarExclusao(frm) {
+            var validador = confirm("Tem certeza que deseja excluir o cadastro desta empresa?");
+            if (validador == false) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+    <form action="{{ route('pdv.destroy', $pdv) }}" method="post"
+        onsubmit="return validarExclusao();">
+        @csrf
+        <button type="submit" class="btn btn-danger pull-right">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash-fill"
+                viewBox="0 0 16 13" style="color: red">
+                <path
+                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z">
+                </path>
+            </svg>
+            Excluir PDV
+        </button>
+    </form>
     <form action="{{ route('cadastroPDV.update', $pdv, $pdv->id) }}" method="post" name="formulario">
         @csrf
-        <h3>Informações do Ponto de Venda: <b>{{ $pdv->nome_comercial }}</b></h3>
-        <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#base" role="tab">Informações Base</a>
@@ -525,7 +577,7 @@
                     @enderror
                 </div>
                 <div class="form-group col-md-12">
-                    <input type="submit" class="btn btn-success" value="Cadastrar PDV">
+                    <input type="submit" class="btn btn-success" value="Salvar Alterações">
                 </div>
             </div>
         </div>
