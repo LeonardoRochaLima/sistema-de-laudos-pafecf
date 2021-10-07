@@ -4,7 +4,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <a href="/cadastros" class="btn btn-default">Lista de Empresas Cadastradas</a>
     <h1>Editar Cadastro</h1>
     <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
@@ -31,35 +30,6 @@
         });
     </script>
     <script>
-        function validarExclusao2() {
-            swal({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this imaginary file!",
-                    icon: "warning",
-                    dangerMode: true,
-                    closeOnClickOutside: false,
-                    buttons: {
-                        cancelar: {
-                            texto: "Cancelar",
-                            valor: false,
-                        },
-                        confirm: {
-                            texto: "Ok",
-                            valor: true,
-                        }
-                    }
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        swal("Poof! Your imaginary file has been deleted!", {
-                            icon: "success",
-                        });
-                    } else {
-                        swal("Your imaginary file is safe!");
-                    }
-                });
-        }
-
         function validarExclusao(frm) {
             var validador = confirm("Tem certeza que deseja excluir o cadastro desta empresa?");
             if (validador == false) {
@@ -71,7 +41,7 @@
     </script>
     <br>
     <form action="{{ route('cadastroEmpresa.excluirCadastro', $empresa) }}" method="post" .
-        onsubmit="return validarExclusao2();">
+        onsubmit="return validarExclusao();">
         @csrf
         <button type="submit" class="btn btn-danger pull-right">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash-fill"
