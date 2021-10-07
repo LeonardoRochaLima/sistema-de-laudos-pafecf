@@ -42,6 +42,7 @@
                     </a>
                 </div>
             @endforeach
+            {{ $empresas->links() }}
         @else
             <p>Nenhuma empresa encontrada.</p>
         @endif
@@ -74,6 +75,7 @@
                     </a>
                 </div>
             @endforeach
+            {{ $empresas->links() }}
         @else
             <p>Nenhuma empresa cadastrada</p>
         @endif
