@@ -32,6 +32,7 @@
                     <li><a href="/cadastros">Empresas</a></li>
                     <li><a href="/about">Sobre</a></li>
                     <li><a href="/services">Serviços</a></li>
+                    <li><a href="/laudo">Gerar Laudo</a></li>
                 </ul>
                 <ul class="nav navbar-nav top-right">
                     <li><a href="/profile/show">Editar Perfil</a></li>

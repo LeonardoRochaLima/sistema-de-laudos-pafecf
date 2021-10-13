@@ -30,37 +30,8 @@
         });
     </script>
      <script>
-        function validarExclusao2() {
-            swal({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this imaginary file!",
-                    icon: "warning",
-                    dangerMode: true,
-                    closeOnClickOutside: false,
-                    buttons: {
-                        cancelar: {
-                            texto: "Cancelar",
-                            valor: false,
-                        },
-                        confirm: {
-                            texto: "Ok",
-                            valor: true,
-                        }
-                    }
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        swal("Poof! Your imaginary file has been deleted!", {
-                            icon: "success",
-                        });
-                    } else {
-                        swal("Your imaginary file is safe!");
-                    }
-                });
-        }
-
         function validarExclusao(frm) {
-            var validador = confirm("Tem certeza que deseja excluir o cadastro desta empresa?");
+            var validador = confirm("Tem certeza que deseja excluir este PDV da empresa?");
             if (validador == false) {
                 return false;
             } else {
