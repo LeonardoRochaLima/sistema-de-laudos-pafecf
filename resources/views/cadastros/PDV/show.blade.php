@@ -6,6 +6,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <a href="/cadastros/{{ $empresa->id }}" class="btn btn-default">Editar Cadastro da Empresa</a>
     <h1>Editar Cadastro de Ponto de Venda - PDV</h1>
+    <h3>Empresa Requerente: <b>{{ $empresa->razao_social }}</b></h3>
     <h3>Informações do Ponto de Venda: <b>{{ $pdv->nome_comercial }}</b></h3>
     <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
     @if ($errors->any())
@@ -17,7 +18,6 @@
             </ul>
         </div>
     @endif
-    <h3>Empresa Requerente: <b>{{ $empresa->razao_social }}</b></h3>
     <script type="text/javascript">
         $(document).ready(function() {
             $('.proximo').click(function() {
