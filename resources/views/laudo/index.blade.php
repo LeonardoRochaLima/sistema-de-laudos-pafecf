@@ -3,33 +3,40 @@
 @section('content')
     <h1>Gerar Laudo</h1>
     <br>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <form action="">
         <div class="form-group control-label col-md-12">
             <label for="select">Selecione a Empresa</label>
-            <select name="empresas" onselect="mostrarPdvs()">
+            <select name="empresas" id="empresas">
+                <option selected>Selecione uma Empresa</option>
                 @foreach ($empresas as $empresa)
-                    <option value="empresa">{{ $empresa->razao_social }}</option>
+                    <option value="{{ $empresa->id }}">{{ $empresa->razao_social }}</option>
                 @endforeach
             </select>
         </div>
-        
-        <script>
-            function mostrarPdvs(){
-                console.log("selecionou");
-            }
-        </script>
         <div class="form-group control-label col-md-12">
             <label for="select">Selecione o PDV Homologado</label>
-            <select name="pdv">
+            <select name="pdv" id="pdv">
+                <option selected>Selecione um PDV</option>
                 @foreach ($pdvs as $pdv)
-                    @if ($pdv->id_empresa == $empresa->id)
-                        <option value="pdv">{{ $pdv->nome_comercial }}</option>
-                    @else
-                        <p>Selecione uma empresa que possua um PDV cadastrado.</p>
-                    @endif
+                    <option value="pdv">{{ $pdv->nome_comercial }}</option>
                 @endforeach
+                <p>Selecione uma empresa que possua um PDV cadastrado.</p>
             </select>
         </div>
+        <script>
+            $(document).ready(function(){
+                $("#empresas").change(function(){
+                    let id = this.value;
+                    $.get('/getPDVs?empresas='+id, function(data){
+                        $("#pdv").html(data);
+                    })
+                })
+            })
+        </script>
         <br>
         <div class="form-group control-label col-md-12">
             <label for="md5">Arquivo md5.txt</label>

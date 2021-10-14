@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\PDVController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +50,4 @@ Route::post('/profie/{user}/perfil', 'Auth\UserController@perfil')->name('user.p
 
 //Rotas Laudo
 Route::resource('laudo', 'LaudoController');
+Route::get('/getPDVs', 'LaudoController@getPDVs');

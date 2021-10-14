@@ -10,6 +10,11 @@ class pdv extends Model
 {
     use HasFactory;
 
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class);
+    }
+
     protected $fillable = ['id_empresa', 'nome_comercial', 
     'versao', 'nome_principal_executavel', 'linguagem', 
     'sistema_operacional', 'data_base', 'tipo_desenvolvimento',
