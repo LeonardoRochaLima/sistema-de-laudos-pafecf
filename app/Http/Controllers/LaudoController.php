@@ -16,7 +16,7 @@ class LaudoController extends Controller
     
     public function index()
     {
-        $empresas = Empresa::where('validacao', true)->orderBy('id', 'desc')->paginate(10);
+        $empresas = Empresa::where('validacao', true)->orderBy('id', 'desc')->get();
         $pdvs = PDV::all();
         return view('laudo.index', ['empresas' => $empresas, 'pdvs' => $pdvs]);
     }

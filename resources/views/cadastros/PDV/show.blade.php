@@ -494,12 +494,12 @@
                 <div class="form-group control-label col-md-5">
                     <label for="perfis">Perfis:</label>
                     <div>
-                        <input type="checkbox" id="perfil_v" name="perfis[]" checked value="perfil_v" @foreach ($perfis as $valor)
-                        @if ($valor == 'perfil_v')
+                        <input type="checkbox" id="perfil_r" name="perfis[]" value="perfil_r" @foreach ($perfis as $valor)
+                        @if ($valor == 'perfil_r')
                             checked
                         @endif
                         @endforeach>
-                        <label for="perfil_v">Perfil V</label>
+                        <label for="perfil_r">Perfil R</label>
                     </div>
                     <div>
                         <input type="checkbox" id="perfil_s" name="perfis[]" value="perfil_s" @foreach ($perfis as $valor)
@@ -524,6 +524,22 @@
                         @endif
                         @endforeach>
                         <label for="perfil_u">Perfil U</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="perfil_v" name="perfis[]" checked value="perfil_v" @foreach ($perfis as $valor)
+                        @if ($valor == 'perfil_v')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="perfil_v">Perfil V</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="perfil_w" name="perfis[]" value="perfil_w" @foreach ($perfis as $valor)
+                        @if ($valor == 'perfil_w')
+                            checked
+                        @endif
+                        @endforeach>
+                        <label for="perfil_w">Perfil W</label>
                     </div>
                     <div>
                         <input type="checkbox" id="perfil_y" name="perfis[]" value="perfil_y" @foreach ($perfis as $valor)

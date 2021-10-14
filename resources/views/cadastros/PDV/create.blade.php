@@ -316,8 +316,8 @@
                 <div class="form-group control-label col-md-5">
                     <label for="perfis">Perfis:</label>
                     <div>
-                        <input type="checkbox" id="perfil_v" name="perfis[]" checked value="perfil_v">
-                        <label for="perfil_v">Perfil V</label>
+                        <input type="checkbox" id="perfil_r" name="perfis[]" value="perfil_r">
+                        <label for="perfil_r">Perfil R</label>
                     </div>
                     <div>
                         <input type="checkbox" id="perfil_s" name="perfis[]" value="perfil_s">
@@ -330,6 +330,14 @@
                     <div>
                         <input type="checkbox" id="perfil_u" name="perfis[]" value="perfil_u">
                         <label for="perfil_u">Perfil U</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="perfil_v" name="perfis[]" checked value="perfil_v">
+                        <label for="perfil_v">Perfil V</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="perfil_w" name="perfis[]" value="perfil_w">
+                        <label for="perfil_w">Perfil W</label>
                     </div>
                     <div>
                         <input type="checkbox" id="perfil_y" name="perfis[]" value="perfil_y">

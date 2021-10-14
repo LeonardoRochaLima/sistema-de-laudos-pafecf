@@ -21,9 +21,6 @@
             <label for="select">Selecione o PDV Homologado</label>
             <select name="pdv" id="pdv">
                 <option selected>Selecione um PDV</option>
-                @foreach ($pdvs as $pdv)
-                    <option value="pdv">{{ $pdv->nome_comercial }}</option>
-                @endforeach
                 <p>Selecione uma empresa que possua um PDV cadastrado.</p>
             </select>
         </div>
