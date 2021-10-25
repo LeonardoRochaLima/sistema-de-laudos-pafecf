@@ -8,7 +8,6 @@ use App\Models\Empresa;
 
 class pdv extends Model
 {
-    use HasFactory;
 
     public function empresa()
     {
