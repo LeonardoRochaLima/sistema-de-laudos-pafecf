@@ -13,7 +13,7 @@ class CreateLaudoTable extends Migration
      */
     public function up()
     {
-        Schema::create('laudo', function (Blueprint $table) {
+        Schema::create('laudos', function (Blueprint $table) {
             $table->id();
             $table->string('razao_social_empresa');
             $table->string('nome_comercial_pdv');
@@ -32,7 +32,7 @@ class CreateLaudoTable extends Migration
             $table->boolean('parecer_conclusivo');
             $table->string('ecf_analise_marca');
             $table->string('ecf_analise_modelo');
-            $table->longText('ecfs_compativeis_pdv');
+            $table->longText('relacao_ecfs');
             $table->string('comentarios')->nullable();
             $table->timestamps();
         });
@@ -45,6 +45,6 @@ class CreateLaudoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('laudo');
+        Schema::dropIfExists('laudos');
     }
 }

@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Empresa;
 
-class laudo extends Model
+class Laudo extends Model
 {
     protected $fillable = ['razao_social_empresa',
    'nome_comercial_pdv', 'homologador', 'data_inicio',

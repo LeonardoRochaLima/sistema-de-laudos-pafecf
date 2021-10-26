@@ -50,7 +50,7 @@ Route::post('/profie/{user}/perfil', 'Auth\UserController@perfil')->name('user.p
 
 //Rotas Laudo
 Route::resource('laudo', 'LaudoController');
-Route::post('/cadastros/laudo/create', 'LaudoController@store');
-Route::post('/cadastros/laudo/{laudo}/update', 'LaudoController@update')->name('cadastroLaudo.update');
+Route::post('laudo/create', 'LaudoController@store');
+Route::post('laudo/{laudo}/update', 'LaudoController@update')->name('cadastroLaudo.update');
 Route::get('/getPDVs', 'LaudoController@getPDVs');
 Route::get('/getObject', 'LaudoController@getObject');
