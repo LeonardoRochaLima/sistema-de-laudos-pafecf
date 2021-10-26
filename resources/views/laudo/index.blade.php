@@ -38,13 +38,35 @@
                 })
             })
         </script>
+        <script>
+            $(function() {
+                var hoje = new Date();
+
+                var mes = hoje.getMonth() + 1;
+                var dia = hoje.getDate();
+                var ano = hoje.getFullYear();
+                if (mes < 10)
+                    mes = '0' + mes.toString();
+                if (dia < 10)
+                    dia = '0' + dia.toString();
+
+                var maxDate = ano + '-' + mes + '-' + dia;
+                ano = ano - 1;
+                var minDate = ano + '-' + mes + '-' + dia;
+
+                $('#data_inicio').attr('max', maxDate);
+                $('#data_inicio').attr('min', minDate);
+                $('#data_termino').attr('max', maxDate);
+                $('#data_termino').attr('min', minDate);
+            });
+        </script>
         <div class="form-group control-label col-md-3">
             <label for="data_inicio">Data e Hora de Início do Serviço</label>
-            <input id="data_inicio" type="date" class="form-control" name="data_inicio" required />
+            <input id="data_inicio" type="date" class="form-control" name="data_inicio" required onkeydown="return false"/>
         </div>
         <div class="form-group control-label col-md-3">
             <label for="data_termino">Data e Hora de Término do Serviço</label>
-            <input id="data_termino" type="date" class="form-control" name="data_termino" required />
+            <input id="data_termino" type="date" class="form-control" name="data_termino" required onkeydown="return false"/>
         </div>
         <div class="control-label col-md-12">
             <label for="data_termino">Identificação do Envelope de Segurança: </label>
@@ -190,8 +212,9 @@
             </div>
             <div>
                 <input type="radio" id="em_conformidade" name="parecer_conclusivo" value="em_conformidade">
-                <label for="em_conformidade">Não se constatou “Não Conformidade” em nenhum dos testes aplicados. O sistema passou em todas as especificações e testes.
-                    </label>
+                <label for="em_conformidade">Não se constatou “Não Conformidade” em nenhum dos testes aplicados. O sistema
+                    passou em todas as especificações e testes.
+                </label>
             </div>
         </div>
         <div class="control-label col-md-12">
@@ -202,8 +225,7 @@
         </div>
         <div class="form-group control-label col-md-4">
             <label for="comentarios">Marca</label>
-            <input type="text" class="form-control"
-                id="comentarios" name="comentarios" placeholder="Comentários">
+            <input type="text" class="form-control" id="comentarios" name="comentarios" placeholder="Comentários">
         </div>
         <div class="form-group col-md-12">
             <input type="submit" class="btn btn-primary" value="Validar Arquivos">
