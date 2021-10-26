@@ -31,15 +31,8 @@ class LaudoController extends Controller
         return $option;
     }
 
-    public function getObject(){
-        $id_empresa = request('empresa');
-        $empresa = Empresa::find($id_empresa);
+    public function getObject($id_empresa){
         $pdvs = PDV::where('id_empresa', $id_empresa)->get();
-        foreach ($pdvs as $pdv) {
-            if($pdv->id_empresa == $empresa->id){
-                $pdvs = $pdv;
-            }
-        }
-        return ['empresas' => $empresa, 'pdvs' => $pdvs];
+        return $pdvs;
     }
 }

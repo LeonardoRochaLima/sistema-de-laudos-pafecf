@@ -62,14 +62,26 @@
         </script>
         <div class="form-group control-label col-md-3">
             <label for="data_inicio">Data e Hora de Início do Serviço</label>
-            <input id="data_inicio" type="date" class="form-control" name="data_inicio" required onkeydown="return false"/>
+            <input id="data_inicio" type="date" class="form-control" name="data_inicio" required
+                onkeydown="return false" />
         </div>
         <div class="form-group control-label col-md-3">
             <label for="data_termino">Data e Hora de Término do Serviço</label>
-            <input id="data_termino" type="date" class="form-control" name="data_termino" required onkeydown="return false"/>
+            <input id="data_termino" type="date" class="form-control" name="data_termino" required
+                onkeydown="return false" />
+        </div>
+        <div class="form-group control-label col-md-4">
+            <label for="versao_er">Versão da Especificação de Requisitos</label>
+            <input type="text" class="form-control @error('versao_er') is-invalid @enderror" id="versao_er" name="versao_er"
+                placeholder="Versão ER" value="02.06">
+            @error('versao_er')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
         <div class="control-label col-md-12">
-            <label for="data_termino">Identificação do Envelope de Segurança: </label>
+            <label>Identificação do Envelope de Segurança: </label>
         </div>
         <div class="form-group control-label col-md-4">
             <label for="envelope_seguranca_marca">Marca</label>
@@ -206,12 +218,12 @@
         <div class="control-label col-md-12">
             <label for="parecer_conclusivo">Parecer conclusivo: </label>
             <div>
-                <input type="radio" id="nao_conformidade" name="parecer_conclusivo" value="nao_conformidade">
+                <input type="radio" id="nao_conformidade" name="parecer_conclusivo" value="0">
                 <label for="nao_conformidade">Constatada(s) “Não Conformidade” relacionada(s) no campo “Relatório de Não
                     Conformidade”.</label>
             </div>
             <div>
-                <input type="radio" id="em_conformidade" name="parecer_conclusivo" value="em_conformidade">
+                <input type="radio" id="em_conformidade" name="parecer_conclusivo" value="1">
                 <label for="em_conformidade">Não se constatou “Não Conformidade” em nenhum dos testes aplicados. O sistema
                     passou em todas as especificações e testes.
                 </label>
@@ -220,12 +232,10 @@
         <div class="control-label col-md-12">
             <label>Relatório de não conformidade: </label>
         </div>
-        <div class="control-label col-md-12">
-            <label>Comentários: </label>
-        </div>
         <div class="form-group control-label col-md-4">
-            <label for="comentarios">Marca</label>
-            <input type="text" class="form-control" id="comentarios" name="comentarios" placeholder="Comentários">
+            <label for="comentarios">Comentários</label>
+            <textarea type="text" class="form-control" id="comentarios" name="comentarios"
+                placeholder="Comentários"></textarea>
         </div>
         <div class="form-group col-md-12">
             <input type="submit" class="btn btn-primary" value="Validar Arquivos">
