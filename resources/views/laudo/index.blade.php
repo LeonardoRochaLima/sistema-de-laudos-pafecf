@@ -19,8 +19,8 @@
         @if (count($laudos) > 0)
             @foreach ($laudos as $laudo)
                 <div class="well">
-                    <p>{{ $laudo->razao_social }}</p>
-                    <p>{{ $laudo->ifl }} </p>
+                    <p>{{ $laudo->ifl }} - {{$laudo->razao_social_empresa}}</p>
+                    <p>PDV: {{$laudo->nome_comercial_pdv}}</p>
                     <small>Criado em {{ $laudo->created_at }}</small>
                     <br>
                     <br>
@@ -37,8 +37,8 @@
         @if (count($laudos) > 0)
             @foreach ($laudos as $laudo)
                 <div class="well">
-                    <p>{{ $laudo->razao_social }}</p>
-                    <p>{{ $laudo->ifl }} </p>
+                    <p>{{ $laudo->ifl }} - {{$laudo->razao_social_empresa}}</p>
+                    <p>PDV: {{$laudo->nome_comercial_pdv}}</p>
                     <small>Criado em {{ $laudo->created_at }}</small>
                     <br>
                     <br>
@@ -46,7 +46,7 @@
             @endforeach
             {{ $laudos->links() }}
         @else
-            <p>Nenhuma empresa cadastrada</p>
+            <p>Nenhuma laudo cadastrada</p>
         @endif
     @endif
 @endsection
