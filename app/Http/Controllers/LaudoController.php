@@ -7,13 +7,13 @@ use App\Models\Laudo;
 use App\Models\Empresa;
 use App\Models\PDV;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class LaudoController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->ifl = 0;
     }
 
     public function index()
@@ -23,22 +23,43 @@ class LaudoController extends Controller
 
     public function create()
     {
-        $ano_atual = Carbon::now()->year;
-
-        $ifl = $this->ifl + 1;
-        $ifl_laudo = null;
-        $ifl_laudo .= "IFL".$ifl.$ano_atual;
-        echo($ifl_laudo);
-
         $empresas = Empresa::where('validacao', true)->orderBy('id', 'desc')->get();
         $pdvs = PDV::all();
         return view('laudo.create', ['empresas' => $empresas, 'pdvs' => $pdvs]);
+    }
+
+    public function gerarIFL()
+    {
+        $ano_atual = Carbon::now()->year;
+        $ultimo_laudo =  Laudo::latest('id')->first();
+        $ano_ultimo_laudo = $ultimo_laudo->select('created_at')->first();
+        $ano_ultimo_laudo = \Carbon\Carbon::parse($ano_ultimo_laudo->created_at)->year;
+
+        $numero_laudo = 1;
+
+        if ($ano_atual == $ano_ultimo_laudo) {
+            $numero_laudo = $ultimo_laudo->numero_laudo + 1;
+            return $numero_laudo;
+        }else{
+            return $numero_laudo;
+        }
     }
 
     public function store(Request $request)
     {   
         $laudo = new Laudo;
         $user = auth()->user();
+        $ano_atual = Carbon::now()->year;
+
+        $laudo->numero_laudo = $this->gerarIFL();
+
+        if($laudo->numero_laudo < 10){
+            $laudo->ifl .= "IFL00".$laudo->numero_laudo.$ano_atual;
+        }else{
+            $laudo->ifl .= "IFL0".$laudo->numero_laudo.$ano_atual;
+        }
+
+        
 
         $laudo->razao_social_empresa = $request->empresa;
         $laudo->nome_comercial_pdv = $request->pdv;
