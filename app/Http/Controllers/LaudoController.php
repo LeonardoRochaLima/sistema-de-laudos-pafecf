@@ -18,7 +18,15 @@ class LaudoController extends Controller
 
     public function index()
     {
-        return view('laudo.index');
+        $buscar = request('buscar');
+        if ($buscar) {
+            $laudos = Laudo::where([
+                ['ifl', 'LIKE', "%{$buscar}%"]
+            ])->orderBy('id', 'desc')->paginate(10);
+            return view('laudo.index', ['laudos' => $laudos, 'buscar' => $buscar]);
+        }
+        $laudos = Laudo::where('ifl', 'LIKE', "%IFL%")->orderBy('id', 'desc')->paginate(10);
+        return view('laudo.index', ['laudos' => $laudos, 'buscar' => $buscar]);
     }
 
     public function create()
