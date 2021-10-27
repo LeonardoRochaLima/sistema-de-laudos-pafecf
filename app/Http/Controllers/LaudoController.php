@@ -38,12 +38,14 @@ class LaudoController extends Controller
 
     public function gerarIFL()
     {
+        $numero_laudo = 1;
         $ano_atual = Carbon::now()->year;
         $ultimo_laudo =  Laudo::latest('id')->first();
+        if($ultimo_laudo == null){  return $numero_laudo;}
         $ano_ultimo_laudo = $ultimo_laudo->select('created_at')->first();
         $ano_ultimo_laudo = \Carbon\Carbon::parse($ano_ultimo_laudo->created_at)->year;
 
-        $numero_laudo = 1;
+        
 
         if ($ano_atual == $ano_ultimo_laudo) {
             $numero_laudo = $ultimo_laudo->numero_laudo + 1;
