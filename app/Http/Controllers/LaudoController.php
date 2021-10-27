@@ -56,6 +56,7 @@ class LaudoController extends Controller
     public function store(Request $request)
     {   
         $laudo = new Laudo;
+        $pdv = PDV::find($request->pdv);
         $user = auth()->user();
         $ano_atual = Carbon::now()->year;
 
@@ -67,10 +68,9 @@ class LaudoController extends Controller
             $laudo->ifl .= "IFL0".$laudo->numero_laudo.$ano_atual;
         }
 
-        
-
-        $laudo->razao_social_empresa = $request->empresa;
-        $laudo->nome_comercial_pdv = $request->pdv;
+        $laudo->id_pdv = $pdv->id;
+        $laudo->razao_social_empresa = $pdv->empresa->razao_social;
+        $laudo->nome_comercial_pdv = $pdv->nome_comercial;
         $laudo->homologador = $user->name;
         $laudo->data_inicio = $request->data_inicio;
         $laudo->data_termino = $request->data_termino;

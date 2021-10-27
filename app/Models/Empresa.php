@@ -9,6 +9,6 @@ class Empresa extends Model
 {
     public function pdvs()
     {
-        return $this->hasMany(PDV::class);
+        return $this->hasMany(PDV::class,"id_empresa", "id");
     }
 }

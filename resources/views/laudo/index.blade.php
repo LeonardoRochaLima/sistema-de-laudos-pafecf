@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Laudos e Documentos</h1>
+    <h1>Laudos</h1>
     <form action="/laudo" method="GET">
         <label for="buscar">Buscar Laudo</label>
         <div class="form-group col-md-9 input-group">

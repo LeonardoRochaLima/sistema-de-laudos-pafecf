@@ -6,20 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Empresa;
 
-class pdv extends Model
+class PDV extends Model
 {
-
-    public function empresa()
-    {
-        return $this->belongsTo(Empresa::class);
-    }
-
+    protected $table = "pdvs";
     protected $fillable = ['id_empresa', 'nome_comercial', 
     'versao', 'nome_principal_executavel', 'linguagem', 
     'sistema_operacional', 'data_base', 'tipo_desenvolvimento',
-     'tipo_funcionamento', 'nfe', 'sped', 'nfce', 
-     'tratamento_interrupcao', 'integracao_paf', 
-     'aplicacoes_especiais', 'forma_impressao', 'perfis'];
+    'tipo_funcionamento', 'nfe', 'sped', 'nfce', 
+    'tratamento_interrupcao', 'integracao_paf', 
+    'aplicacoes_especiais', 'forma_impressao', 'perfis'];
+
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class, "id_empresa", "id");
+    }
 
     public function setCategoryAttribute($value)
     {

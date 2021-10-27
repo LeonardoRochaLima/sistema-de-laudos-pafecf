@@ -15,7 +15,8 @@ class CreateLaudoTable extends Migration
     {
         Schema::create('laudos', function (Blueprint $table) {
             $table->id();
-            $table->integer('numero_laudo');
+            $table->unsignedBigInteger('numero_laudo');
+            $table->unsignedBigInteger('id_pdv');
             $table->string('ifl');
             $table->string('razao_social_empresa');
             $table->string('nome_comercial_pdv');

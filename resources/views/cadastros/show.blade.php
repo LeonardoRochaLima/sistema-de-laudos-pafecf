@@ -41,7 +41,7 @@
         }
     </script>
     <br>
-    <form action="{{ route('cadastroEmpresa.excluirCadastro', $empresa) }}" method="post" .
+    <form action="{{ route('cadastroEmpresa.excluirCadastro', $empresa) }}" method="post"
         onsubmit="return validarExclusao();">
         @csrf
         <button type="submit" class="btn btn-danger pull-right">
