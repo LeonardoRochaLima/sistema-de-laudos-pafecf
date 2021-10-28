@@ -6,9 +6,20 @@
         <title>Bootstrap Example</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+        </script>
+        <script>
+            $('#exampleModal').on('shown.bs.modal', function() {
+                $('#myInput').trigger('focus')
+            })
+        </script>
     </head>
     <h1>{{ $title }}</h1>
     @if (count($services) > 0)
@@ -18,52 +29,74 @@
             @endforeach
         </ul>
     @endif
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">First Panel</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Second Panel</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Third Panel</a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane active" id="tabs-1" role="tabpanel">
-            <div class="form-group control-label col-md-5">
-                <label for="forma_impressao">Forma de Impressão de Item em Cupom Fiscal:</label>
-                <div>
-                    <input type="checkbox" id="concomitante" name="concomitante">
-                    <label for="concomitante">Concomitante</label>
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModal">{{ __('Login') }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
-                <div>
-                    <input type="checkbox" id="nao_concomitante" name="nao_concomitante">
-                    <label for="nao_concomitante">Não Concomitante com Impressão de DAV</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="perfil_t" name="perfil_t">
-                    <label for="perfil_t">Não Concomitante com contrle de Pré-venda</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="perfil_u" name="perfil_u">
-                    <label for="perfil_u">Não Concomitante com controle de Conta de Cliente</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="dav_sem_impressao" name="dav_sem_impressao">
-                    <label for="dav_sem_impressao">DAV - Emitido sem possibilidade de Impressão</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="dav_impresso_nao_fiscal" name="dav_impresso_nao_fiscal">
-                    <label for="dav_impresso_nao_fiscal">DAV - Impresso em Impressora Não Fiscal</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="dav_impresso_ecf" name="dav_impresso_ecf">
-                    <label for="dav_impresso_ecf">DAV - Impresso em ECF</label>
+                <div class="modal-body">
+                    <form method="" >
+    
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+    
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+    
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+    
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+    
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+    
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+    
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+    
+                                    <label class="form-check-label" for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Login') }}
+                                </button>
+    
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="tab-pane" id="tabs-2" role="tabpanel"><p>Second Panel</p></div>
-        <div class="tab-pane" id="tabs-3" role="tabpanel"><p>Third Panel</p></div>
     </div>
 @endsection

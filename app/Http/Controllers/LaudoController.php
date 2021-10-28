@@ -110,4 +110,53 @@ class LaudoController extends Controller
         $pdvs = PDV::where('id_empresa', $id_empresa)->get();
         return $pdvs;
     }
+
+    public function show($id){
+        $laudo = Laudo::find($id);
+        return view('laudo.show')->with('laudo', $laudo);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $laudo = Laudo::find($id);
+
+        if (
+            $laudo->data_inicio == $request->input('data_inicio') &&
+            $laudo->data_termino == $request->input('data_termino') &&
+            $laudo->versao_er == $request->input('versao_er') &&
+            $laudo->envelope_seguranca_marca == $request->input('envelope_seguranca_marca') &&
+            $laudo->envelope_seguranca_modelo == $request->input('envelope_seguranca_modelo') &&
+            $laudo->numero_envelope == $request->input('numero_envelope') &&
+            $laudo->requisitos_executados_sgbd == $request->input('requisitos_executados_sgbd') &&
+            $laudo->executavel_sgbd == $request->input('executavel_sgbd') &&
+            $laudo->funcao_sped == $request->input('funcao_sped') &&
+            $laudo->executavel_sped == $request->input('executavel_sped') &&
+            $laudo->executavel_nfe == $request->input('executavel_nfe') &&
+            $laudo->parecer_conclusivo == $request->input('parecer_conclusivo') &&
+            $laudo->ecf_analise_modelo == $request->input('ecf_analise_modelo') &&
+            $laudo->relacao_ecfs == $request->input('relacao_ecfs') &&
+            $laudo->comentarios == $request->input('comentarios')
+        ) {
+            return redirect()->back()->with('msg', 'Nenhum campo alterado!!');
+        } else {
+            $laudo->data_inicio = $request->input('data_inicio');
+            $laudo->data_termino = $request->input('data_termino');
+            $laudo->versao_er = $request->input('versao_er');
+            $laudo->envelope_seguranca_marca = $request->input('envelope_seguranca_marca');
+            $laudo->envelope_seguranca_modelo = $request->input('envelope_seguranca_modelo');
+            $laudo->numero_envelope = $request->input('numero_envelope');
+            $laudo->requisitos_executados_sgbd = $request->input('requisitos_executados_sgbd');
+            $laudo->executavel_sgbd = $request->input('executavel_sgbd');
+            $laudo->funcao_sped = $request->input('funcao_sped');
+            $laudo->executavel_sped = $request->input('executavel_sped');
+            $laudo->executavel_nfe = $request->input('executavel_nfe');
+            $laudo->parecer_conclusivo = $request->input('parecer_conclusivo');
+            $laudo->ecf_analise_modelo = $request->input('ecf_analise_modelo');
+            $laudo->relacao_ecfs = $request->input('relacao_ecfs');
+            $laudo->comentarios = $request->input('comentarios');
+            
+            $laudo->save();
+            return redirect()->back()->with('msg', 'Laudo Editado com Sucesso!!');
+        }
+    }
 }

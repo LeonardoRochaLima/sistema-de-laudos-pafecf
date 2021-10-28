@@ -89,7 +89,6 @@ class EmpresaController extends Controller
      */
     public function update(StoreEmpresaRequest $request, $id)
     {
-        //Edit Empresa
         $empresa = Empresa::find($id);
 
         if (
