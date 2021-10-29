@@ -21,6 +21,11 @@ class PDV extends Model
         return $this->belongsTo(Empresa::class, "id_empresa", "id");
     }
 
+    public function laudo()
+    {
+        return $this->belongsTo(Laudo::class, "id_pdv", "id");
+    }
+
     public function setCategoryAttribute($value)
     {
         $this->attributes['aplicacoes_especiais'] = json_encode($value);

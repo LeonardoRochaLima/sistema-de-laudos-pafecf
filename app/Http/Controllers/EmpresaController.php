@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreEmpresaRequest;
 use App\Models\Empresa;
+use App\Models\PDV;
+use App\Models\Laudo;
+use App\Http\Controllers\LaudoController;
 
 class EmpresaController extends Controller
 {
@@ -73,7 +76,8 @@ class EmpresaController extends Controller
         return redirect('/cadastros')->with('msg', 'Empresa Cadastrada com Sucesso!!');
     }
 
-    public function excluirCadastro($id){
+    public function excluirCadastro($id)
+    {
         $empresa = Empresa::find($id);
         $empresa->validacao = false;
         $empresa->save();
@@ -90,7 +94,8 @@ class EmpresaController extends Controller
     public function update(StoreEmpresaRequest $request, $id)
     {
         $empresa = Empresa::find($id);
-
+        $pdvs = PDV::where('id_empresa', $id)->get();
+        $laudos = Laudo::where('id_empresa', $id)->get();
         if (
             $empresa->razao_social == $request->input('razao_social') &&
             $empresa->nome_fantasia == $request->input('nome_fantasia') &&
@@ -127,6 +132,20 @@ class EmpresaController extends Controller
             $empresa->cpf_representante = $request->input('cpf_representante');
             $empresa->rg_representante = $request->input('rg_representante');
             $empresa->email_representante = $request->input('email_representante');
+
+            if ($pdvs) {
+                foreach ($pdvs as $pdv) {
+                    $pdv->razao_social_empresa = $request->input('razao_social');
+                    $pdv->save();
+                }
+            }
+
+            if($laudos){
+                foreach ($laudos as $laudo) {
+                    $laudo->razao_social_empresa = $request->input('razao_social');
+                    $laudo->save();
+                }
+            }
 
             $empresa->save();
             return redirect()->back()->with('msg', 'Cadastro Editado com Sucesso!!');

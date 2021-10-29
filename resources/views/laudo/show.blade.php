@@ -23,6 +23,28 @@
             </ul>
         </div>
     @endif
+    <script>
+        function validarExclusao(frm) {
+            var validador = confirm("Tem certeza que deseja excluir este Laudo?");
+            if (validador == false) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+    <form action="{{ route('laudo.destroy', $laudo) }}" method="post" onsubmit="return validarExclusao();">
+        @csrf
+        <button type="submit" class="btn btn-danger pull-right">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash-fill"
+                viewBox="0 0 16 13" style="color: red">
+                <path
+                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z">
+                </path>
+            </svg>
+            Excluir Laudo
+        </button>
+    </form>
     <form action="{{ route('laudo.update', $laudo) }}" method="post" name="formulario">
         @csrf
         <script>
@@ -51,21 +73,21 @@
             <label for="data_inicio">Data e Hora de Início do Serviço</label>
             <input id="data_inicio" type="date" class="form-control" name="data_inicio" required onkeydown="return false"
                 value="{{ $laudo->data_inicio }}" />
-                @error('data_inicio')
-                        <div class="invalid-feedback" style="color: red">
-                            {{ $message }}
-                        </div>
-                @enderror
+            @error('data_inicio')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
         <div class="form-group control-label col-md-3">
             <label for="data_termino">Data e Hora de Término do Serviço</label>
             <input id="data_termino" type="date" class="form-control" name="data_termino" required onkeydown="return false"
                 value="{{ $laudo->data_termino }}" />
-                @error('data_termino')
-                        <div class="invalid-feedback" style="color: red">
-                            {{ $message }}
-                        </div>
-                @enderror
+            @error('data_termino')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
         <div class="form-group control-label col-md-4">
             <label for="versao_er">Versão da Especificação de Requisitos</label>
@@ -197,7 +219,7 @@
         <div class="form-group control-label col-md-7">
             <label for="executavel_nfe">Escolha o Arquivo Executável Responsável pelo gerador de NF-e e seu Respectivo
                 MD5</label>
-                @error('executavel_nfe')
+            @error('executavel_nfe')
                 <div class="invalid-feedback" style="color: red">
                     {{ $message }}
                 </div>
@@ -212,10 +234,10 @@
         <div class="form-group control-label col-md-3">
             <label for="ecf_analise_marca">Marca</label>
             @error('ecf_analise_marca')
-            <div class="invalid-feedback" style="color: red">
-                {{ $message }}
-            </div>
-        @enderror
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <select name="ecf_analise_marca" id="ecf_analise_marca">
                 <option selected>Selecione a Marca</option>
             </select>

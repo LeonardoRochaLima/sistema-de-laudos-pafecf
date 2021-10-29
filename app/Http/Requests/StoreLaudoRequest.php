@@ -24,8 +24,6 @@ class StoreLaudoRequest extends FormRequest
     public function rules()
     {
         return [
-            'razao_social_empresa' => 'required',
-            'nome_comercial_pdv' => 'required',
             'data_inicio' => 'required',
             'data_termino' => 'required',
             'versao_er' => 'required',

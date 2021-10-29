@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Empresa;
 use App\Models\PDV;
 use App\Http\Requests\StorePDVRequest;
+use App\Models\Laudo;
 
 class PDVController extends Controller
 {
@@ -26,7 +27,8 @@ class PDVController extends Controller
     public function create($id){
         $empresa = Empresa::find($id);
         $pdvs = PDV::where([
-            ['id_empresa', 'LIKE', "{$id}"]
+            ['id_empresa', $id],
+            ['validacao', true]
         ])->get();
         return view('cadastros.PDV.create', ['empresa' => $empresa, 'pdvs'=> $pdvs]);
     }
@@ -38,6 +40,7 @@ class PDVController extends Controller
         $empresa = Empresa::find($id_empresa);
 
         $pdv->id_empresa = $empresa->id;
+        $pdv->razao_social_empresa = $empresa->razao_social;
         $pdv->nome_comercial = $request->nome_comercial;
         $pdv->versao = $request->versao;
         $pdv->nome_principal_executavel = $request->nome_principal_executavel;
@@ -56,6 +59,8 @@ class PDVController extends Controller
         $pdv->aplicacoes_especiais = implode(", ", $request->aplicacoes_especiais);
         $pdv->forma_impressao = implode(", ", $request->forma_impressao);
         $pdv->perfis = implode(", ", $request->perfis);
+
+        $pdv->validacao = true;
         
         $pdv->save();
         return redirect()->back()->with('msg', 'PDV Cadastrado com Sucesso!!');
@@ -69,9 +74,9 @@ class PDVController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(StorePDVRequest $request, $id)
-    {
-        //Edit Empresa
+    {   
         $pdv = PDV::find($id);
+        $laudos = Laudo::where('id_pdv', $id)->get();
         $request->aplicacoes_especiais = implode(", ", $request->aplicacoes_especiais);
         $request->forma_impressao = implode(", ", $request->forma_impressao);
         $request->perfis = implode(", ", $request->perfis);
@@ -114,6 +119,13 @@ class PDVController extends Controller
             $pdv->forma_impressao = $request->forma_impressao;
             $pdv->perfis = $request->perfis;
 
+            if($laudos){
+                foreach ($laudos as $laudo) {
+                    $laudo->nome_comercial_pdv = $request->input('nome_comercial');
+                    $laudo->save();
+                }
+            }
+
             $pdv->save();
             return redirect()->back()->with('msg', 'Cadastro do PDV Editado com Sucesso!!');
         }
@@ -124,7 +136,8 @@ class PDVController extends Controller
         $pdv = PDV::find($id);
         $empresa = Empresa::find($pdv->id_empresa);
         $empresa_id = $empresa->id;
-        $pdv->delete();
+        $pdv->validacao = false;
+        $pdv->save();
         return redirect()->route('cadastroPDV.create', ['empresa' => $empresa_id])->with('msg', 'PDV Excluído com Sucesso!!');
     }
 }

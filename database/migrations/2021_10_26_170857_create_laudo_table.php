@@ -17,6 +17,7 @@ class CreateLaudoTable extends Migration
             $table->id();
             $table->unsignedBigInteger('numero_laudo');
             $table->unsignedBigInteger('id_pdv');
+            $table->unsignedBigInteger('id_empresa');
             $table->string('ifl');
             $table->string('razao_social_empresa');
             $table->string('nome_comercial_pdv');

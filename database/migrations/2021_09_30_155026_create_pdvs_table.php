@@ -16,6 +16,7 @@ class CreatePdvsTable extends Migration
         Schema::create('pdvs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_empresa');
+            $table->string('razao_social_empresa');
             $table->string('nome_comercial');
             $table->string('versao');
             $table->string('nome_principal_executavel');
@@ -32,6 +33,7 @@ class CreatePdvsTable extends Migration
             $table->longText('aplicacoes_especiais');
             $table->longText('forma_impressao');
             $table->longText('perfis');
+            $table->boolean('validacao');
             $table->timestamps();
         });
     }

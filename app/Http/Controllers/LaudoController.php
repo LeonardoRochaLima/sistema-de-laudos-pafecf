@@ -22,9 +22,8 @@ class LaudoController extends Controller
     {
         $buscar = request('buscar');
         if ($buscar) {
-            $laudos = Laudo::where([
-                ['razao_social_empresa', 'LIKE', "%{$buscar}%"]
-            ])->orderBy('id', 'desc')->paginate(10);
+            $laudos = Laudo::where(['razao_social_empresa', 'LIKE', "%{$buscar}%"])
+                ->orderBy('id', 'desc')->paginate(10);
             return view('laudo.index', ['laudos' => $laudos, 'buscar' => $buscar]);
         }
         $laudos = Laudo::where('ifl', 'LIKE', "%IFL%")->orderBy('id', 'desc')->paginate(10);
@@ -34,7 +33,7 @@ class LaudoController extends Controller
     public function create()
     {
         $empresas = Empresa::where('validacao', true)->orderBy('id', 'desc')->get();
-        $pdvs = PDV::all();
+        $pdvs = PDV::where('validacao', true)->orderBy('id', 'desc')->get();
         return view('laudo.create', ['empresas' => $empresas, 'pdvs' => $pdvs]);
     }
 
@@ -43,22 +42,24 @@ class LaudoController extends Controller
         $numero_laudo = 1;
         $ano_atual = Carbon::now()->year;
         $ultimo_laudo =  Laudo::latest('id')->first();
-        if($ultimo_laudo == null){  return $numero_laudo;}
+        if ($ultimo_laudo == null) {
+            return $numero_laudo;
+        }
         $ano_ultimo_laudo = $ultimo_laudo->select('created_at')->first();
         $ano_ultimo_laudo = \Carbon\Carbon::parse($ano_ultimo_laudo->created_at)->year;
 
-        
+
 
         if ($ano_atual == $ano_ultimo_laudo) {
             $numero_laudo = $ultimo_laudo->numero_laudo + 1;
             return $numero_laudo;
-        }else{
+        } else {
             return $numero_laudo;
         }
     }
 
     public function store(StoreLaudoRequest $request)
-    {   
+    {
         $laudo = new Laudo;
         $pdv = PDV::find($request->pdv);
         $user = auth()->user();
@@ -66,13 +67,14 @@ class LaudoController extends Controller
 
         $laudo->numero_laudo = $this->gerarIFL();
 
-        if($laudo->numero_laudo < 10){
-            $laudo->ifl .= "IFL00".$laudo->numero_laudo.$ano_atual;
-        }else{
-            $laudo->ifl .= "IFL0".$laudo->numero_laudo.$ano_atual;
+        if ($laudo->numero_laudo < 10) {
+            $laudo->ifl .= "IFL00" . $laudo->numero_laudo . $ano_atual;
+        } else {
+            $laudo->ifl .= "IFL0" . $laudo->numero_laudo . $ano_atual;
         }
 
         $laudo->id_pdv = $pdv->id;
+        $laudo->id_empresa = $pdv->empresa->id;
         $laudo->razao_social_empresa = $pdv->empresa->razao_social;
         $laudo->nome_comercial_pdv = $pdv->nome_comercial;
         $laudo->homologador = $user->name;
@@ -97,23 +99,29 @@ class LaudoController extends Controller
 
         return redirect('/laudo')->with('msg', 'Laudo Cadastrado com Sucesso!!');
     }
-  
-    public function getPDVs(){
+
+    public function getPDVs()
+    {
         $id_empresa = request('empresa');
-        $pdvs = PDV::where('id_empresa', $id_empresa)->get();
+        $pdvs = PDV::where([
+            ['id_empresa', $id_empresa],
+            ['validacao', true]
+        ])->get();
         $option = "<option value=''>Selecione um PDV</option>";
         foreach ($pdvs as $pdv) {
-            $option .= '<option value="'.$pdv->id.'">'.$pdv->nome_comercial.'</option>';
+            $option .= '<option value="' . $pdv->id . '">' . $pdv->nome_comercial . '</option>';
         }
         return $option;
     }
 
-    public function getObject($id_empresa){
+    public function getObject($id_empresa)
+    {
         $pdvs = PDV::where('id_empresa', $id_empresa)->get();
         return $pdvs;
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $laudo = Laudo::find($id);
         return view('laudo.show')->with('laudo', $laudo);
     }
@@ -156,9 +164,17 @@ class LaudoController extends Controller
             $laudo->ecf_analise_modelo = $request->input('ecf_analise_modelo');
             $laudo->relacao_ecfs = $request->input('relacao_ecfs');
             $laudo->comentarios = $request->input('comentarios');
-            
+
             $laudo->save();
             return redirect()->back()->with('msg', 'Laudo Editado com Sucesso!!');
         }
+    }
+
+
+    public function destroy($id)
+    {
+        $laudo = Laudo::find($id);
+        $laudo->delete();
+        return redirect()->route('laudo.index')->with('msg', 'Laudo Excluído com Sucesso!!');
     }
 }

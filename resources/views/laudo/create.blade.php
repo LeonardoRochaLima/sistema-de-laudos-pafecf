@@ -24,12 +24,7 @@
         @csrf
         <div class="form-group control-label col-md-6">
             <label for="empresa">Selecione a Empresa</label>
-            @error('razao_social_empresa')
-                <div class="invalid-feedback" style="color: red">
-                    {{ $message }}
-                </div>
-            @enderror
-            <select name="empresa" id="empresa">
+            <select name="empresa" id="empresa" required>
                 <option selected value="">Selecione uma Empresa</option>
                 @foreach ($empresas as $empresa)
                     <option value="{{ $empresa->id }}">{{ $empresa->razao_social }}</option>
@@ -38,12 +33,7 @@
         </div>
         <div class="form-group control-label col-md-6">
             <label for="pdv">Selecione o PDV Homologado</label>
-            @error('nome_comercial_pdv')
-                <div class="invalid-feedback" style="color: red">
-                    {{ $message }}
-                </div>
-            @enderror
-            <select name="pdv" id="pdv">
+            <select name="pdv" id="pdv" required>
                 <option selected value="">Selecione um PDV</option>
                 <p>Selecione uma empresa que possua um PDV cadastrado.</p>
             </select>
