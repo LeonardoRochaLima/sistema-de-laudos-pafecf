@@ -8,6 +8,8 @@ use App\Models\Empresa;
 use App\Models\PDV;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreLaudoRequest;
+use App\Http\Requests\StoreLaudoUpdateRequest;
 
 class LaudoController extends Controller
 {
@@ -55,7 +57,7 @@ class LaudoController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(StoreLaudoRequest $request)
     {   
         $laudo = new Laudo;
         $pdv = PDV::find($request->pdv);
@@ -116,7 +118,7 @@ class LaudoController extends Controller
         return view('laudo.show')->with('laudo', $laudo);
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreLaudoUpdateRequest $request, $id)
     {
         $laudo = Laudo::find($id);
 

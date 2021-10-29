@@ -14,6 +14,15 @@
     <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
     <h3><b>{{ $laudo->ifl }} - {{ $laudo->razao_social_empresa }}</b></h3>
     <br>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('laudo.update', $laudo) }}" method="post" name="formulario">
         @csrf
         <script>
@@ -42,11 +51,21 @@
             <label for="data_inicio">Data e Hora de Início do Serviço</label>
             <input id="data_inicio" type="date" class="form-control" name="data_inicio" required onkeydown="return false"
                 value="{{ $laudo->data_inicio }}" />
+                @error('data_inicio')
+                        <div class="invalid-feedback" style="color: red">
+                            {{ $message }}
+                        </div>
+                @enderror
         </div>
         <div class="form-group control-label col-md-3">
             <label for="data_termino">Data e Hora de Término do Serviço</label>
             <input id="data_termino" type="date" class="form-control" name="data_termino" required onkeydown="return false"
                 value="{{ $laudo->data_termino }}" />
+                @error('data_termino')
+                        <div class="invalid-feedback" style="color: red">
+                            {{ $message }}
+                        </div>
+                @enderror
         </div>
         <div class="form-group control-label col-md-4">
             <label for="versao_er">Versão da Especificação de Requisitos</label>
@@ -137,6 +156,11 @@
         </div>
         <div class="form-group control-label col-md-7">
             <label for="executavel_sgbd">Escolha o Arquivo Executável Responsável pelo SGBD e seu Respectivo MD5</label>
+            @error('executavel_sgbd')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <select name="executavel_sgbd" id="executavel_sgbd">
                 <option selected>Selecione o Executável</option>
             </select>
@@ -158,6 +182,11 @@
         </div>
         <div class="form-group control-label col-md-7">
             <label for="executavel_sped">Escolha o Arquivo Executável Responsável pelo SPED e seu Respectivo MD5</label>
+            @error('executavel_sped')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <select name="executavel_sped" id="executavel_sped">
                 <option selected>Selecione o Executável</option>
             </select>
@@ -168,6 +197,11 @@
         <div class="form-group control-label col-md-7">
             <label for="executavel_nfe">Escolha o Arquivo Executável Responsável pelo gerador de NF-e e seu Respectivo
                 MD5</label>
+                @error('executavel_nfe')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <select name="executavel_nfe" id="executavel_nfe">
                 <option selected>Selecione o Executável</option>
             </select>
@@ -177,12 +211,22 @@
         </div>
         <div class="form-group control-label col-md-3">
             <label for="ecf_analise_marca">Marca</label>
+            @error('ecf_analise_marca')
+            <div class="invalid-feedback" style="color: red">
+                {{ $message }}
+            </div>
+        @enderror
             <select name="ecf_analise_marca" id="ecf_analise_marca">
                 <option selected>Selecione a Marca</option>
             </select>
         </div>
         <div class="form-group control-label col-md-6">
             <label for="ecf_analise_modelo">Modelo</label>
+            @error('ecf_analise_modelo')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <select name="ecf_analise_modelo" id="ecf_analise_modelo">
                 <option selected>Selecione o Modelo</option>
             </select>
@@ -192,12 +236,22 @@
         </div>
         <div class="form-group control-label col-md-4">
             <label for="relacao_ecfs">Marcas e Modelos Compatíveis e Utilizados</label>
+            @error('relacao_ecfs')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <select name="relacao_ecfs" id="relacao_ecfs">
                 <option selected>Selecione as Marcas e Modelos</option>
             </select>
         </div>
-        <div class="control-label col-md-12">
+        <div class="form-group control-label col-md-12">
             <label for="parecer_conclusivo">Parecer conclusivo: </label>
+            @error('parecer_conclusivo')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <div>
                 <input type="radio" id="nao_conformidade" name="parecer_conclusivo" value="0" @if ($laudo->parecer_conclusivo == 0) checked
                 @endif>
@@ -216,7 +270,7 @@
         <div class="control-label col-md-12">
             <label>Relatório de não conformidade: </label>
         </div>
-        <div class="form-group control-label col-md-4">
+        <div class="control-label col-md-4">
             <label for="comentarios">Comentários</label>
             <textarea type="text" class="form-control" id="comentarios" name="comentarios"
                 placeholder="Comentários"></textarea>

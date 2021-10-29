@@ -11,21 +11,40 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="/laudo" method="POST" name="formulario">
         @csrf
-        <div class="form-group control-label col-md-12">
+        <div class="form-group control-label col-md-6">
             <label for="empresa">Selecione a Empresa</label>
+            @error('razao_social_empresa')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <select name="empresa" id="empresa">
-                <option selected>Selecione uma Empresa</option>
+                <option selected value="">Selecione uma Empresa</option>
                 @foreach ($empresas as $empresa)
                     <option value="{{ $empresa->id }}">{{ $empresa->razao_social }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="form-group control-label col-md-12">
+        <div class="form-group control-label col-md-6">
             <label for="pdv">Selecione o PDV Homologado</label>
+            @error('nome_comercial_pdv')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <select name="pdv" id="pdv">
-                <option selected>Selecione um PDV</option>
+                <option selected value="">Selecione um PDV</option>
                 <p>Selecione uma empresa que possua um PDV cadastrado.</p>
             </select>
         </div>
@@ -63,13 +82,21 @@
         </script>
         <div class="form-group control-label col-md-3">
             <label for="data_inicio">Data e Hora de Início do Serviço</label>
-            <input id="data_inicio" type="date" class="form-control" name="data_inicio" required
-                onkeydown="return false" />
+            <input id="data_inicio" type="date" class="form-control" name="data_inicio" onkeydown="return false" />
+            @error('data_inicio')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
         <div class="form-group control-label col-md-3">
             <label for="data_termino">Data e Hora de Término do Serviço</label>
-            <input id="data_termino" type="date" class="form-control" name="data_termino" required
-                onkeydown="return false" />
+            <input id="data_termino" type="date" class="form-control" name="data_termino" onkeydown="return false" />
+            @error('data_termino')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
         <div class="form-group control-label col-md-4">
             <label for="versao_er">Versão da Especificação de Requisitos</label>
@@ -157,6 +184,11 @@
         </div>
         <div class="form-group control-label col-md-7">
             <label for="executavel_sgbd">Escolha o Arquivo Executável Responsável pelo SGBD e seu Respectivo MD5</label>
+            @error('executavel_sgbd')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <select name="executavel_sgbd" id="executavel_sgbd">
                 <option selected>Selecione o Executável</option>
             </select>
@@ -178,6 +210,11 @@
         </div>
         <div class="form-group control-label col-md-7">
             <label for="executavel_sped">Escolha o Arquivo Executável Responsável pelo SPED e seu Respectivo MD5</label>
+            @error('executavel_sped')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <select name="executavel_sped" id="executavel_sped">
                 <option selected>Selecione o Executável</option>
             </select>
@@ -188,6 +225,11 @@
         <div class="form-group control-label col-md-7">
             <label for="executavel_nfe">Escolha o Arquivo Executável Responsável pelo gerador de NF-e e seu Respectivo
                 MD5</label>
+            @error('executavel_nfe')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <select name="executavel_nfe" id="executavel_nfe">
                 <option selected>Selecione o Executável</option>
             </select>
@@ -197,12 +239,22 @@
         </div>
         <div class="form-group control-label col-md-3">
             <label for="ecf_analise_marca">Marca</label>
+            @error('ecf_analise_marca')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <select name="ecf_analise_marca" id="ecf_analise_marca">
                 <option selected>Selecione a Marca</option>
             </select>
         </div>
         <div class="form-group control-label col-md-6">
             <label for="ecf_analise_modelo">Modelo</label>
+            @error('ecf_analise_modelo')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <select name="ecf_analise_modelo" id="ecf_analise_modelo">
                 <option selected>Selecione o Modelo</option>
             </select>
@@ -212,12 +264,22 @@
         </div>
         <div class="form-group control-label col-md-4">
             <label for="relacao_ecfs">Marcas e Modelos Compatíveis e Utilizados</label>
+            @error('relacao_ecfs')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <select name="relacao_ecfs" id="relacao_ecfs">
                 <option selected>Selecione as Marcas e Modelos</option>
             </select>
         </div>
-        <div class="control-label col-md-12">
+        <div class="form-group control-label col-md-12">
             <label for="parecer_conclusivo">Parecer conclusivo: </label>
+            @error('parecer_conclusivo')
+                <div class="invalid-feedback" style="color: red">
+                    {{ $message }}
+                </div>
+            @enderror
             <div>
                 <input type="radio" id="nao_conformidade" name="parecer_conclusivo" value="0">
                 <label for="nao_conformidade">Constatada(s) “Não Conformidade” relacionada(s) no campo “Relatório de Não
@@ -233,7 +295,7 @@
         <div class="control-label col-md-12">
             <label>Relatório de não conformidade: </label>
         </div>
-        <div class="form-group control-label col-md-4">
+        <div class="control-label col-md-4">
             <label for="comentarios">Comentários</label>
             <textarea type="text" class="form-control" id="comentarios" name="comentarios"
                 placeholder="Comentários"></textarea>
