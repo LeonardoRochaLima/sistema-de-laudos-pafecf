@@ -22,8 +22,9 @@ class LaudoController extends Controller
     {
         $buscar = request('buscar');
         if ($buscar) {
-            $laudos = Laudo::where(['razao_social_empresa', 'LIKE', "%{$buscar}%"])
-                ->orderBy('id', 'desc')->paginate(10);
+            $laudos = Laudo::where([
+                ['razao_social_empresa', 'LIKE', "%{$buscar}%"]
+            ])->orderBy('id', 'desc')->paginate(10);
             return view('laudo.index', ['laudos' => $laudos, 'buscar' => $buscar]);
         }
         $laudos = Laudo::where('ifl', 'LIKE', "%IFL%")->orderBy('id', 'desc')->paginate(10);

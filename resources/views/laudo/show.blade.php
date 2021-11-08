@@ -358,7 +358,7 @@
                 <div class="control-label col-md-4">
                     <label for="comentarios">Comentários:</label>
                     <textarea type="text" class="form-control" id="comentarios" name="comentarios"
-                        placeholder="Comentários"></textarea>
+                        placeholder="Comentários">{{$laudo->comentarios}}</textarea>
                 </div>
                 <div class="form-group col-md-12">
                     <input type="submit" class="btn btn-success" value="Atualizar Informações">
