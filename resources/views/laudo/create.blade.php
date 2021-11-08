@@ -10,7 +10,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <h1>Gerar Laudo</h1>
     <small>Os campos obrigatórios estão representados com um asterisco (*).</small>
-    <br>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -348,15 +347,15 @@
                     </div>
                 </div>
                 <div class="control-label col-md-12">
-                    <label>Relatório de não conformidade: </label>
+                    <label>Relatório de não conformidade: <br> <small class="form-group control-label" style="color: red">Só deve ser preenchido com comentários caso existam inconfomidades no sistema. Favor adicionar o item do requisito e o comentário referente.</small></label>
                 </div>
                 <div class="control-label col-md-4">
-                    <label for="comentarios">Comentários</label>
+                    <label for="comentarios">Comentários: </label>
                     <textarea type="text" class="form-control" id="comentarios" name="comentarios"
                         placeholder="Comentários"></textarea>
                 </div>
                 <div class="form-group col-md-12">
-                    <input type="submit" class="btn btn-primary" value="Cadastrar Laudo">
+                    <input type="submit" class="btn btn-success" value="Cadastrar Laudo">
                 </div>
             </div>
         </div>
