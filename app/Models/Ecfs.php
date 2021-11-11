@@ -7,5 +7,4 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ecfs extends Model
 {
-    use HasFactory;
 }
