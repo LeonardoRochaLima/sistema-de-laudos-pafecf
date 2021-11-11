@@ -78,4 +78,5 @@
                 @endforeach
             </tbody>
         </table>
+        {{$ecfs->links()}}
     @endsection

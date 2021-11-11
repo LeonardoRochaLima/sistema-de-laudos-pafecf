@@ -13,7 +13,7 @@ class ECFsController extends Controller
     }
 
     public function index(){
-        $ecfs = Ecfs::all()->sortBy('marca');
+        $ecfs = Ecfs::orderBy('marca')->paginate(10);
         return view('ecfs.index', ['ecfs' => $ecfs]);
     }
 
