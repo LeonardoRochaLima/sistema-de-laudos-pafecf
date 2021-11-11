@@ -31,7 +31,7 @@
                     <li><a href="/home">Home</a></li>
                     <li><a href="/cadastros">Empresas</a></li>
                     <li><a href="/about">Sobre</a></li>
-                    <li><a href="/ecfs">ecfs</a></li>
+                    <li><a href="/ecfs">Listagem de ECF's Válidas</a></li>
                     <li><a href="/laudo">Laudos</a></li>
                 </ul>
                 <ul class="nav navbar-nav top-right">
