@@ -32,7 +32,7 @@
             <p>Nenhum laudo encontrado.</p>
         @endif
     @else
-        <a href="/laudo/create" class="btn btn-default">Gerar Laudo</a>
+        <a href="/laudo/create" class="btn btn-default">Cadastrar Laudo</a>
         <br>
         <br>
         @if (count($laudos) > 0)
