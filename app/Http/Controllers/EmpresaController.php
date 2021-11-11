@@ -81,7 +81,7 @@ class EmpresaController extends Controller
         $empresa = Empresa::find($id);
         $empresa->validacao = false;
         $empresa->save();
-        return redirect('/cadastros')->with('msg', 'Cadastro da Empresa Excluído com Sucesso!!');
+        return redirect('/cadastros')->with('msgerro', 'Cadastro da Empresa Excluído com Sucesso!!');
     }
 
     /**
@@ -114,7 +114,7 @@ class EmpresaController extends Controller
             $empresa->rg_representante == $request->input('rg_representante') &&
             $empresa->email_representante == $request->input('email_representante')
         ) {
-            return redirect()->back()->with('msg', 'Nenhum campo alterado!!');
+            return redirect()->back()->with('msgerro', 'Nenhum campo alterado!!');
         } else {
             $empresa->razao_social = $request->input('razao_social');
             $empresa->nome_fantasia = $request->input('nome_fantasia');

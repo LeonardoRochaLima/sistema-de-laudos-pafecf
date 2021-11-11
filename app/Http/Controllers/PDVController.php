@@ -100,7 +100,7 @@ class PDVController extends Controller
             $pdv->perfis == $request->perfis
         ) 
         {
-            return redirect()->back()->with('msg', 'Nenhum campo alterado!!');
+            return redirect()->back()->with('msgerro', 'Nenhum campo alterado!!');
         } else {
             $pdv->nome_comercial = $request->input('nome_comercial');
             $pdv->versao = $request->input('versao');
@@ -138,6 +138,6 @@ class PDVController extends Controller
         $empresa_id = $empresa->id;
         $pdv->validacao = false;
         $pdv->save();
-        return redirect()->route('cadastroPDV.create', ['empresa' => $empresa_id])->with('msg', 'PDV Excluído com Sucesso!!');
+        return redirect()->route('cadastroPDV.create', ['empresa' => $empresa_id])->with('msgerro', 'PDV Excluído com Sucesso!!');
     }
 }

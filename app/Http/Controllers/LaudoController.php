@@ -140,7 +140,7 @@ class LaudoController extends Controller
             $laudo->relacao_ecfs == $request->input('relacao_ecfs') &&
             $laudo->comentarios == $request->input('comentarios')
         ) {
-            return redirect()->back()->with('msg', 'Nenhum campo alterado!!');
+            return redirect()->back()->with('msgerro', 'Nenhum campo alterado!!');
         } else {
             $laudo->data_inicio = $request->input('data_inicio');
             $laudo->data_termino = $request->input('data_termino');
@@ -168,7 +168,7 @@ class LaudoController extends Controller
     {
         $laudo = Laudo::find($id);
         $laudo->delete();
-        return redirect()->route('laudo.index')->with('msg', 'Laudo Excluído com Sucesso!!');
+        return redirect()->route('laudo.index')->with('msgerro', 'Laudo Excluído com Sucesso!!');
     }
 
     public function gerarLaudo(){

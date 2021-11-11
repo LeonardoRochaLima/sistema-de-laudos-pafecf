@@ -19,6 +19,12 @@
                         <p class="msg"
                             style="background-color: #D3EDDA; color: green; border: 1px solid #C3E6CB; width: 100%; margin-bottom: 0; text-align: center; padding: 10px; font-size: large">
                             {{ session('msg') }}</p>
+                    @else
+                        @if (session('msgerro'))
+                            <p class="msgerro"
+                                style="background-color: #f59191; color: red; border: 1px solid #C3E6CB; width: 100%; margin-bottom: 0; text-align: center; padding: 10px; font-size: large">
+                                {{ session('msgerro') }}</p>
+                        @endif
                     @endif
                     @yield('content')
                 </div>
@@ -29,10 +35,10 @@
 <br>
 <footer>
     <div class="text-center">
-      ©2021 Copyright By Leonardo Lima <br>
-      From NPI - Núcleo de Práticas em Informática <br>
-      Centro Universitário Filadélfia - UNIFIL
+        ©2021 Copyright By Leonardo Lima <br>
+        From NPI - Núcleo de Práticas em Informática <br>
+        Centro Universitário Filadélfia - UNIFIL
     </div>
 </footer>
-</html>
 
+</html>

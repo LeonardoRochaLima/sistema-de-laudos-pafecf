@@ -31,7 +31,7 @@ class UserController extends Controller
         if (
             $user->name == $request->input('nome') &&
             $user->email == $request->input('email')){
-                return redirect()->back()->with('msg', 'Nenhum campo alterado!!');
+                return redirect()->back()->with('msgerro', 'Nenhum campo alterado!!');
             }
         $user->name = $request->input('nome');
         $user->email = $request->input('email'); 
@@ -54,15 +54,15 @@ class UserController extends Controller
                     session()->flash('msg','Senha alterada com sucesso!');
                     return redirect()->back();
                 }else{
-                    session()->flash('msg','As senhas não conferem!');
+                    session()->flash('msgerro','As senhas não conferem!');
                     return redirect()->back();
                 }
             }else{
-                session()->flash('msg','A nova senha não pode ser igual a senha atual!');
+                session()->flash('msgerro','A nova senha não pode ser igual a senha atual!');
                 return redirect()->back();
             }
         }else{
-            session()->flash('msg','Senha Atual inválida');
+            session()->flash('msgerro','Senha Atual inválida');
             return redirect()->back();
         }
     } 
