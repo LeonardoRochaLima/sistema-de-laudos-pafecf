@@ -53,5 +53,5 @@ Route::resource('laudo', 'LaudoController');
 Route::post('laudo/create', 'LaudoController@store');
 Route::post('laudo/{laudo}/update', 'LaudoController@update')->name('laudo.update');
 Route::get('/getPDVs', 'LaudoController@getPDVs');
-Route::get('/getObject', 'LaudoController@getObject');
+Route::post('/carregarArquivos', 'LaudoController@carregarArquivos')->name('laudo.carregarArquivos');
 Route::post('/laudo/{laudo}/destroy', 'LaudoController@destroy')->name('laudo.destroy');

@@ -167,7 +167,8 @@
                 </div>
             </div>
             <div class="tab-pane" id="homologacao" role="tabpanel">
-                <form action="">
+                <form action="{{ route('laudo.carregarArquivos') }}" method="post" name="formulario">
+                    @csrf
                     <div class="form-group col-md-12" id="botoes">
                         <a class="btn btn-primary proximo pull-right">Próximo</a>
                         <a class="btn btn-primary anterior">Voltar</a>

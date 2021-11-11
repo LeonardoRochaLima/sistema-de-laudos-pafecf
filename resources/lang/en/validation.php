@@ -29,7 +29,7 @@ return [
         'array' => 'The :attribute must have between :min and :max items.',
     ],
     'boolean' => 'The :attribute field must be true or false.',
-    'confirmed' => 'The :attribute confirmation does not match.',
+    'confirmed' => 'As senhas não conferem.',
     'date' => 'The :attribute is not a valid date.',
     'date_equals' => 'The :attribute must be a date equal to :date.',
     'date_format' => 'The :attribute does not match the format :format.',
@@ -106,7 +106,7 @@ return [
     'size' => [
         'numeric' => 'The :attribute must be :size.',
         'file' => 'The :attribute must be :size kilobytes.',
-        'string' => 'The :attribute must be :size characters.',
+        'string' => 'O :attribute deve conter no mínimo :size caracteres.',
         'array' => 'The :attribute must contain :size items.',
     ],
     'starts_with' => 'O :attribute deve estar entre following: :values.',

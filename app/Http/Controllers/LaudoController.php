@@ -115,12 +115,6 @@ class LaudoController extends Controller
         return $option;
     }
 
-    public function getObject($id_empresa)
-    {
-        $pdvs = PDV::where('id_empresa', $id_empresa)->get();
-        return $pdvs;
-    }
-
     public function show($id)
     {
         $laudo = Laudo::find($id);
@@ -177,5 +171,16 @@ class LaudoController extends Controller
         $laudo = Laudo::find($id);
         $laudo->delete();
         return redirect()->route('laudo.index')->with('msg', 'Laudo Excluído com Sucesso!!');
+    }
+
+    public function carregarArquivos(){
+        $arquivo_tmp = $_FILES['md5']['tmp_name'];
+        $dados = file($arquivo_tmp);
+
+        foreach ($dados as $linha) {
+            $linha = trim($linha);
+            $valor = explode(' ', $linha);
+            var_dump($valor);
+        }
     }
 }
