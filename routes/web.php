@@ -55,3 +55,8 @@ Route::post('laudo/{laudo}/update', 'LaudoController@update')->name('laudo.updat
 Route::get('/getPDVs', 'LaudoController@getPDVs');
 Route::post('/carregarArquivos', 'LaudoController@carregarArquivos')->name('laudo.carregarArquivos');
 Route::post('/laudo/{laudo}/destroy', 'LaudoController@destroy')->name('laudo.destroy');
+
+//Rotas ECFs
+Route::resource('ecfs', 'ECFsController');
+Route::post('ecfs/create', 'ECFsController@store');
+Route::post('ecfs/{ecf}/destroy', 'ECFsController@destroy')->name('ecf.destroy');

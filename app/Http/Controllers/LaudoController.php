@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Laudo;
 use App\Models\Empresa;
 use App\Models\PDV;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreLaudoRequest;
 use App\Http\Requests\StoreLaudoUpdateRequest;
 
@@ -171,6 +169,10 @@ class LaudoController extends Controller
         $laudo = Laudo::find($id);
         $laudo->delete();
         return redirect()->route('laudo.index')->with('msg', 'Laudo Excluído com Sucesso!!');
+    }
+
+    public function gerarLaudo(){
+        return 0;
     }
 
     public function carregarArquivos(){
