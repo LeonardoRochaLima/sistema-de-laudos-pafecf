@@ -66,8 +66,7 @@
                 <div class="form-group control-label col-md-6">
                     <label for="pdv">Selecione o PDV Homologado</label>
                     <select name="pdv" id="pdv" required>
-                        <option selected value="">Selecione um PDV</option>
-                        <p>Selecione uma empresa que possua um PDV cadastrado.</p>
+                        <option selected value="">Nenhuma Empresa Selecionada</option>
                     </select>
                 </div>
                 <script>
@@ -322,7 +321,7 @@
                         </div>
                     @enderror
                     <select name="ecf_analise_modelo" id="ecf_analise_modelo">
-                        <option selected>Selecione o Modelo</option>
+                        <option selected>Selecione Primeiro a Marca</option>
                     </select>
                 </div>
                 <div class="control-label col-md-12">
