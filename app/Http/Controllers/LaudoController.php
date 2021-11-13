@@ -35,9 +35,10 @@ class LaudoController extends Controller
     {
         $ecfs = DB::table('ecfs')
         ->select('marca')->distinct()->get();
+        $relacao_ecfs = Ecfs::all();
         $empresas = Empresa::where('validacao', true)->orderBy('id', 'desc')->get();
         $pdvs = PDV::where('validacao', true)->orderBy('id', 'desc')->get();
-        return view('laudo.create', ['empresas' => $empresas, 'pdvs' => $pdvs, 'ecfs' => $ecfs]);
+        return view('laudo.create', ['empresas' => $empresas, 'pdvs' => $pdvs, 'ecfs' => $ecfs, 'relacao_ecfs' => $relacao_ecfs]);
     }
 
     public function gerarIFL()

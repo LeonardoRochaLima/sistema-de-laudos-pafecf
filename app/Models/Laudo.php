@@ -12,11 +12,11 @@ class Laudo extends Model
    'data_termino', 'envelope_seguranca_marca', 'envelope_seguranca_modelo',
    'numero_envelope', 'requisitos_executados_sgbd', 'executavel_sgbd',
    'funcao_sped', 'executavel_sped', 'executavel_nfe', 'parecer_conclusivo',
-   'ecf_analise_marca', 'ecf_analise_modelo', 'ecfs_compativeis_pdv', 'comentarios'];
+   'ecf_analise_marca', 'ecf_analise_modelo', 'relacao_ecfs', 'comentarios'];
     
     public function setCategoryAttribute($value)
     {
-        $this->attributes['ecfs_compativeis_pdv'] = json_encode($value);
+        $this->attributes['relacao_ecfs'] = json_encode($value);
     }
 
     public function pdvs()
@@ -26,6 +26,6 @@ class Laudo extends Model
 
     public function getCategoryAttribute($value)
     {
-        return $this->attributes['ecfs_compativeis_pdv'] = json_decode($value);
+        return $this->attributes['relacao_ecfs'] = json_decode($value);
     }
 }
