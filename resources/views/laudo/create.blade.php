@@ -298,9 +298,22 @@
                         </div>
                     @enderror
                     <select name="ecf_analise_marca" id="ecf_analise_marca">
-                        <option selected>Selecione a Marca</option>
+                        <option selected value="">Selecione uma Marca</option>
+                        @foreach ($ecfs as $ecf)
+                            <option value="{{ $ecf->marca }}">{{ $ecf->marca }}</option>
+                        @endforeach
                     </select>
                 </div>
+                <script>
+                    $(document).ready(function() {
+                        $("#ecf_analise_marca").change(function() {
+                            let marca = this.value;
+                            $.get('/getModelos?ecf_analise_marca=' + marca, function(data) {
+                                $("#ecf_analise_modelo").html(data);
+                            })
+                        })
+                    })
+                </script>
                 <div class="form-group control-label col-md-6">
                     <label for="ecf_analise_modelo">Modelo</label>
                     @error('ecf_analise_modelo')
@@ -348,7 +361,9 @@
                     </div>
                 </div>
                 <div class="control-label col-md-12">
-                    <label>Relatório de não conformidade: <br> <small class="form-group control-label" style="color: red">Só deve ser preenchido com comentários caso existam inconfomidades no sistema. Favor adicionar o item do requisito e o comentário referente.</small></label>
+                    <label>Relatório de não conformidade: <br> <small class="form-group control-label" style="color: red">Só
+                            deve ser preenchido com comentários caso existam inconfomidades no sistema. Favor adicionar o
+                            item do requisito e o comentário referente.</small></label>
                 </div>
                 <div class="control-label col-md-4">
                     <label for="comentarios">Comentários: </label>

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Laudo;
 use App\Models\Empresa;
 use App\Models\PDV;
+use App\Models\Ecfs;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreLaudoRequest;
 use App\Http\Requests\StoreLaudoUpdateRequest;
 
@@ -31,9 +33,11 @@ class LaudoController extends Controller
 
     public function create()
     {
+        $ecfs = DB::table('ecfs')
+        ->select('marca')->distinct()->get();
         $empresas = Empresa::where('validacao', true)->orderBy('id', 'desc')->get();
         $pdvs = PDV::where('validacao', true)->orderBy('id', 'desc')->get();
-        return view('laudo.create', ['empresas' => $empresas, 'pdvs' => $pdvs]);
+        return view('laudo.create', ['empresas' => $empresas, 'pdvs' => $pdvs, 'ecfs' => $ecfs]);
     }
 
     public function gerarIFL()
@@ -59,6 +63,7 @@ class LaudoController extends Controller
 
     public function store(StoreLaudoRequest $request)
     {
+        
         $laudo = new Laudo;
         $pdv = PDV::find($request->pdv);
         $user = auth()->user();
@@ -71,6 +76,8 @@ class LaudoController extends Controller
         } else {
             $laudo->ifl .= "IFL0" . $laudo->numero_laudo . $ano_atual;
         }
+
+        $ecf = Ecfs::find($request->ecf_analise_modelo);
 
         $laudo->id_pdv = $pdv->id;
         $laudo->id_empresa = $pdv->empresa->id;
@@ -90,7 +97,7 @@ class LaudoController extends Controller
         $laudo->executavel_nfe = $request->executavel_nfe;
         $laudo->parecer_conclusivo = $request->parecer_conclusivo;
         $laudo->ecf_analise_marca = $request->ecf_analise_marca;
-        $laudo->ecf_analise_modelo = $request->ecf_analise_modelo;
+        $laudo->ecf_analise_modelo = $ecf->modelo;
         $laudo->relacao_ecfs = $request->relacao_ecfs;
         $laudo->comentarios = $request->comentarios;
 
@@ -113,16 +120,33 @@ class LaudoController extends Controller
         return $option;
     }
 
+    public function getModelos()
+    {
+        $marca = request('ecf_analise_marca');
+        $ecfs = Ecfs::where([
+            ['marca', 'LIKE', $marca]
+        ])->get();
+
+        $option = "<option value=''>Selecione um Modelo</option>";
+        foreach ($ecfs as $ecf) {
+            $option .= '<option value="' . $ecf->id . '">' . $ecf->modelo . '</option>';
+        }
+        return $option;
+    }
+
     public function show($id)
     {
+        $ecfs = DB::table('ecfs')
+        ->select('marca')->distinct()->get();
         $laudo = Laudo::find($id);
-        return view('laudo.show')->with('laudo', $laudo);
+        return view('laudo.show', ['laudo' => $laudo, 'ecfs' => $ecfs]);
     }
 
     public function update(StoreLaudoUpdateRequest $request, $id)
     {
         $laudo = Laudo::find($id);
-
+        $ecf = Ecfs::find($request->input('ecf_analise_modelo'));
+        $ecf_modelo = $ecf->modelo;
         if (
             $laudo->data_inicio == $request->input('data_inicio') &&
             $laudo->data_termino == $request->input('data_termino') &&
@@ -136,7 +160,7 @@ class LaudoController extends Controller
             $laudo->executavel_sped == $request->input('executavel_sped') &&
             $laudo->executavel_nfe == $request->input('executavel_nfe') &&
             $laudo->parecer_conclusivo == $request->input('parecer_conclusivo') &&
-            $laudo->ecf_analise_modelo == $request->input('ecf_analise_modelo') &&
+            $laudo->ecf_analise_modelo == $ecf->ecf_analise_modelo &&
             $laudo->relacao_ecfs == $request->input('relacao_ecfs') &&
             $laudo->comentarios == $request->input('comentarios')
         ) {
@@ -154,7 +178,7 @@ class LaudoController extends Controller
             $laudo->executavel_sped = $request->input('executavel_sped');
             $laudo->executavel_nfe = $request->input('executavel_nfe');
             $laudo->parecer_conclusivo = $request->input('parecer_conclusivo');
-            $laudo->ecf_analise_modelo = $request->input('ecf_analise_modelo');
+            $laudo->ecf_analise_modelo = $ecf_modelo;
             $laudo->relacao_ecfs = $request->input('relacao_ecfs');
             $laudo->comentarios = $request->input('comentarios');
 

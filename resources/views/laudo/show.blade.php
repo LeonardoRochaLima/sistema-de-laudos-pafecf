@@ -290,6 +290,16 @@
                 <div class="control-label col-md-12">
                     <label>Identificação dos Equipamentos ECF Utilizados para a Análise Funcional: </label>
                 </div>
+                <script>
+                    $(document).ready(function() {
+                        $("#ecf_analise_marca").change(function() {
+                            let marca = this.value;
+                            $.get('/getModelos?ecf_analise_marca=' + marca, function(data) {
+                                $("#ecf_analise_modelo").html(data);
+                            })
+                        })
+                    })
+                </script>
                 <div class="form-group control-label col-md-3">
                     <label for="ecf_analise_marca">Marca</label>
                     @error('ecf_analise_marca')
@@ -298,7 +308,10 @@
                         </div>
                     @enderror
                     <select name="ecf_analise_marca" id="ecf_analise_marca">
-                        <option selected>Selecione a Marca</option>
+                        <option selected value="{{ $laudo->ecf_analise_marca }}">{{ $laudo->ecf_analise_marca }}</option>
+                        @foreach ($ecfs as $ecf)
+                            <option value="{{ $ecf->marca }}">{{ $ecf->marca }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group control-label col-md-6">
@@ -309,7 +322,7 @@
                         </div>
                     @enderror
                     <select name="ecf_analise_modelo" id="ecf_analise_modelo">
-                        <option selected>Selecione o Modelo</option>
+                        <option selected value="{{ $laudo->ecf_analise_modelo }}">{{ $laudo->ecf_analise_modelo }}</option>
                     </select>
                 </div>
                 <div class="control-label col-md-12">
