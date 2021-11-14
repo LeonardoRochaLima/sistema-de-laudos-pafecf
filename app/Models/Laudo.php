@@ -7,6 +7,7 @@ use App\Models\PDV;
 
 class Laudo extends Model
 {
+    protected $table = "laudos";
     protected $fillable = ['razao_social_empresa',
    'nome_comercial_pdv', 'homologador', 'data_inicio',
    'data_termino', 'envelope_seguranca_marca', 'envelope_seguranca_modelo',

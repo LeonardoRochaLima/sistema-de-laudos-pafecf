@@ -334,9 +334,10 @@
                             {{ $message }}
                         </div>
                     @enderror
-                    <select name="relacao_ecfs" id="relacao_ecfs[]" multiple>
+                    <select id="relacao_ecfs" name="relacao_ecfs[]" multiple="">
+                        <option value="" disabled selected>Escolha as ECFS</option>
                         @foreach ($relacao_ecfs as $ecf)
-                            <option value="{{ $ecf->marca }} - {{ $ecf->modelo }}">{{ $ecf->marca }} - {{ $ecf->modelo }}</option>
+                            <option value[]="{{$ecf->id}}">{{$ecf->marca}} - {{$ecf->modelo}}</option>
                         @endforeach
                     </select>
                 </div>

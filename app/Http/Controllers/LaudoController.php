@@ -99,7 +99,8 @@ class LaudoController extends Controller
         $laudo->parecer_conclusivo = $request->parecer_conclusivo;
         $laudo->ecf_analise_marca = $request->ecf_analise_marca;
         $laudo->ecf_analise_modelo = $ecf->modelo;
-        $laudo->relacao_ecfs = $request->relacao_ecfs;
+        //$laudo->relacao_ecfs = implode(", ", $request->relacao_ecfs);
+        $laudo->relacao_ecfs = implode(", ", $request->input('relacao_ecfs'));
         $laudo->comentarios = $request->comentarios;
 
         $laudo->save();
@@ -140,7 +141,9 @@ class LaudoController extends Controller
         $ecfs = DB::table('ecfs')
         ->select('marca')->distinct()->get();
         $laudo = Laudo::find($id);
-        return view('laudo.show', ['laudo' => $laudo, 'ecfs' => $ecfs]);
+        $relacao_ecfs = Ecfs::all();
+        $ecfs_selecionadas = explode(", ", $laudo->relacao_ecfs);
+        return view('laudo.show', ['laudo' => $laudo, 'ecfs' => $ecfs, 'relacao_ecfs' => $relacao_ecfs, 'ecfs_selecionadas' => $ecfs_selecionadas]);
     }
 
     public function update(StoreLaudoUpdateRequest $request, $id)
