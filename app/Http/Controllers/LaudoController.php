@@ -213,4 +213,9 @@ class LaudoController extends Controller
             var_dump($valor);
         }
     }
+
+    public function viewGerarDocs($id_laudo){
+        $laudo = Laudo::find($id_laudo);
+        return view('laudo.gerarDocs', ['laudo' => $laudo]);
+    }
 }

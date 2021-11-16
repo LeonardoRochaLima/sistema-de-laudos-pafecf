@@ -10,6 +10,7 @@
             }
         }
     </script>
+    <a href="https://sat.sef.sc.gov.br/tax.net/sat.cei.web/ecf/listagem.aspx" class="btn btn-default">CEI - Listagem Oficial de ECFs Válidas.</a>
     <h1>Listagem de ECF's Válidas</h1>
     @if ($errors->any())
         <div class="alert alert-danger">

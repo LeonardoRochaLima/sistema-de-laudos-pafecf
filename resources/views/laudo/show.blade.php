@@ -300,7 +300,7 @@
                         })
                     })
                 </script>
-                <div class="form-group control-label col-md-3">
+                <div class="form-group control-label col-md-6">
                     <label for="ecf_analise_marca">Marca</label>
                     @error('ecf_analise_marca')
                         <div class="invalid-feedback" style="color: red">

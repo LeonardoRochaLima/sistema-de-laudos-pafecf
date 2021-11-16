@@ -289,7 +289,7 @@
                 <div class="control-label col-md-12">
                     <label>Identificação dos Equipamentos ECF Utilizados para a Análise Funcional: </label>
                 </div>
-                <div class="form-group control-label col-md-3">
+                <div class="form-group control-label col-md-6">
                     <label for="ecf_analise_marca">Marca</label>
                     @error('ecf_analise_marca')
                         <div class="invalid-feedback" style="color: red">
