@@ -277,8 +277,14 @@ class LaudoController extends Controller
             'txtSo' => $pdv->sistema_operacional,
             'txtBd' => $pdv->data_base,
         ));
-        $pathToSave = 'salvo.docx';
-        $templateProcessor->saveAs($pathToSave);
-        return $this->index();
+        //$option .= '<option value="' . $ecf->id . '">' . $ecf->modelo . '</option>';
+        $stringNomeLado = $laudo->ifl;
+        $pastaParaSalvar = $stringNomeLado;
+        if (!file_exists($pastaParaSalvar)) {
+            mkdir($pastaParaSalvar, 0755, true);
+        }
+        $pastaParaSalvar .= '/'.$stringNomeLado.'.docx';
+        $templateProcessor->saveAs($pastaParaSalvar);
+        return view('laudo.gerarDocs', ['laudo' => $laudo, 'pdv' => $pdv, 'empresa' => $empresa]);
     }
 }
