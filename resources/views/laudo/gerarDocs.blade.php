@@ -13,7 +13,7 @@
         <h1>Gerar Documentos</h1>
         <h3>Laudo: <b>{{ $laudo->ifl }} - {{ $laudo->razao_social_empresa }}</b></h3>
     </div>
-    <form action="">
+    <form action="/gerarLaudo/{{$laudo->id}}" method="GET">
         <div class="form-group col-md-5">
             <p>Para <b>gerar os documentos</b> referentes ao laudo em questão, basta clicar no botão ao lado. O <b>download</b> dos
                 arquivos será automático.</p>

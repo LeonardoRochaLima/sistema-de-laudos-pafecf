@@ -57,6 +57,7 @@ Route::get('/getModelos', 'LaudoController@getModelos');
 Route::post('/carregarArquivos', 'LaudoController@carregarArquivos')->name('laudo.carregarArquivos');
 Route::post('/laudo/{laudo}/destroy', 'LaudoController@destroy')->name('laudo.destroy');
 Route::get('laudo/{laudo}/gerarDocumentos', 'LaudoController@viewGerarDocs')->name('laudo.gerarDocumentos');
+Route::get('/gerarLaudo/{laudo}', 'LaudoController@gerarLaudo')->name('laudo.gerarLaudo');
 
 //Rotas ECFs
 Route::resource('ecfs', 'ECFsController');

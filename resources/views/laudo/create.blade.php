@@ -372,6 +372,16 @@
                     <textarea type="text" class="form-control" id="comentarios" name="comentarios"
                         placeholder="Comentários"></textarea>
                 </div>
+                <div class="form-group control-label col-md-4">
+                    <label for="responsavel_testes">Responsável da Empresa pela Execução dos Testes:</label>
+                    <input type="text" class="form-control @error('responsavel_testes') is-invalid @enderror"
+                        id="responsavel_testes" name="responsavel_testes" placeholder="Responsável pelos Testes">
+                    @error('responsavel_testes')
+                        <div class="invalid-feedback" style="color: red">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
                 <div class="form-group col-md-12">
                     <input type="submit" class="btn btn-success" value="Cadastrar Laudo">
                 </div>

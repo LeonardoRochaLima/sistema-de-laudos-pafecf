@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreLaudoRequest;
 use App\Http\Requests\StoreLaudoUpdateRequest;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class LaudoController extends Controller
 {
@@ -34,7 +35,7 @@ class LaudoController extends Controller
     public function create()
     {
         $ecfs = DB::table('ecfs')
-        ->select('marca')->distinct()->get();
+            ->select('marca')->distinct()->get();
         $relacao_ecfs = Ecfs::all();
         $empresas = Empresa::where('validacao', true)->orderBy('id', 'desc')->get();
         $pdvs = PDV::where('validacao', true)->orderBy('id', 'desc')->get();
@@ -64,7 +65,7 @@ class LaudoController extends Controller
 
     public function store(StoreLaudoRequest $request)
     {
-        
+
         $laudo = new Laudo;
         $pdv = PDV::find($request->pdv);
         $user = auth()->user();
@@ -102,6 +103,7 @@ class LaudoController extends Controller
         //$laudo->relacao_ecfs = implode(", ", $request->relacao_ecfs);
         $laudo->relacao_ecfs = implode(", ", $request->input('relacao_ecfs'));
         $laudo->comentarios = $request->comentarios;
+        $laudo->responsavel_testes = $request->responsavel_testes;
 
         $laudo->save();
 
@@ -139,7 +141,7 @@ class LaudoController extends Controller
     public function show($id)
     {
         $ecfs = DB::table('ecfs')
-        ->select('marca')->distinct()->get();
+            ->select('marca')->distinct()->get();
         $laudo = Laudo::find($id);
         $relacao_ecfs = Ecfs::all();
         $ecfs_selecionadas = explode(", ", $laudo->relacao_ecfs);
@@ -166,7 +168,8 @@ class LaudoController extends Controller
             $laudo->parecer_conclusivo == $request->input('parecer_conclusivo') &&
             $laudo->ecf_analise_modelo == $ecf->ecf_analise_modelo &&
             $laudo->relacao_ecfs == $request->input('relacao_ecfs') &&
-            $laudo->comentarios == $request->input('comentarios')
+            $laudo->comentarios == $request->input('comentarios') &&
+            $laudo->responsavel_testes == $request->input('responsavel_testes')
         ) {
             return redirect()->back()->with('msgerro', 'Nenhum campo alterado!!');
         } else {
@@ -185,6 +188,7 @@ class LaudoController extends Controller
             $laudo->ecf_analise_modelo = $ecf_modelo;
             $laudo->relacao_ecfs = $request->input('relacao_ecfs');
             $laudo->comentarios = $request->input('comentarios');
+            $laudo->responsavel_testes = $request->input('responsavel_testes');
 
             $laudo->save();
             return redirect()->back()->with('msg', 'Laudo Editado com Sucesso!!');
@@ -199,11 +203,8 @@ class LaudoController extends Controller
         return redirect()->route('laudo.index')->with('msgerro', 'Laudo Excluído com Sucesso!!');
     }
 
-    public function gerarLaudo(){
-        return 0;
-    }
-
-    public function carregarArquivos(){
+    public function carregarArquivos()
+    {
         $arquivo_tmp = $_FILES['md5']['tmp_name'];
         $dados = file($arquivo_tmp);
 
@@ -214,8 +215,60 @@ class LaudoController extends Controller
         }
     }
 
-    public function viewGerarDocs($id_laudo){
+    public function viewGerarDocs($id_laudo)
+    {
         $laudo = Laudo::find($id_laudo);
-        return view('laudo.gerarDocs', ['laudo' => $laudo]);
+        $pdv = PDV::find($laudo->id_pdv);
+        $empresa = Empresa::find($pdv->empresa->id);
+        return view('laudo.gerarDocs', ['laudo' => $laudo, 'pdv' => $pdv, 'empresa' => $empresa]);
+    }
+
+    public function gerarLaudo($id_laudo)
+    {
+        $laudo = Laudo::find($id_laudo);
+        $pdv = PDV::find($laudo->id_pdv);
+        $empresa = Empresa::find($pdv->empresa->id);
+        $templateProcessor = new TemplateProcessor('ModeloLaudoPAFECF.docx');
+        $templateProcessor->setValues(array(
+            //informações da Empresa
+            'txtCnpj' => $empresa->cnpj,
+            'txtRazaoSocial' => $empresa->razao_social,
+            'txtNomeFantasia' => $empresa->nome_fantasia,
+            'txtEndereco' => $empresa->endereco,
+            'txtBairro' => $empresa->bairro,
+            'txtCidade' => $empresa->cidade,
+            'txtUf' => $empresa->uf,
+            'txtCep' => $empresa->cep,
+            'txtTelefone' => $empresa->telefone,
+            'txtCelular' => $empresa->celular,
+            'txtIe' => $empresa->inscricao_estadual,
+            'txtIm' => $empresa->inscricao_municipal,
+            'txtRepresentante' => $empresa->representante,
+            'txtCpfContato' => $empresa->cpf_representante,
+            'txtRGRepresentante' => $empresa->rg_representante,
+            'txtEmail' => $empresa->email_representante,
+            //informações do Laudo
+            'txtResponsavelTestes' => $laudo->responsavel_testes,
+            'laudo' => $laudo->ifl,
+            'txtNomeHomologador' => $laudo->homologador,
+            'txtDataInicio' => $laudo->data_inicio,
+            'txtDataFinal' => $laudo->data_termino,
+            'txtEnvelope' => $laudo->numero_envelope,
+            'txtEcfMarca' => $laudo->ecf_analise_marca,
+            'txtEcfModelo' => $laudo->ecf_analise_modelo,
+            'txtObservacaoOTC' => $laudo->comentarios,
+            //'txtRelacaoEcf' => $laudo->relacao_ecfs,
+            //pretendo pegar o sysdate
+            'txtDataVersao' => $laudo->data_termino,
+            //informações do PDV
+            'txtNomeComercial' => $pdv->nome_comercial,
+            'txtVersao' => $pdv->versao,
+            'txtLinguagemProgramacao' => $pdv->linguagem,
+            'txtSo' => $pdv->sistema_operacional,
+            'txtBd' => $pdv->data_base,
+        ));
+        $pathToSave = 'salvo.docx';
+        $templateProcessor->saveAs($pathToSave);
+        return $this->index();
     }
 }

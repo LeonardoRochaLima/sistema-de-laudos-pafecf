@@ -38,6 +38,7 @@ class CreateLaudoTable extends Migration
             $table->string('ecf_analise_modelo');
             $table->longText('relacao_ecfs');
             $table->string('comentarios')->nullable();
+            $table->string('responsavel_testes');
             $table->timestamps();
         });
     }
