@@ -86,8 +86,10 @@ class LaudoController extends Controller
         $laudo->razao_social_empresa = $pdv->empresa->razao_social;
         $laudo->nome_comercial_pdv = $pdv->nome_comercial;
         $laudo->homologador = $user->name;
-        $laudo->data_inicio = $request->data_inicio;
-        $laudo->data_termino = $request->data_termino;
+        $laudo->data_inicio = \Carbon\Carbon::createFromFormat('Y-m-d', $request->data_inicio)
+        ->format('d/m/Y');
+        $laudo->data_termino = \Carbon\Carbon::createFromFormat('Y-m-d', $request->data_termino)
+        ->format('d/m/Y');
         $laudo->versao_er = $request->versao_er;
         $laudo->envelope_seguranca_marca = $request->envelope_seguranca_marca;
         $laudo->envelope_seguranca_modelo = $request->envelope_seguranca_modelo;
@@ -140,11 +142,14 @@ class LaudoController extends Controller
 
     public function show($id)
     {
-        $ecfs = DB::table('ecfs')
-            ->select('marca')->distinct()->get();
+        $ecfs = DB::table('ecfs')->select('marca')->distinct()->get();
         $laudo = Laudo::find($id);
+        $laudo->data_inicio = \Carbon\Carbon::createFromFormat('d/m/Y', $laudo->data_inicio)
+        ->format('Y-m-d');
+        $laudo->data_termino = \Carbon\Carbon::createFromFormat('d/m/Y', $laudo->data_termino)
+        ->format('Y-m-d');
         $relacao_ecfs = Ecfs::all();
-        $ecfs_selecionadas = explode(", ", $laudo->relacao_ecfs);
+        $ecfs_selecionadas = $laudo->relacao_ecfs;
         return view('laudo.show', ['laudo' => $laudo, 'ecfs' => $ecfs, 'relacao_ecfs' => $relacao_ecfs, 'ecfs_selecionadas' => $ecfs_selecionadas]);
     }
 
@@ -152,10 +157,11 @@ class LaudoController extends Controller
     {
         $laudo = Laudo::find($id);
         $ecf = Ecfs::find($request->input('ecf_analise_modelo'));
-        $ecf_modelo = $ecf->modelo;
         if (
-            $laudo->data_inicio == $request->input('data_inicio') &&
-            $laudo->data_termino == $request->input('data_termino') &&
+            $laudo->data_inicio == \Carbon\Carbon::createFromFormat('Y-m-d', $request->data_inicio)
+            ->format('d/m/Y') &&
+            $laudo->data_termino == \Carbon\Carbon::createFromFormat('Y-m-d', $request->data_termino)
+            ->format('d/m/Y') &&
             $laudo->versao_er == $request->input('versao_er') &&
             $laudo->envelope_seguranca_marca == $request->input('envelope_seguranca_marca') &&
             $laudo->envelope_seguranca_modelo == $request->input('envelope_seguranca_modelo') &&
@@ -166,15 +172,18 @@ class LaudoController extends Controller
             $laudo->executavel_sped == $request->input('executavel_sped') &&
             $laudo->executavel_nfe == $request->input('executavel_nfe') &&
             $laudo->parecer_conclusivo == $request->input('parecer_conclusivo') &&
-            $laudo->ecf_analise_modelo == $ecf->ecf_analise_modelo &&
-            $laudo->relacao_ecfs == $request->input('relacao_ecfs') &&
+            $laudo->ecf_analise_marca == $request->input('ecf_analise_marca') &&
+            $laudo->ecf_analise_modelo == $request->input('ecf_analise_modelo') &&
+            $laudo->relacao_ecfs == implode(", ",$request->input('relacao_ecfs')) &&
             $laudo->comentarios == $request->input('comentarios') &&
             $laudo->responsavel_testes == $request->input('responsavel_testes')
         ) {
             return redirect()->back()->with('msgerro', 'Nenhum campo alterado!!');
         } else {
-            $laudo->data_inicio = $request->input('data_inicio');
-            $laudo->data_termino = $request->input('data_termino');
+            $laudo->data_inicio = \Carbon\Carbon::createFromFormat('Y-m-d', $request->data_inicio)
+            ->format('d/m/Y');
+            $laudo->data_termino = \Carbon\Carbon::createFromFormat('Y-m-d', $request->data_termino)
+            ->format('d/m/Y');
             $laudo->versao_er = $request->input('versao_er');
             $laudo->envelope_seguranca_marca = $request->input('envelope_seguranca_marca');
             $laudo->envelope_seguranca_modelo = $request->input('envelope_seguranca_modelo');
@@ -185,8 +194,9 @@ class LaudoController extends Controller
             $laudo->executavel_sped = $request->input('executavel_sped');
             $laudo->executavel_nfe = $request->input('executavel_nfe');
             $laudo->parecer_conclusivo = $request->input('parecer_conclusivo');
-            $laudo->ecf_analise_modelo = $ecf_modelo;
-            $laudo->relacao_ecfs = $request->input('relacao_ecfs');
+            $laudo->ecf_analise_marca = $request->input('ecf_analise_marca');
+            $laudo->ecf_analise_modelo = $request->input('ecf_analise_modelo');
+            $laudo->relacao_ecfs = implode(", ",$request->input('relacao_ecfs'));
             $laudo->comentarios = $request->input('comentarios');
             $laudo->responsavel_testes = $request->input('responsavel_testes');
 

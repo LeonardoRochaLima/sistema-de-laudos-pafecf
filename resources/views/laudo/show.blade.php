@@ -338,7 +338,11 @@
                     <select id="relacao_ecfs" name="relacao_ecfs[]" multiple="">
                         <option value="" disabled selected>Escolha as ECFS</option>
                         @foreach ($relacao_ecfs as $ecf)
-                            <option value[]="{{$ecf->id}}">{{$ecf->marca}} - {{$ecf->modelo}}</option>
+                            <option 
+                            @if (str_contains($ecfs_selecionadas, $ecf->modelo)) 
+                                selected
+                            @endif 
+                            value[]="{{$ecf->id}}">{{$ecf->marca}} - {{$ecf->modelo}}</option>
                         @endforeach
                     </select>
                 </div>
