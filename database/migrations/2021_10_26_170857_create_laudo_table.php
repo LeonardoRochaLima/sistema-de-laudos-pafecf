@@ -39,6 +39,7 @@ class CreateLaudoTable extends Migration
             $table->longText('relacao_ecfs');
             $table->string('comentarios')->nullable();
             $table->string('responsavel_testes');
+            $table->string('caminho_laudo')->nullable();
             $table->timestamps();
         });
     }

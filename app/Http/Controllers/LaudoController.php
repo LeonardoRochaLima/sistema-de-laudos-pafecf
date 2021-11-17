@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreLaudoRequest;
 use App\Http\Requests\StoreLaudoUpdateRequest;
+use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 class LaudoController extends Controller
@@ -87,9 +88,9 @@ class LaudoController extends Controller
         $laudo->nome_comercial_pdv = $pdv->nome_comercial;
         $laudo->homologador = $user->name;
         $laudo->data_inicio = \Carbon\Carbon::createFromFormat('Y-m-d', $request->data_inicio)
-        ->format('d/m/Y');
+            ->format('d/m/Y');
         $laudo->data_termino = \Carbon\Carbon::createFromFormat('Y-m-d', $request->data_termino)
-        ->format('d/m/Y');
+            ->format('d/m/Y');
         $laudo->versao_er = $request->versao_er;
         $laudo->envelope_seguranca_marca = $request->envelope_seguranca_marca;
         $laudo->envelope_seguranca_modelo = $request->envelope_seguranca_modelo;
@@ -126,7 +127,7 @@ class LaudoController extends Controller
         return $option;
     }
 
-    public function getModelos()
+    public function getModelosStore()
     {
         $marca = request('ecf_analise_marca');
         $ecfs = Ecfs::where([
@@ -140,14 +141,28 @@ class LaudoController extends Controller
         return $option;
     }
 
+    public function getModelosUpdate()
+    {
+        $marca = request('ecf_analise_marca');
+        $ecfs = Ecfs::where([
+            ['marca', 'LIKE', $marca]
+        ])->get();
+
+        $option = "<option value=''>Selecione um Modelo</option>";
+        foreach ($ecfs as $ecf) {
+            $option .= '<option value="' . $ecf->modelo . '">' . $ecf->modelo . '</option>';
+        }
+        return $option;
+    }
+
     public function show($id)
     {
         $ecfs = DB::table('ecfs')->select('marca')->distinct()->get();
         $laudo = Laudo::find($id);
         $laudo->data_inicio = \Carbon\Carbon::createFromFormat('d/m/Y', $laudo->data_inicio)
-        ->format('Y-m-d');
+            ->format('Y-m-d');
         $laudo->data_termino = \Carbon\Carbon::createFromFormat('d/m/Y', $laudo->data_termino)
-        ->format('Y-m-d');
+            ->format('Y-m-d');
         $relacao_ecfs = Ecfs::all();
         $ecfs_selecionadas = $laudo->relacao_ecfs;
         return view('laudo.show', ['laudo' => $laudo, 'ecfs' => $ecfs, 'relacao_ecfs' => $relacao_ecfs, 'ecfs_selecionadas' => $ecfs_selecionadas]);
@@ -156,7 +171,6 @@ class LaudoController extends Controller
     public function update(StoreLaudoUpdateRequest $request, $id)
     {
         $laudo = Laudo::find($id);
-        $ecf = Ecfs::find($request->input('ecf_analise_modelo'));
         if (
             $laudo->data_inicio == \Carbon\Carbon::createFromFormat('Y-m-d', $request->data_inicio)
             ->format('d/m/Y') &&
@@ -174,16 +188,16 @@ class LaudoController extends Controller
             $laudo->parecer_conclusivo == $request->input('parecer_conclusivo') &&
             $laudo->ecf_analise_marca == $request->input('ecf_analise_marca') &&
             $laudo->ecf_analise_modelo == $request->input('ecf_analise_modelo') &&
-            $laudo->relacao_ecfs == implode(", ",$request->input('relacao_ecfs')) &&
+            $laudo->relacao_ecfs == implode(", ", $request->input('relacao_ecfs')) &&
             $laudo->comentarios == $request->input('comentarios') &&
             $laudo->responsavel_testes == $request->input('responsavel_testes')
         ) {
             return redirect()->back()->with('msgerro', 'Nenhum campo alterado!!');
         } else {
             $laudo->data_inicio = \Carbon\Carbon::createFromFormat('Y-m-d', $request->data_inicio)
-            ->format('d/m/Y');
+                ->format('d/m/Y');
             $laudo->data_termino = \Carbon\Carbon::createFromFormat('Y-m-d', $request->data_termino)
-            ->format('d/m/Y');
+                ->format('d/m/Y');
             $laudo->versao_er = $request->input('versao_er');
             $laudo->envelope_seguranca_marca = $request->input('envelope_seguranca_marca');
             $laudo->envelope_seguranca_modelo = $request->input('envelope_seguranca_modelo');
@@ -196,7 +210,7 @@ class LaudoController extends Controller
             $laudo->parecer_conclusivo = $request->input('parecer_conclusivo');
             $laudo->ecf_analise_marca = $request->input('ecf_analise_marca');
             $laudo->ecf_analise_modelo = $request->input('ecf_analise_modelo');
-            $laudo->relacao_ecfs = implode(", ",$request->input('relacao_ecfs'));
+            $laudo->relacao_ecfs = implode(", ", $request->input('relacao_ecfs'));
             $laudo->comentarios = $request->input('comentarios');
             $laudo->responsavel_testes = $request->input('responsavel_testes');
 
@@ -239,6 +253,9 @@ class LaudoController extends Controller
         $pdv = PDV::find($laudo->id_pdv);
         $empresa = Empresa::find($pdv->empresa->id);
         $templateProcessor = new TemplateProcessor('ModeloLaudoPAFECF.docx');
+
+        $pdv_perfis = explode(", ", $pdv->perfis);
+
         $templateProcessor->setValues(array(
             //informações da Empresa
             'txtCnpj' => $empresa->cnpj,
@@ -267,6 +284,7 @@ class LaudoController extends Controller
             'txtEcfMarca' => $laudo->ecf_analise_marca,
             'txtEcfModelo' => $laudo->ecf_analise_modelo,
             'txtObservacaoOTC' => $laudo->comentarios,
+            'txtPrincipalExec' => $pdv->nome_principal_executavel,
             //'txtRelacaoEcf' => $laudo->relacao_ecfs,
             //pretendo pegar o sysdate
             'txtDataVersao' => $laudo->data_termino,
@@ -284,7 +302,9 @@ class LaudoController extends Controller
             mkdir($pastaParaSalvar, 0755, true);
         }
         $pastaParaSalvar .= '/'.$stringNomeLado.'.docx';
+        $laudo->caminho_laudo = '/public/'.$pastaParaSalvar;
         $templateProcessor->saveAs($pastaParaSalvar);
+        $laudo->save();
         return view('laudo.gerarDocs', ['laudo' => $laudo, 'pdv' => $pdv, 'empresa' => $empresa]);
     }
 }

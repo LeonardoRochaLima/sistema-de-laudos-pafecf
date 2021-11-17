@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\PDVController;
+use Illuminate\Support\Facades\Storage;
 
 
 /*
@@ -53,11 +54,15 @@ Route::resource('laudo', 'LaudoController');
 Route::post('laudo/create', 'LaudoController@store');
 Route::post('laudo/{laudo}/update', 'LaudoController@update')->name('laudo.update');
 Route::get('/getPDVs', 'LaudoController@getPDVs');
-Route::get('/getModelos', 'LaudoController@getModelos');
+Route::get('/getModelosStore', 'LaudoController@getModelosStore');
+Route::get('/getModelosUpdate', 'LaudoController@getModelosUpdate');
 Route::post('/carregarArquivos', 'LaudoController@carregarArquivos')->name('laudo.carregarArquivos');
 Route::post('/laudo/{laudo}/destroy', 'LaudoController@destroy')->name('laudo.destroy');
 Route::get('laudo/{laudo}/gerarDocumentos', 'LaudoController@viewGerarDocs')->name('laudo.gerarDocumentos');
 Route::get('/gerarLaudo/{laudo}', 'LaudoController@gerarLaudo')->name('laudo.gerarLaudo');
+Route::get('get/file', function(){
+    return Storage::download('path to file');
+});
 
 //Rotas ECFs
 Route::resource('ecfs', 'ECFsController');

@@ -294,7 +294,7 @@
                     $(document).ready(function() {
                         $("#ecf_analise_marca").change(function() {
                             let marca = this.value;
-                            $.get('/getModelos?ecf_analise_marca=' + marca, function(data) {
+                            $.get('/getModelosUpdate?ecf_analise_marca=' + marca, function(data) {
                                 $("#ecf_analise_modelo").html(data);
                             })
                         })

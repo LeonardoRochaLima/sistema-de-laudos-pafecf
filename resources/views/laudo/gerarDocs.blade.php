@@ -13,22 +13,26 @@
         <h1>Gerar Documentos</h1>
         <h3>Laudo: <b>{{ $laudo->ifl }} - {{ $laudo->razao_social_empresa }}</b></h3>
     </div>
-    <form action="/gerarLaudo/{{$laudo->id}}" method="GET">
+    <form action="/gerarLaudo/{{ $laudo->id }}" method="GET">
         <div class="form-group col-md-5">
-            <p>Para <b>gerar os documentos</b> referentes ao laudo em questão, basta clicar no botão ao lado. O <b>download</b> dos
+            <p>Para <b>gerar os documentos</b> referentes ao laudo em questão, basta clicar no botão ao lado. O
+                <b>download</b> dos
                 arquivos será automático.</p>
-            <p><b style="color: red" >Certifique-se</b> que a instância do laudo está correta para não gerar arquivos indesejados.</p>
+            <p><b style="color: red">Certifique-se</b> que a instância do laudo está correta para não gerar arquivos
+                indesejados.</p>
         </div>
         <div class="form-group col-md-6">
             <input type="submit" class="btn btn-success" value="Gerar Arquivos">
         </div>
     </form>
+    <img src="{{asset(./img'doc.png')}}" alt="word">
     <form action="">
         <div class="control-label col-md-12">
             <label>Fazer Upload de Arquivos Atualizados: </label>
         </div>
         <div class="form-group col-md-12">
-            <p>Você também pode atualizar os arquivos do servidor através de um upload. Selecione os arquivos e clique no botão descrito.</p>
+            <p>Você também pode atualizar os arquivos do servidor através de um upload. Selecione os arquivos e clique no
+                botão descrito.</p>
         </div>
         <div class="form-group control-label col-md-6">
             <label for="laudo_doc">LaudoDoc.doc</label>
