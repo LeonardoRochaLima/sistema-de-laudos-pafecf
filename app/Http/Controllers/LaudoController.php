@@ -251,10 +251,50 @@ class LaudoController extends Controller
     {
         $laudo = Laudo::find($id_laudo);
         $pdv = PDV::find($laudo->id_pdv);
+        $ecfs = Ecfs::all();
         $empresa = Empresa::find($pdv->empresa->id);
         $templateProcessor = new TemplateProcessor('ModeloLaudoPAFECF.docx');
 
-        $pdv_perfis = explode(", ", $pdv->perfis);
+
+        $ano_atual = Carbon::now()->year;
+        $dia = Carbon::now()->day;
+        $mes = Carbon::now()->month;
+
+        if ($mes == 1) {
+           $mes = "Janeiro";
+        } else if($mes == 2){
+            $mes = "Fevereiro";
+        } else if($mes == 3){
+            $mes = "Março";
+        } else if($mes == 4){
+            $mes = "Abril";
+        } else if($mes == 5){
+            $mes = "Maio";
+        } else if($mes == 6){
+            $mes = "Junho";
+        } else if($mes == 7){
+            $mes = "Julho";
+        } else if($mes == 8){
+            $mes = "Agosto";
+        } else if($mes == 9){
+            $mes = "Setembro";
+        } else if($mes == 10){
+            $mes = "Outubro";
+        } else if($mes == 11){
+            $mes = "Novembro";
+        } else if($mes == 12){
+            $mes = "Dezembro";
+        }
+
+        $data_de_hoje = "$dia de $mes de $ano_atual";
+
+        $marcas_ecfs = "";
+        $modelos_ecfs = "";
+        foreach ($ecfs as $ecf) {
+            $marcas_ecfs .= $ecf->marca;
+            $marcas_ecfs .= "\n";
+            $modelos_ecfs .= "$ecf->modelo\n";
+        }
 
         $templateProcessor->setValues(array(
             //informações da Empresa
@@ -285,7 +325,8 @@ class LaudoController extends Controller
             'txtEcfModelo' => $laudo->ecf_analise_modelo,
             'txtObservacaoOTC' => $laudo->comentarios,
             'txtPrincipalExec' => $pdv->nome_principal_executavel,
-            //'txtRelacaoEcf' => $laudo->relacao_ecfs,
+            'txtRelacaoMarcas' => $marcas_ecfs,
+            'txtRelacaoModelos' => $modelos_ecfs,
             //pretendo pegar o sysdate
             'txtDataVersao' => $laudo->data_termino,
             //informações do PDV
@@ -294,6 +335,8 @@ class LaudoController extends Controller
             'txtLinguagemProgramacao' => $pdv->linguagem,
             'txtSo' => $pdv->sistema_operacional,
             'txtBd' => $pdv->data_base,
+            //Informações Doc
+            'txtData' => $data_de_hoje,
         ));
         //$option .= '<option value="' . $ecf->id . '">' . $ecf->modelo . '</option>';
         $stringNomeLado = $laudo->ifl;

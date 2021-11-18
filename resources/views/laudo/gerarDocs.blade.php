@@ -25,7 +25,6 @@
             <input type="submit" class="btn btn-success" value="Gerar Arquivos">
         </div>
     </form>
-    <img src="{{asset(./img'doc.png')}}" alt="word">
     <form action="">
         <div class="control-label col-md-12">
             <label>Fazer Upload de Arquivos Atualizados: </label>
