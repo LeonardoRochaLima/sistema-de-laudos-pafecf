@@ -5,7 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\PDV;
 
-
+/**
+ * Classe Model do Laudo
+ * @author Leonardo Lima
+ * @version 1.0
+ * @copyright NPI © 2021, Núcleo de Práticas em Informática LTDA.
+ * @access public
+ */
 class Laudo extends Model
 {   
     /**
