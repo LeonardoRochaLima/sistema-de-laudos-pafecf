@@ -7,6 +7,13 @@ use App\Models\PDV;
 use App\Http\Requests\StorePDVRequest;
 use App\Models\Laudo;
 
+/**
+ * Classe de controle dos PDVs.
+ * @author Leonardo Lima
+ * @version 1.0
+ * @copyright NPI © 2021, Núcleo de Práticas em Informática LTDA.
+ * @access public
+ */
 class PDVController extends Controller
 {   
     /**

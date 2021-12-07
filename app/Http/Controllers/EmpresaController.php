@@ -9,6 +9,13 @@ use App\Models\PDV;
 use App\Models\Laudo;
 use App\Http\Controllers\LaudoController;
 
+/**
+ * Classe de controle das Empresas
+ * @author Leonardo Lima
+ * @version 1.0
+ * @copyright NPI © 2021, Núcleo de Práticas em Informática LTDA.
+ * @access public
+ */
 class EmpresaController extends Controller
 {
     private $objEmpresa;

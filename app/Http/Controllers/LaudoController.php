@@ -13,6 +13,13 @@ use App\Http\Requests\StoreLaudoUpdateRequest;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpWord\TemplateProcessor;
 
+/**
+ * Classe de controle dos Laudos
+ * @author Leonardo Lima
+ * @version 1.0
+ * @copyright NPI © 2021, Núcleo de Práticas em Informática LTDA.
+ * @access public
+ */
 class LaudoController extends Controller
 {   
     /**

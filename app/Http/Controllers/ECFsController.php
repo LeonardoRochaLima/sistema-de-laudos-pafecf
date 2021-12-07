@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreECFRequest;
 use App\Models\Ecfs;
 
+/**
+ * Classe de controle das ECFs
+ * @author Leonardo Lima
+ * @version 1.0
+ * @copyright NPI © 2021, Núcleo de Práticas em Informática LTDA.
+ * @access public
+ */
 class ECFsController extends Controller
 {   
     /**

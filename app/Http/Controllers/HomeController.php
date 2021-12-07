@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+/**
+ * Classe de controle da página Home
+ * @author Leonardo Lima
+ * @version 1.0
+ * @copyright NPI © 2021, Núcleo de Práticas em Informática LTDA.
+ * @access public
+ */
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
+     * Função responsável por limitar as funções dessa classe somente para usuários logados.
      * @return void
      */
     public function __construct()
