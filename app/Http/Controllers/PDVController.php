@@ -8,7 +8,11 @@ use App\Http\Requests\StorePDVRequest;
 use App\Models\Laudo;
 
 class PDVController extends Controller
-{
+{   
+    /**
+     * Função responsável por limitar as funções dessa classe somente para usuários logados.
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,6 +28,11 @@ class PDVController extends Controller
         return view('cadastros.PDV.show', ['empresa' => $empresa, 'pdv'=> $pdv, 'aplicacoes' => $aplicacoes, 'forma_impressao' => $forma_impressao, 'perfis' => $perfis]);
     }
 
+    /**
+     * Função responsável por chamar o formulário de cadastro de PDVs da empresa.
+     * @param $id - identificador da empresa que receberá o cadastro do PDV.
+     * @return view - Formulário de cadastro de PDVs.
+     */
     public function create($id){
         $empresa = Empresa::find($id);
         $pdvs = PDV::where([
@@ -33,6 +42,11 @@ class PDVController extends Controller
         return view('cadastros.PDV.create', ['empresa' => $empresa, 'pdvs'=> $pdvs]);
     }
 
+    /**
+     * Função responsável por escrever as informações cadastradas no banco de dados.
+     * @param \Requests\StorePDVRequest $request - Objeto com todas as informações preenchidas no formulário. Os campos são validados pela classe StorePDVRequest.
+     * @return view - Volta para a página inicial do cadastro de PDVs com uma mensagem de êxito.
+     */
     public function store(StorePDVRequest $request, $id_empresa){
         
         $pdv = new PDV;
@@ -67,11 +81,9 @@ class PDVController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Teste  $teste
-     * @return \Illuminate\Http\Response
+     * Atualiza o cadastro do PDV.
+     * @param \Requests\StorePDVRequest $request - Objeto com todas as informações preenchidas no formulário. Os campos são validados pela classe StorePDVRequest.
+     * @return view - Retorna para a mesma página com a mensagem de êxito ou de erro.
      */
     public function update(StorePDVRequest $request, $id)
     {   
@@ -131,6 +143,11 @@ class PDVController extends Controller
         }
     }
 
+    /**
+     * Função responsável por esconver da visualização do usuário o cadastro do PDV.
+     * @param Integer $id - identificador da empresa
+     * @return view - Volta para a página inicial do cadastro de PDV com uma mensagem de êxito.
+     */
     public function destroy($id)
     {   
         $pdv = PDV::find($id);

@@ -13,11 +13,20 @@ class EmpresaController extends Controller
 {
     private $objEmpresa;
 
+    /**
+     * Função responsável por limitar as funções dessa classe somente para usuários logados.
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Função responsável por chamar a view inicial do cadastro de empresa.
+     * Se algo for escrito no campo de busca, ela retorna o resultado da busca.
+     * @return view - Mostra uma listagem com todas as empresas cadastradas e podemos buscar através da variável $busca
+     */
     public function index()
     {
         $buscar = request('buscar');
@@ -32,22 +41,31 @@ class EmpresaController extends Controller
         return view('cadastros.index', ['empresas' => $empresas, 'buscar' => $buscar]);
     }
 
+    /**
+     * Função responsável por chamar o formulário de cadastro de empresa.
+     * @return view - Formulário de cadastro
+     */
     public function create()
     {
         return view('cadastros.create');
     }
 
+    /**
+     * Função responsável por trazer do banco o cadastro da empresa e preencher o formulário para upload.
+     * @param Integer $id - identificador da empresa a ser buscado no banco de dados.
+     * @return view - Formulário de cadastro da empresa com os campos preenchidos, livres para edição.
+     */
     public function show($id)
     {
         $empresa = Empresa::find($id);
         return view('cadastros.show')->with('empresa', $empresa);
     }
 
-    public function search($buscar)
-    {
-        return view('cadastros.search');
-    }
-
+    /**
+     * Função responsável por escrever as informações cadastradas no banco de dados
+     * @param \Requests\StoreEmpresaRequest $request - Objeto com todas as informações preenchidas no formulário. Os campos são validados pela classe StoreEmpresaRequest.
+     * @return view - Volta para a página inicial do cadastro de empresas com uma mensagem de êxito.
+     */
     public function store(StoreEmpresaRequest $request)
     {
 
@@ -76,6 +94,11 @@ class EmpresaController extends Controller
         return redirect('/cadastros')->with('msg', 'Empresa Cadastrada com Sucesso!!');
     }
 
+    /**
+     * Função responsável por esconver da visualização do usuário o cadastro da empresa.
+     * @param Integer $id - identificador da empresa
+     * @return view - Volta para a página inicial do cadastro de empresas com uma mensagem de êxito.
+     */
     public function excluirCadastro($id)
     {
         $empresa = Empresa::find($id);
@@ -85,11 +108,9 @@ class EmpresaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Teste  $teste
-     * @return \Illuminate\Http\Response
+     * Atualiza o cadastro da Empresa
+     * @param \Requests\StoreEmpresaRequest $request - Objeto com todas as informações preenchidas no formulário. Os campos são validados pela classe StoreEmpresaRequest.
+     * @return view - Retorna para a mesma página com a mensagem de êxito ou de erro.
      */
     public function update(StoreEmpresaRequest $request, $id)
     {

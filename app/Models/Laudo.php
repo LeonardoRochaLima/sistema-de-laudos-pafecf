@@ -7,7 +7,10 @@ use App\Models\PDV;
 
 
 class Laudo extends Model
-{
+{   
+    /**
+     * Valores das varíaveis/campos do banco de dados sempre tem que estar declarados como fillable.
+     */
     protected $table = "laudos";
     protected $fillable = ['razao_social_empresa',
    'nome_comercial_pdv', 'homologador', 'data_inicio',
@@ -16,16 +19,32 @@ class Laudo extends Model
    'funcao_sped', 'executavel_sped', 'executavel_nfe', 'parecer_conclusivo',
    'ecf_analise_marca', 'ecf_analise_modelo', 'relacao_ecfs', 'comentarios'];
     
+    /**
+     * Função responsável por receber o array de entradas da checkbox
+     *  e transformar num longText antes de passar para o controller.
+     * @param $value - objeto contendo os arrays a serem trasnformados antes de passagem para o controller.
+     * @return void
+     */   
     public function setCategoryAttribute($value)
     {
         $this->attributes['relacao_ecfs'] = json_encode($value);
     }
 
+    /**
+     * Função responsável por fazer o relacionamento entre a os PDVs e o Laudo.
+     * @return void
+     */
     public function pdvs()
     {
         return $this->hasMany(PDV::class,"id_pdv", "id");
     }
 
+    /**
+     * Função responsável por receber o array de entradas da checkbox
+     *  e transformar num longText antes de passar para o controller.
+     * @param $value - objeto contendo os arrays a serem trasnformados antes de passagem para o controller.
+     * @return void
+     */  
     public function getCategoryAttribute($value)
     {
         return $this->attributes['relacao_ecfs'] = json_decode($value);

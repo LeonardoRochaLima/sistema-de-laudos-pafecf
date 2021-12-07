@@ -14,12 +14,21 @@ use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 class LaudoController extends Controller
-{
+{   
+    /**
+     * Função responsável por limitar as funções dessa classe somente para usuários logados.
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Função responsável por chamar a view inicial do cadastro de laudos.
+     * Se algo for escrito no campo de busca, ela retorna o resultado da busca.
+     * @return view - Mostra uma listagem com todos os laudos cadastrados e podemos buscar através da variável $busca
+     */
     public function index()
     {
         $buscar = request('buscar');
@@ -33,6 +42,10 @@ class LaudoController extends Controller
         return view('laudo.index', ['laudos' => $laudos, 'buscar' => $buscar]);
     }
 
+    /**
+     * Função responsável por chamar o formulário de cadastro de laudos.
+     * @return view - Formulário de cadastro
+     */
     public function create()
     {
         $ecfs = DB::table('ecfs')
@@ -43,6 +56,10 @@ class LaudoController extends Controller
         return view('laudo.create', ['empresas' => $empresas, 'pdvs' => $pdvs, 'ecfs' => $ecfs, 'relacao_ecfs' => $relacao_ecfs]);
     }
 
+    /**
+     * Função responsável por gerar o número do laudo corretamente, conforme o ano atual e os laudos existentes
+     * @return $numero_laudo
+     */
     public function gerarIFL()
     {
         $numero_laudo = 1;
@@ -64,6 +81,11 @@ class LaudoController extends Controller
         }
     }
 
+    /**
+     * Função responsável por escrever as informações cadastradas no banco de dados
+     * @param \Requests\StoreLaudoRequest $request - Objeto com todas as informações preenchidas no formulário. Os campos são validados pela classe StoreLaudoRequest.
+     * @return view - Volta para a página inicial do cadastro de laudos com uma mensagem de êxito.
+     */
     public function store(StoreLaudoRequest $request)
     {
 
@@ -112,7 +134,12 @@ class LaudoController extends Controller
 
         return redirect('/laudo')->with('msg', 'Laudo Cadastrado com Sucesso!!');
     }
-
+    
+    /**
+     * Função responsável por puxar do banco de dados todos os PDVs da empresa selecionada e
+     * preencher as <option> do <select> na view.
+     * @return $option
+     */
     public function getPDVs()
     {
         $id_empresa = request('empresa');
@@ -127,6 +154,12 @@ class LaudoController extends Controller
         return $option;
     }
 
+    /**
+     * Função responsável por puxar do banco de dados todos os modelos de ECFs cadastrados
+     * para as <option> no <select> da view responsável por selecionar o modelo da ecf utilizado na homologação.
+     * ESTE É PARA A CADASTRO DO LAUDO
+     * @return $option
+     */
     public function getModelosStore()
     {
         $marca = request('ecf_analise_marca');
@@ -141,6 +174,12 @@ class LaudoController extends Controller
         return $option;
     }
 
+    /**
+     * Função responsável por puxar do banco de dados todos os modelos de ECFs cadastrados
+     * para as <option> no <select> da view responsável por selecionar o modelo da ecf utilizado na homologação.
+     * ESTE É PARA A ATUALIZAÇÃO DO LAUDO
+     * @return $option
+     */
     public function getModelosUpdate()
     {
         $marca = request('ecf_analise_marca');
@@ -155,6 +194,11 @@ class LaudoController extends Controller
         return $option;
     }
 
+    /**
+     * Função responsável por trazer do banco o cadastro do laudo e preencher o formulário para upload.
+     * @param Integer $id - identificador do laudo a ser buscado no banco de dados.
+     * @return view - Formulário de cadastro do laudo com os campos preenchidos, livres para edição.
+     */
     public function show($id)
     {
         $ecfs = DB::table('ecfs')->select('marca')->distinct()->get();
@@ -168,6 +212,11 @@ class LaudoController extends Controller
         return view('laudo.show', ['laudo' => $laudo, 'ecfs' => $ecfs, 'relacao_ecfs' => $relacao_ecfs, 'ecfs_selecionadas' => $ecfs_selecionadas]);
     }
 
+    /**
+     * Atualiza o cadastro do laudo.
+     * @param \Requests\StoreLaudoUpdateRequest $request - Objeto com todas as informações preenchidas no formulário. Os campos são validados pela classe StoreLaudoUpdateRequest.
+     * @return view - Retorna para a mesma página com a mensagem de êxito ou de erro.
+     */
     public function update(StoreLaudoUpdateRequest $request, $id)
     {
         $laudo = Laudo::find($id);
@@ -219,7 +268,11 @@ class LaudoController extends Controller
         }
     }
 
-
+    /**
+     * Função responsável por excluir o registro do laudo.
+     * @param Integer $id - identificador do laudo.
+     * @return view - Volta para a página inicial do cadastro de laudos com uma mensagem de êxito.
+     */
     public function destroy($id)
     {
         $laudo = Laudo::find($id);
@@ -227,6 +280,10 @@ class LaudoController extends Controller
         return redirect()->route('laudo.index')->with('msgerro', 'Laudo Excluído com Sucesso!!');
     }
 
+    /**
+     * Função que seria responsável por fazer upload dos arquivos, lê-los e preencher os <select> da view.
+     * Ainda não funciona
+     */
     public function carregarArquivos()
     {
         $arquivo_tmp = $_FILES['md5']['tmp_name'];
@@ -239,6 +296,11 @@ class LaudoController extends Controller
         }
     }
 
+    /**
+     * Função responsável por chamar a view de geração de laudo.
+     * @param Integer $id_laudo - identificador do laudo a ser gerado em .doc
+     * @return view - Mostra a view que gera os laudos.
+     */
     public function viewGerarDocs($id_laudo)
     {
         $laudo = Laudo::find($id_laudo);
@@ -247,6 +309,11 @@ class LaudoController extends Controller
         return view('laudo.gerarDocs', ['laudo' => $laudo, 'pdv' => $pdv, 'empresa' => $empresa]);
     }
 
+    /**
+     * Função responsável por gerar efetivamente o laudo em .doc.
+     * @param Integer $id_laudo - identificador do laudo a ser gerado em .doc
+     * @return view - Volta para a página de geração de laudos.
+     */
     public function gerarLaudo($id_laudo)
     {
         $laudo = Laudo::find($id_laudo);
